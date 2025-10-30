@@ -1,0 +1,8 @@
+{
+    "nav": "Cache Settings",
+    "title": "Cache Configuration",
+    "label_enable_cache": "Enable Cache",
+    "label_ttl": "Cache TTL (seconds)",
+    "btn_save": "Save Settings",
+    "msg_saved": "Settings saved successfully"
+}

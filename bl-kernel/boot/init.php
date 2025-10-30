@@ -416,6 +416,7 @@ define('PATH_WORKSPACES',		PATH_CONTENT . 'workspaces' . DS);
 define('PATH_UPLOADS_PAGES',		PATH_UPLOADS . 'pages' . DS);
 define('PATH_UPLOADS_PROFILES',		PATH_UPLOADS . 'profiles' . DS);
 define('PATH_UPLOADS_THUMBNAILS',	PATH_UPLOADS . 'thumbnails' . DS);
+define('PATH_AUTHZ',			PATH_KERNEL . '_maigewan' . DS . 'authz' . DS);
 
 define('PATH_ADMIN',			PATH_KERNEL . 'admin' . DS);
 define('PATH_ADMIN_THEMES',		PATH_ADMIN . 'themes' . DS);
@@ -498,9 +499,23 @@ if (file_exists(PATH_KERNEL . 'bludit.pro.php')) {
 SystemIntegrity::registerCritical('init', __FILE__, ['type' => 'file']);
 SystemIntegrity::registerCritical('authz_dir', rtrim(PATH_AUTHZ, DS), ['required' => true, 'type' => 'dir']);
 SystemIntegrity::registerCritical('db_users', DB_USERS, ['type' => 'file']);
-// 可选：再抬高几个锚点
-// SystemIntegrity::registerCritical('kernel_security', PATH_KERNEL.'security.class.php', ['type'=>'file']);
-// SystemIntegrity::registerCritical('admin_controllers', rtrim(PATH_ADMIN_CONTROLLERS, DS), ['type'=>'dir','required'=>true]);
+
+// 导航页面关键路径登记
+$navPages = [
+    'dashboard-home', 'sites-overview', 'site-new', 'seo-settings', 'content-management',
+    'media-images', 'brand-logo', 'ads-settings', 'spider-logs', 'spider-settings',
+    'plugins', 'themes', 'cache-settings', 'cache-list', 'security-system',
+    'security-general', 'audit-logs', 'system-repair-upgrade', 'authorization-settings',
+    'profile', 'about-maigewan'
+];
+
+foreach ($navPages as $navKey) {
+    SystemIntegrity::registerCritical("lang_pages_{$navKey}_dir", PATH_LANGUAGES."pages/{$navKey}", ['required' => true, 'type' => 'dir']);
+    SystemIntegrity::registerCritical("lang_pages_{$navKey}_en", PATH_LANGUAGES."pages/{$navKey}/en.json", ['required' => true, 'type' => 'file']);
+    SystemIntegrity::registerCritical("lang_pages_{$navKey}_zh", PATH_LANGUAGES."pages/{$navKey}/zh_CN.json", ['required' => true, 'type' => 'file']);
+    SystemIntegrity::registerCritical("css_{$navKey}", PATH_KERNEL."css/{$navKey}.css", ['required' => true, 'type' => 'file']);
+    SystemIntegrity::registerCritical("js_{$navKey}", PATH_CORE_JS."{$navKey}.js", ['required' => true, 'type' => 'file']);
+}
 
 // 2) 策略（初始化阶段不强制授权文件）
 SystemIntegrity::setPolicy([
@@ -516,7 +531,7 @@ SystemIntegrity::quickCheck();
 // === License Bootstrap Guard（未授权时的后台白名单） ===
 $licenseFile  = PATH_AUTHZ . 'license.json';
 $reqPath      = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-$adminPrefix  = '/' . trim(ADMIN_URI_FILTER, '/').'/';          // 例如 /admin/
+$adminPrefix  = '/' . trim(ADMIN_URI_FILTER, '/') . '/';          // 例如 /admin/
 $isAdminReq   = (strpos($reqPath, $adminPrefix) === 0);
 
 // 初始化阶段 license.json 可能不存在：只放行白名单后台路由
@@ -528,6 +543,7 @@ if (!is_readable($licenseFile) && $isAdminReq) {
 
     // ★ 白名单（按你的需求可增减）
     $whitelist = [
+        '',                     // 空路径（/admin/ 默认跳转到授权页）
         'login',                // 登录页
         'logout',               // 允许退出
         'authorization-settings',// 授权页（配置/上传 license.json）
@@ -537,8 +553,22 @@ if (!is_readable($licenseFile) && $isAdminReq) {
 
     if (!in_array($firstSeg, $whitelist, true)) {
         // 友好跳转到授权页，并带上 reason=missing，让授权页显示品牌提示
-        $dest = HTML_PATH_ADMIN_ROOT . 'authorization-settings?reason=missing';
+        // 直接构建路径，不依赖 HTML_PATH_ADMIN_ROOT（此时尚未定义）
+        $dest = $adminPrefix . 'authorization-settings?reason=missing';
 
+        if (!headers_sent()) {
+            header('Cache-Control: no-store');
+            header('Location: ' . $dest, true, 302);
+            exit;
+        } else {
+            echo '<meta http-equiv="refresh" content="0;url=' . htmlspecialchars($dest, ENT_QUOTES, 'UTF-8') . '">';
+            exit;
+        }
+    }
+    
+    // 如果访问的是空路径（/admin/），也重定向到授权页
+    if ($firstSeg === '') {
+        $dest = $adminPrefix . 'authorization-settings?reason=missing';
         if (!headers_sent()) {
             header('Cache-Control: no-store');
             header('Location: ' . $dest, true, 302);

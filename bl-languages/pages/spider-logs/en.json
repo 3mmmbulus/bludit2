@@ -1,0 +1,8 @@
+{
+    "nav": "Spider Logs",
+    "title": "Spider Access Logs",
+    "col_date": "Date",
+    "col_ip": "IP Address",
+    "col_user_agent": "User Agent",
+    "col_url": "URL"
+}

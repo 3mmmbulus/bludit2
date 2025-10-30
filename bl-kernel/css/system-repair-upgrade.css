@@ -1,0 +1,32 @@
+/* System Repair & Upgrade Styles */
+.system-repair-upgrade {
+    padding: 20px;
+    max-width: 800px;
+}
+
+.system-repair-upgrade .action-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.system-repair-upgrade .action-card h3 {
+    margin-top: 0;
+}
+
+.system-repair-upgrade .btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.system-repair-upgrade .result-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 14px;
+}

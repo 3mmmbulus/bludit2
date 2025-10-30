@@ -1,0 +1,12 @@
+{
+    "nav": "内容管理",
+    "title": "内容管理",
+    "col_title": "标题",
+    "col_status": "状态",
+    "col_date": "日期",
+    "col_actions": "操作",
+    "btn_new": "新建内容",
+    "btn_edit": "编辑",
+    "btn_delete": "删除",
+    "msg_deleted": "内容删除成功"
+}

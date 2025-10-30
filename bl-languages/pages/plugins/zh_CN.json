@@ -1,0 +1,10 @@
+{
+    "nav": "插件",
+    "title": "插件管理",
+    "col_name": "名称",
+    "col_status": "状态",
+    "col_actions": "操作",
+    "btn_activate": "激活",
+    "btn_deactivate": "停用",
+    "msg_activated": "插件激活成功"
+}

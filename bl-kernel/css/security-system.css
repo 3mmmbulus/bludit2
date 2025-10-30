@@ -1,0 +1,24 @@
+/* Security System Styles */
+.security-system {
+    padding: 20px;
+    max-width: 800px;
+}
+
+.security-system .form-group {
+    margin-bottom: 20px;
+}
+
+.security-system textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 100px;
+    font-family: monospace;
+}
+
+.security-system .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

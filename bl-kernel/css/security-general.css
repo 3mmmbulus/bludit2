@@ -1,0 +1,18 @@
+/* Security General Styles */
+.security-general {
+    padding: 20px;
+    max-width: 600px;
+}
+
+.security-general .form-group {
+    margin-bottom: 20px;
+}
+
+.security-general .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}

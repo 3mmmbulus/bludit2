@@ -1,0 +1,9 @@
+{
+    "nav": "新建站点",
+    "title": "创建新站点",
+    "label_domain": "域名",
+    "label_site_name": "站点名称",
+    "btn_create": "创建站点",
+    "msg_created": "站点创建成功",
+    "msg_error_exists": "站点已存在"
+}

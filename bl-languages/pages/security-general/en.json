@@ -1,0 +1,8 @@
+{
+    "nav": "General Security",
+    "title": "General Security Settings",
+    "label_https_only": "HTTPS Only",
+    "label_csrf_protection": "CSRF Protection",
+    "btn_save": "Save Settings",
+    "msg_saved": "Settings saved successfully"
+}

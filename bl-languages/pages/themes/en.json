@@ -1,0 +1,9 @@
+{
+    "nav": "Themes",
+    "title": "Theme Management",
+    "col_name": "Name",
+    "col_author": "Author",
+    "col_actions": "Actions",
+    "btn_activate": "Activate",
+    "msg_activated": "Theme activated successfully"
+}

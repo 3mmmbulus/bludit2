@@ -1,0 +1,21 @@
+/* Content Management Styles */
+.content-management {
+    padding: 20px;
+}
+
+.content-management table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content-management th,
+.content-management td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.content-management .btn-group {
+    display: flex;
+    gap: 10px;
+}

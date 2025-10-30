@@ -1,0 +1,17 @@
+/* SEO Settings Styles */
+.seo-settings {
+    padding: 20px;
+    max-width: 800px;
+}
+
+.seo-settings .form-group {
+    margin-bottom: 20px;
+}
+
+.seo-settings textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 100px;
+}

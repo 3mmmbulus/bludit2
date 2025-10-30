@@ -1,0 +1,32 @@
+/* Plugins Styles */
+.plugins {
+    padding: 20px;
+}
+
+.plugins table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.plugins th,
+.plugins td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.plugins .status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.plugins .status-active {
+    background-color: #28a745;
+    color: white;
+}
+
+.plugins .status-inactive {
+    background-color: #6c757d;
+    color: white;
+}

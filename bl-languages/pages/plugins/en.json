@@ -1,0 +1,10 @@
+{
+    "nav": "Plugins",
+    "title": "Plugin Management",
+    "col_name": "Name",
+    "col_status": "Status",
+    "col_actions": "Actions",
+    "btn_activate": "Activate",
+    "btn_deactivate": "Deactivate",
+    "msg_activated": "Plugin activated successfully"
+}

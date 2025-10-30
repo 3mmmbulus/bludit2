@@ -1,0 +1,9 @@
+{
+    "nav": "主题",
+    "title": "主题管理",
+    "col_name": "名称",
+    "col_author": "作者",
+    "col_actions": "操作",
+    "btn_activate": "激活",
+    "msg_activated": "主题激活成功"
+}

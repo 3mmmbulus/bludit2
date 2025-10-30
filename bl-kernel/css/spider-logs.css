@@ -1,0 +1,22 @@
+/* Spider Logs Styles */
+.spider-logs {
+    padding: 20px;
+}
+
+.spider-logs table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.spider-logs th,
+.spider-logs td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.spider-logs .user-agent {
+    font-family: monospace;
+    font-size: 12px;
+}

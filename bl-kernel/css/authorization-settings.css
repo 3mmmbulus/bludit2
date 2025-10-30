@@ -1,0 +1,35 @@
+/* Authorization Settings Styles */
+.authorization-settings {
+    padding: 20px;
+    max-width: 600px;
+}
+
+.authorization-settings .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.authorization-settings .alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+}
+
+.authorization-settings .alert-success {
+    background-color: #d4edda;
+    border: 1px solid #28a745;
+    color: #155724;
+}
+
+.authorization-settings .upload-box {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.authorization-settings .form-group {
+    margin: 20px 0;
+}

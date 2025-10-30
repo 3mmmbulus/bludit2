@@ -1,0 +1,9 @@
+{
+    "nav": "系统修复和升级",
+    "title": "系统维护",
+    "btn_verify": "验证系统",
+    "btn_repair": "修复",
+    "btn_upgrade": "升级",
+    "msg_verified": "系统验证成功",
+    "msg_repaired": "系统修复成功"
+}

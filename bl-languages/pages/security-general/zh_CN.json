@@ -1,0 +1,8 @@
+{
+    "nav": "常规设置",
+    "title": "常规安全设置",
+    "label_https_only": "仅HTTPS",
+    "label_csrf_protection": "CSRF防护",
+    "btn_save": "保存设置",
+    "msg_saved": "设置保存成功"
+}

@@ -1,0 +1,31 @@
+/* Profile Styles */
+.profile {
+    padding: 20px;
+    max-width: 600px;
+}
+
+.profile .form-group {
+    margin-bottom: 20px;
+}
+
+.profile label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.profile input[type="text"],
+.profile input[type="email"],
+.profile input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.profile .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}

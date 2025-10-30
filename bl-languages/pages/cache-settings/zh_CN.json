@@ -1,0 +1,8 @@
+{
+    "nav": "缓存设置",
+    "title": "缓存配置",
+    "label_enable_cache": "启用缓存",
+    "label_ttl": "缓存TTL（秒）",
+    "btn_save": "保存设置",
+    "msg_saved": "设置保存成功"
+}

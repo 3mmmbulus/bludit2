@@ -1,0 +1,9 @@
+{
+    "nav": "System Repair & Upgrade",
+    "title": "System Maintenance",
+    "btn_verify": "Verify System",
+    "btn_repair": "Repair",
+    "btn_upgrade": "Upgrade",
+    "msg_verified": "System verified successfully",
+    "msg_repaired": "System repaired successfully"
+}

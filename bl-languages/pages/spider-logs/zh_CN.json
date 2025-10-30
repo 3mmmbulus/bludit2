@@ -1,0 +1,8 @@
+{
+    "nav": "蜘蛛日志",
+    "title": "蜘蛛访问日志",
+    "col_date": "日期",
+    "col_ip": "IP地址",
+    "col_user_agent": "用户代理",
+    "col_url": "URL"
+}

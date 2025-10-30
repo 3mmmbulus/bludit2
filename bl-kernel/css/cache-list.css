@@ -1,0 +1,27 @@
+/* Cache List Styles */
+.cache-list {
+    padding: 20px;
+}
+
+.cache-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cache-list th,
+.cache-list td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.cache-list .toolbar {
+    margin-bottom: 20px;
+}
+
+.cache-list .size-badge {
+    padding: 4px 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 12px;
+}

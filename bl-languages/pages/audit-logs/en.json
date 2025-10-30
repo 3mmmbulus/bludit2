@@ -1,0 +1,8 @@
+{
+    "nav": "Audit Logs",
+    "title": "Operation Logs",
+    "col_date": "Date",
+    "col_user": "User",
+    "col_action": "Action",
+    "col_details": "Details"
+}

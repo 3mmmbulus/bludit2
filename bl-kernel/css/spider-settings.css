@@ -1,0 +1,23 @@
+/* Spider Settings Styles */
+.spider-settings {
+    padding: 20px;
+    max-width: 800px;
+}
+
+.spider-settings .form-group {
+    margin-bottom: 20px;
+}
+
+.spider-settings textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+.spider-settings .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

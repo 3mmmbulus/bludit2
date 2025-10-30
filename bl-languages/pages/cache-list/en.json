@@ -1,0 +1,9 @@
+{
+    "nav": "Cache List",
+    "title": "Cache Overview",
+    "col_key": "Cache Key",
+    "col_size": "Size",
+    "col_date": "Date",
+    "btn_clear": "Clear Cache",
+    "msg_cleared": "Cache cleared successfully"
+}

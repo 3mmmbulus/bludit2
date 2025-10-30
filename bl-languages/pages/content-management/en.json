@@ -1,0 +1,12 @@
+{
+    "nav": "Content Management",
+    "title": "Content Management",
+    "col_title": "Title",
+    "col_status": "Status",
+    "col_date": "Date",
+    "col_actions": "Actions",
+    "btn_new": "New Content",
+    "btn_edit": "Edit",
+    "btn_delete": "Delete",
+    "msg_deleted": "Content deleted successfully"
+}

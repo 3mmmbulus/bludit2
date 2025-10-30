@@ -1,0 +1,9 @@
+{
+    "nav": "授权管理",
+    "title": "授权设置",
+    "label_upload_license": "上传授权文件",
+    "btn_upload": "上传",
+    "msg_uploaded": "授权文件上传成功",
+    "msg_invalid": "无效的授权文件",
+    "msg_missing": "授权文件缺失。请上传有效的授权文件以继续。"
+}

@@ -1,0 +1,9 @@
+{
+    "nav": "SEO配置",
+    "title": "SEO配置",
+    "label_meta_description": "Meta描述",
+    "label_meta_keywords": "Meta关键词",
+    "label_robots_txt": "Robots.txt",
+    "btn_save": "保存设置",
+    "msg_saved": "设置保存成功"
+}

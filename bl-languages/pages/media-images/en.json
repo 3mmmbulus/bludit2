@@ -1,0 +1,9 @@
+{
+    "nav": "Media Images",
+    "title": "Image Management",
+    "btn_upload": "Upload Image",
+    "btn_delete": "Delete",
+    "msg_uploaded": "Image uploaded successfully",
+    "msg_deleted": "Image deleted successfully",
+    "msg_error_upload": "Upload failed"
+}

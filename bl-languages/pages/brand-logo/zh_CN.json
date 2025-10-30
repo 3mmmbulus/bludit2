@@ -1,0 +1,9 @@
+{
+    "nav": "Logo管理",
+    "title": "Logo管理",
+    "btn_upload": "上传Logo",
+    "btn_remove": "移除Logo",
+    "msg_uploaded": "Logo上传成功",
+    "msg_removed": "Logo移除成功",
+    "msg_error_format": "文件格式无效"
+}

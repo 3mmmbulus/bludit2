@@ -1,0 +1,9 @@
+{
+    "nav": "New Site",
+    "title": "Create New Site",
+    "label_domain": "Domain",
+    "label_site_name": "Site Name",
+    "btn_create": "Create Site",
+    "msg_created": "Site created successfully",
+    "msg_error_exists": "Site already exists"
+}

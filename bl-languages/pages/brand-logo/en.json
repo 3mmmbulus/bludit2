@@ -1,0 +1,9 @@
+{
+    "nav": "Brand Logo",
+    "title": "Logo Management",
+    "btn_upload": "Upload Logo",
+    "btn_remove": "Remove Logo",
+    "msg_uploaded": "Logo uploaded successfully",
+    "msg_removed": "Logo removed successfully",
+    "msg_error_format": "Invalid file format"
+}

@@ -1,0 +1,9 @@
+{
+    "nav": "SEO Settings",
+    "title": "SEO Configuration",
+    "label_meta_description": "Meta Description",
+    "label_meta_keywords": "Meta Keywords",
+    "label_robots_txt": "Robots.txt",
+    "btn_save": "Save Settings",
+    "msg_saved": "Settings saved successfully"
+}

@@ -1,0 +1,9 @@
+{
+    "nav": "图片管理",
+    "title": "图片管理",
+    "btn_upload": "上传图片",
+    "btn_delete": "删除",
+    "msg_uploaded": "图片上传成功",
+    "msg_deleted": "图片删除成功",
+    "msg_error_upload": "上传失败"
+}

@@ -1,0 +1,39 @@
+/* Audit Logs Styles */
+.audit-logs {
+    padding: 20px;
+}
+
+.audit-logs table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.audit-logs th,
+.audit-logs td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.audit-logs .action-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.audit-logs .action-create {
+    background-color: #28a745;
+    color: white;
+}
+
+.audit-logs .action-update {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.audit-logs .action-delete {
+    background-color: #dc3545;
+    color: white;
+}

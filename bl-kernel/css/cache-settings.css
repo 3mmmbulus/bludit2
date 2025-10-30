@@ -1,0 +1,22 @@
+/* Cache Settings Styles */
+.cache-settings {
+    padding: 20px;
+    max-width: 600px;
+}
+
+.cache-settings .form-group {
+    margin-bottom: 20px;
+}
+
+.cache-settings input[type="number"] {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.cache-settings .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

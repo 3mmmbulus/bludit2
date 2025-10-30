@@ -1,0 +1,16 @@
+/* Sites Overview Styles */
+.sites-overview {
+    padding: 20px;
+}
+
+.sites-overview table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sites-overview th,
+.sites-overview td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}

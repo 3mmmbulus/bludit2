@@ -1,0 +1,9 @@
+{
+    "nav": "缓存一览",
+    "title": "缓存概览",
+    "col_key": "缓存键",
+    "col_size": "大小",
+    "col_date": "日期",
+    "btn_clear": "清除缓存",
+    "msg_cleared": "缓存清除成功"
+}

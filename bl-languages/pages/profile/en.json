@@ -1,0 +1,9 @@
+{
+    "nav": "Profile",
+    "title": "My Profile",
+    "label_username": "Username",
+    "label_email": "Email",
+    "label_password": "Password",
+    "btn_save": "Save Profile",
+    "msg_saved": "Profile updated successfully"
+}

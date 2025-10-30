@@ -1,0 +1,8 @@
+{
+    "nav": "Spider Settings",
+    "title": "Spider Management Settings",
+    "label_enable_logging": "Enable Logging",
+    "label_whitelist": "Whitelist",
+    "btn_save": "Save Settings",
+    "msg_saved": "Settings saved successfully"
+}

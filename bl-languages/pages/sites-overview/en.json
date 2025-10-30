@@ -1,0 +1,8 @@
+{
+    "nav": "Sites Overview",
+    "title": "Sites Management",
+    "col_site_name": "Site Name",
+    "col_domain": "Domain",
+    "col_status": "Status",
+    "col_actions": "Actions"
+}

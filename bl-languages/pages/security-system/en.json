@@ -1,0 +1,8 @@
+{
+    "nav": "System Security",
+    "title": "System Security Settings",
+    "label_ip_whitelist": "IP Whitelist",
+    "label_brute_force_protection": "Brute Force Protection",
+    "btn_save": "Save Settings",
+    "msg_saved": "Settings saved successfully"
+}

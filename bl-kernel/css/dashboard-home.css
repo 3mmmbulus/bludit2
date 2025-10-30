@@ -1,0 +1,23 @@
+/* Dashboard Home Styles */
+.dashboard-home {
+    padding: 20px;
+}
+
+.dashboard-home .stats-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-home .stats-card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.dashboard-home .stats-card .number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #007bff;
+}
