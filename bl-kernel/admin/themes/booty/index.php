@@ -13,7 +13,7 @@
 	<!-- CSS -->
 	<?php
 		echo Theme::cssBootstrap();
-		echo Theme::cssLineAwesome();
+		echo Theme::cssBootstrapIcons();
 		echo Theme::css(array(
 			'bludit.css',
 			'bludit.bootstrap.css'

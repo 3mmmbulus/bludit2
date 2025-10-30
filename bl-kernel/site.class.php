@@ -322,7 +322,26 @@ class Site extends dbJSON
 	// For example, http://www.domain.com
 	public function domain()
 	{
-		// If the URL field is not set, try detect the domain.
+		// 多站点环境：优先使用当前请求的协议和域名，避免混合内容错误
+		if (!empty($_SERVER['HTTP_HOST'])) {
+			// 检测当前协议
+			if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+				$protocol = 'https://';
+			} elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+				$protocol = 'https://'; // 代理/负载均衡器后面的 HTTPS
+			} elseif (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on') {
+				$protocol = 'https://'; // 另一种代理 HTTPS 检测
+			} elseif (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') {
+				$protocol = 'https://'; // 端口 443 通常是 HTTPS
+			} else {
+				$protocol = 'http://';
+			}
+
+			$domain = trim($_SERVER['HTTP_HOST'], '/');
+			return $protocol . $domain;
+		}
+
+		// 回退：如果 URL 字段未设置，尝试检测域名
 		if (Text::isEmpty($this->url())) {
 			if (!empty($_SERVER['HTTPS'])) {
 				$protocol = 'https://';
@@ -334,7 +353,7 @@ class Site extends dbJSON
 			return $protocol . $domain;
 		}
 
-		// Parse the domain from the field url (Settings->Advanced)
+		// 最后回退：从配置字段 url 解析域名（仅在无法从请求获取时使用）
 		$parse = parse_url($this->url());
 		$domain = rtrim($parse['host'], '/');
 		$port = !empty($parse['port']) ? ':' . $parse['port'] : '';
@@ -357,6 +376,21 @@ class Site extends dbJSON
 
 	public function isHTTPS()
 	{
+		// 优先检测实际请求协议（支持代理/负载均衡器）
+		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+			return true;
+		}
+		if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+			return true;
+		}
+		if (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on') {
+			return true;
+		}
+		if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') {
+			return true;
+		}
+		
+		// 回退：检查配置的 URL
 		$url = $this->getField('url');
 		return parse_url($url, PHP_URL_SCHEME) === 'https';
 	}

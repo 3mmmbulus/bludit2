@@ -6,22 +6,22 @@
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'dashboard' ?>"><span class="fa fa-dashboard"></span><?php $L->p('Dashboard') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'dashboard' ?>"><i class="bi bi-speedometer2"></i> <?php $L->p('Dashboard') ?></a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" target="_blank" href="<?php echo HTML_PATH_ROOT ?>"><span class="fa fa-home"></span><?php $L->p('Website') ?></a>
+		<a class="nav-link" target="_blank" href="<?php echo HTML_PATH_ROOT ?>"><i class="bi bi-house-door"></i> <?php $L->p('Website') ?></a>
 	</li>
 
-	<li class="nav-item mt-3">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'new-content' ?>"><span style="color: #0078D4;" class="fa fa-plus-circle"></span><?php $L->p('New content') ?></a>
+	<li class="nav-item">
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'new-content' ?>"><i style="color: #0078D4;" class="bi bi-plus-circle-fill"></i> <?php $L->p('New content') ?></a>
 	</li>
 
 	<?php if (!checkRole(array('admin'),false)): ?>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'content' ?>"><span class="fa fa-archive"></span><?php $L->p('Content') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'content' ?>"><i class="bi bi-archive"></i> <?php $L->p('Content') ?></a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'edit-user/'.$login->username() ?>"><span class="fa fa-user"></span><?php $L->p('Profile') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'edit-user/'.$login->username() ?>"><i class="bi bi-person"></i> <?php $L->p('Profile') ?></a>
 	</li>
 	<?php endif; ?>
 
@@ -31,30 +31,30 @@
 		<h4><?php $L->p('Manage') ?></h4>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'content' ?>"><span class="fa fa-folder"></span><?php $L->p('Content') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'content' ?>"><i class="bi bi-folder"></i> <?php $L->p('Content') ?></a>
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'categories' ?>"><span class="fa fa-bookmark"></span><?php $L->p('Categories') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'categories' ?>"><i class="bi bi-bookmark"></i> <?php $L->p('Categories') ?></a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'users' ?>"><span class="fa fa-users"></span><?php $L->p('Users') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'users' ?>"><i class="bi bi-people"></i> <?php $L->p('Users') ?></a>
 	</li>
 
 	<li class="nav-item mt-3">
 		<h4><?php $L->p('Settings') ?></h4>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'settings' ?>"><span class="fa fa-gear"></span><?php $L->p('General') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'settings' ?>"><i class="bi bi-gear"></i> <?php $L->p('General') ?></a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'plugins' ?>"><span class="fa fa-puzzle-piece"></span><?php $L->p('Plugins') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'plugins' ?>"><i class="bi bi-puzzle"></i> <?php $L->p('Plugins') ?></a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'themes' ?>"><span class="fa fa-desktop"></span><?php $L->p('Themes') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'themes' ?>"><i class="bi bi-palette"></i> <?php $L->p('Themes') ?></a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'about' ?>"><span class="fa fa-info"></span><?php $L->p('About') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'about' ?>"><i class="bi bi-info-circle"></i> <?php $L->p('About') ?></a>
 	</li>
 
 	<?php endif; ?>
@@ -75,6 +75,6 @@
 	<?php endif; ?>
 
 	<li class="nav-item mt-5">
-		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'logout' ?>"><span class="fa fa-arrow-circle-right"></span><?php $L->p('Logout') ?></a>
+		<a class="nav-link" href="<?php echo HTML_PATH_ADMIN_ROOT.'logout' ?>"><i class="bi bi-box-arrow-right"></i> <?php $L->p('Logout') ?></a>
 	</li>
 </ul>

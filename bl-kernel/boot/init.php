@@ -431,7 +431,7 @@ define('DB_SITE', PATH_DATABASES . 'site.php');
 define('DB_CATEGORIES', PATH_DATABASES . 'categories.php');
 define('DB_TAGS', PATH_DATABASES . 'tags.php');
 define('DB_SYSLOG', PATH_DATABASES . 'syslog.php');
-define('DB_USERS', PATH_DATABASES . 'users.php');
+define('DB_USERS', PATH_AUTHZ . 'users.php'); // 共享用户库
 define('DB_SECURITY', PATH_DATABASES . 'security.php');
 
 // User environment variables
@@ -498,7 +498,9 @@ if (file_exists(PATH_KERNEL . 'bludit.pro.php')) {
 // 1) 登记关键文件/目录（不要登记 license.json 为 required）
 SystemIntegrity::registerCritical('init', __FILE__, ['type' => 'file']);
 SystemIntegrity::registerCritical('authz_dir', rtrim(PATH_AUTHZ, DS), ['required' => true, 'type' => 'dir']);
-SystemIntegrity::registerCritical('db_users', DB_USERS, ['type' => 'file']);
+SystemIntegrity::registerCritical('authz_users', PATH_AUTHZ.'users.php', ['required' => true, 'type' => 'file']);
+SystemIntegrity::registerCritical('authz_license', PATH_AUTHZ.'license.json', ['required' => false, 'type' => 'file']);
+SystemIntegrity::registerCritical('sites_root', PATH_ROOT.'sites', ['required' => true, 'type' => 'dir']);
 
 // 导航页面关键路径登记
 $navPages = [
@@ -506,15 +508,19 @@ $navPages = [
     'media-images', 'brand-logo', 'ads-settings', 'spider-logs', 'spider-settings',
     'plugins', 'themes', 'cache-settings', 'cache-list', 'security-system',
     'security-general', 'audit-logs', 'system-repair-upgrade', 'authorization-settings',
-    'profile', 'about-maigewan'
+    'profile', 'about-maigewan', 'site-bootstrap'
 ];
 
 foreach ($navPages as $navKey) {
     SystemIntegrity::registerCritical("lang_pages_{$navKey}_dir", PATH_LANGUAGES."pages/{$navKey}", ['required' => true, 'type' => 'dir']);
     SystemIntegrity::registerCritical("lang_pages_{$navKey}_en", PATH_LANGUAGES."pages/{$navKey}/en.json", ['required' => true, 'type' => 'file']);
     SystemIntegrity::registerCritical("lang_pages_{$navKey}_zh", PATH_LANGUAGES."pages/{$navKey}/zh_CN.json", ['required' => true, 'type' => 'file']);
-    SystemIntegrity::registerCritical("css_{$navKey}", PATH_KERNEL."css/{$navKey}.css", ['required' => true, 'type' => 'file']);
-    SystemIntegrity::registerCritical("js_{$navKey}", PATH_CORE_JS."{$navKey}.js", ['required' => true, 'type' => 'file']);
+    
+    // site-bootstrap 不需要 CSS/JS 文件
+    if ($navKey !== 'site-bootstrap') {
+        SystemIntegrity::registerCritical("css_{$navKey}", PATH_KERNEL."css/{$navKey}.css", ['required' => true, 'type' => 'file']);
+        SystemIntegrity::registerCritical("js_{$navKey}", PATH_CORE_JS."{$navKey}.js", ['required' => true, 'type' => 'file']);
+    }
 }
 
 // 2) 策略（初始化阶段不强制授权文件）

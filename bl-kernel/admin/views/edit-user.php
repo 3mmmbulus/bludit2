@@ -107,7 +107,7 @@ echo Bootstrap::formInputHidden(array(
 						<input type="file" class="custom-file-input" id="jsprofilePictureInputFile" name="profilePictureInputFile">
 						<label class="custom-file-label" for="jsprofilePictureInputFile"><?php $L->p('Upload image'); ?></label>
 					</div>
-					<!-- <button id="jsbuttonRemovePicture" type="button" class="btn btn-primary w-100 mt-4 mb-4"><i class="fa fa-trash"></i> Remove picture</button> -->
+					<!-- <button id="jsbuttonRemovePicture" type="button" class="btn btn-primary w-100 mt-4 mb-4"><i class="bi bi-trash"></i> Remove picture</button> -->
 				</div>
 				<div class="col-lg-8 col-sm-12 p-0 text-center">
 					<img id="jsprofilePicturePreview" class="img-fluid img-thumbnail" alt="Profile picture preview" src="<?php echo (Sanitize::pathFile(PATH_UPLOADS_PROFILES . $user->username() . '.png') ? DOMAIN_UPLOADS_PROFILES . $user->username() . '.png?version=' . time() : HTML_PATH_CORE_IMG . 'default.svg') ?>" />
