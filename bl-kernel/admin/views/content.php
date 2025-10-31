@@ -323,5 +323,11 @@ $(document).ready(function() {
 <script>
 	// Open the tab defined in the URL
 	const anchor = window.location.hash;
-	$(`a[href="${anchor}"]`).tab('show');
+	if (anchor) {
+		const tabTrigger = document.querySelector(`a[href="${anchor}"]`);
+		if (tabTrigger) {
+			const tab = new bootstrap.Tab(tabTrigger);
+			tab.show();
+		}
+	}
 </script>

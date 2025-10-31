@@ -607,7 +607,11 @@ echo Bootstrap::formInputHidden(array(
 		});
 		var activeTab = window.localStorage.getItem('activeTab');
 		if (activeTab) {
-			$('#nav-tab a[href="' + activeTab + '"]').tab('show');
+			const tabTrigger = document.querySelector('#nav-tab a[href="' + activeTab + '"]');
+			if (tabTrigger) {
+				const tab = new bootstrap.Tab(tabTrigger);
+				tab.show();
+			}
 			//window.localStorage.removeItem("activeTab");
 		}
 	});
