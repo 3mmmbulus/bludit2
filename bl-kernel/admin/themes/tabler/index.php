@@ -33,8 +33,7 @@
 		echo Theme::js(array(
 			'jquery.datetimepicker.full.min.js',
 			'select2.full.min.js',
-			'functions.js',
-			'theme-settings.js'
+			'functions.js'
 		), DOMAIN_CORE_JS, null);
 	?>
 
@@ -42,6 +41,10 @@
 	<?php Theme::plugins('adminHead') ?>
 </head>
 <body>
+
+<!-- Theme initialization script (must load first to prevent flash) -->
+<script src="<?php echo DOMAIN_ADMIN_THEME_JS ?>tabler-theme.min.js?version=<?php echo BLUDIT_VERSION ?>"></script>
+<script src="<?php echo DOMAIN_CORE_JS ?>theme-settings.js?version=<?php echo BLUDIT_VERSION ?>"></script>
 
 <!-- Plugins -->
 <?php Theme::plugins('adminBodyBegin') ?>

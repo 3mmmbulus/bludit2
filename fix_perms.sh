@@ -76,6 +76,7 @@ find_common_excludes=(
   -path "./.well-known" -prune -o
   -name ".user.ini" -prune -o
   -path "$SCRIPT_PATH" -prune -o
+  -path "./tabler-temp" -prune -o
   ! -type l
 )
 
