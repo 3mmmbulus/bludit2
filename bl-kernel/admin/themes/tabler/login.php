@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 	<meta name="robots" content="noindex,nofollow">
-	<title>Bludit - Login</title>
+	<title><?php echo $site->title() ?> - Login</title>
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo HTML_PATH_CORE_IMG.'favicon.png?version='.BLUDIT_VERSION ?>">
@@ -13,7 +13,6 @@
 	<!-- CSS files -->
 	<?php
 		echo Theme::cssTabler();
-		echo Theme::cssBootstrapIcons();
 		echo Theme::css(array('bludit-tabler.css'), DOMAIN_ADMIN_THEME_CSS);
 	?>
 
@@ -25,72 +24,56 @@
 
 	<!-- Plugins -->
 	<?php Theme::plugins('loginHead') ?>
-
-	<style>
-		.login-page {
-			display: flex;
-			flex-direction: column;
-			min-height: 100vh;
-			justify-content: center;
-			align-items: center;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		}
-		
-		.login-card {
-			max-width: 400px;
-			width: 100%;
-		}
-		
-		.login-brand {
-			margin-bottom: 2rem;
-			text-align: center;
-		}
-		
-		.login-brand img {
-			height: 40px;
-			margin-bottom: 1rem;
-		}
-		
-		.login-brand h1 {
-			color: #fff;
-			font-weight: 600;
-			margin: 0;
-		}
-	</style>
 </head>
 <body class="d-flex flex-column">
-
-<!-- Plugins -->
-<?php Theme::plugins('loginBodyBegin') ?>
-
-<!-- Alert -->
-<?php include('html/alert.php'); ?>
-
-<div class="login-page">
-	<div class="login-brand">
-		<img src="<?php echo HTML_PATH_CORE_IMG ?>logo.svg" alt="Bludit">
-		<h1><?php echo (defined('BLUDIT_PRO'))?'BLUDIT PRO':'BLUDIT' ?></h1>
-	</div>
 	
-	<div class="login-card">
-		<div class="card card-md">
-			<div class="card-body">
-				<?php
-					if (Sanitize::pathFile(PATH_ADMIN_VIEWS, $layout['view'].'.php')) {
-						include(PATH_ADMIN_VIEWS.$layout['view'].'.php');
+	<!-- Global theme script -->
+	<script src="<?php echo DOMAIN_ADMIN_THEME ?>js/tabler-theme.min.js?version=<?php echo BLUDIT_VERSION ?>"></script>
+
+	<!-- Plugins -->
+	<?php Theme::plugins('loginBodyBegin') ?>
+
+	<div class="page page-center">
+		<div class="container container-tight py-4">
+			
+			<!-- Brand Logo -->
+			<div class="text-center mb-4">
+				<a href="<?php echo DOMAIN ?>" aria-label="<?php echo $site->title() ?>" class="navbar-brand navbar-brand-autodark">
+					<?php 
+					$logoPath = HTML_PATH_CORE_IMG . 'logo.svg';
+					if (file_exists(PATH_UPLOADS . 'logo.svg')) {
+						$logoPath = DOMAIN_UPLOADS . 'logo.svg';
+					} elseif (file_exists(PATH_UPLOADS . 'logo.png')) {
+						$logoPath = DOMAIN_UPLOADS . 'logo.png';
 					}
-				?>
+					?>
+					<img src="<?php echo $logoPath ?>" height="36" alt="<?php echo $site->title() ?>" class="navbar-brand-image">
+				</a>
+			</div>
+
+			<!-- Login Card -->
+			<div class="card card-md">
+				<div class="card-body">
+					<!-- Alert -->
+					<?php include('html/alert.php'); ?>
+					
+					<?php
+						if (Sanitize::pathFile(PATH_ADMIN_VIEWS, $layout['view'].'.php')) {
+							include(PATH_ADMIN_VIEWS.$layout['view'].'.php');
+						}
+					?>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<div class="text-center text-secondary mt-3">
+				<?php echo $L->g('Powered by Bludit') ?> <?php echo (defined('BLUDIT_PRO')) ? 'PRO' : '' ?> v<?php echo BLUDIT_VERSION ?>
 			</div>
 		</div>
 	</div>
-	
-	<div class="text-center text-white mt-3" style="opacity: 0.8;">
-		<small>Version <?php echo BLUDIT_VERSION ?></small>
-	</div>
-</div>
 
-<!-- Plugins -->
-<?php Theme::plugins('loginBodyEnd') ?>
+	<!-- Plugins -->
+	<?php Theme::plugins('loginBodyEnd') ?>
 
 </body>
 </html>

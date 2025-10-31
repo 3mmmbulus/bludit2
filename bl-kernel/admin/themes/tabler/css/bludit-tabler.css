@@ -1,0 +1,43 @@
+/* Bludit Tabler Custom Styles */
+
+.login-page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.login-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	padding: 1rem;
+}
+
+.login-card {
+	max-width: 400px;
+	width: 100%;
+}
+
+.navbar-brand-image {
+	height: 32px;
+	width: auto;
+}
+
+/* Password toggle icon */
+.link-secondary {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.link-secondary:hover {
+	opacity: 0.8;
+}
+
+/* Footer text */
+.login-footer {
+	text-align: center;
+	padding: 1rem;
+	color: var(--tblr-secondary);
+	font-size: 0.875rem;
+}

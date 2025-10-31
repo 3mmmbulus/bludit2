@@ -1,6 +1,6 @@
 <?php defined('BLUDIT') or die('Bludit CMS.');
 
-echo '<h1 class="text-center mb-3 mt-3 font-weight-normal" style="color: #555;">' . $site->title() . '</h1>';
+echo '<h2 class="h2 text-center mb-4">' . $L->g('Login to your account') . '</h2>';
 
 echo Bootstrap::formOpen(array());
 
@@ -11,27 +11,54 @@ echo Bootstrap::formInputHidden(array(
 
 echo '
 	<div class="mb-3">
-		<input type="text" dir="auto" value="' . (isset($_POST['username']) ? Sanitize::html($_POST['username']) : '') . '" class="form-control form-control-lg" id="jsusername" name="username" placeholder="' . $L->g('Username') . '" autofocus>
+		<label class="form-label">' . $L->g('Username') . '</label>
+		<input type="text" dir="auto" value="' . (isset($_POST['username']) ? Sanitize::html($_POST['username']) : '') . '" class="form-control" id="jsusername" name="username" placeholder="' . $L->g('Enter your username') . '" autocomplete="username" autofocus>
 	</div>
 	';
 
 echo '
-	<div class="mb-3">
-		<input type="password" class="form-control form-control-lg" id="jspassword" name="password" placeholder="' . $L->g('Password') . '">
+	<div class="mb-2">
+		<label class="form-label">' . $L->g('Password') . '</label>
+		<div class="input-group input-group-flat">
+			<input type="password" class="form-control" id="jspassword" name="password" placeholder="' . $L->g('Your password') . '" autocomplete="current-password">
+			<span class="input-group-text">
+				<a href="#" class="link-secondary" title="' . $L->g('Show password') . '" data-bs-toggle="tooltip" onclick="togglePassword(); return false;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+						<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+						<path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+					</svg>
+				</a>
+			</span>
+		</div>
 	</div>
 	';
 
 echo '
-	<div class="form-check">
-		<input class="form-check-input" type="checkbox" value="true" id="jsremember" name="remember">
-		<label class="form-check-label" for="jsremember">' . $L->g('Remember me') . '</label>
+	<div class="mb-2">
+		<label class="form-check">
+			<input class="form-check-input" type="checkbox" value="true" id="jsremember" name="remember">
+			<span class="form-check-label">' . $L->g('Remember me on this device') . '</span>
+		</label>
 	</div>
+	';
 
-	<div class="mt-3">
-		<button type="submit" class="btn btn-primary btn-lg me-2 w-100" name="save">' . $L->g('Login') . '</button>
+echo '
+	<div class="form-footer">
+		<button type="submit" class="btn btn-primary w-100" name="save">' . $L->g('Sign in') . '</button>
 	</div>
 	';
 
 echo '</form>';
 
-echo '<p class="mt-3 text-right">' . $L->g('Powered by Bludit') . ((defined('BLUDIT_PRO')) ? ' PRO' : '') . '</p>';
+?>
+
+<script>
+function togglePassword() {
+	var passwordField = document.getElementById('jspassword');
+	if (passwordField.type === 'password') {
+		passwordField.type = 'text';
+	} else {
+		passwordField.type = 'password';
+	}
+}
+</script>
