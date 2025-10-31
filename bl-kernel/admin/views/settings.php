@@ -608,7 +608,7 @@ echo Bootstrap::formInputHidden(array(
 		var activeTab = window.localStorage.getItem('activeTab');
 		if (activeTab) {
 			const tabTrigger = document.querySelector('#nav-tab a[href="' + activeTab + '"]');
-			if (tabTrigger) {
+			if (tabTrigger && typeof bootstrap !== 'undefined') {
 				const tab = new bootstrap.Tab(tabTrigger);
 				tab.show();
 			}

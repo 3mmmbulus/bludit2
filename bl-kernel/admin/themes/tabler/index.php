@@ -164,7 +164,7 @@
 						<input type="radio" name="theme-scheme" value="blue" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #0054a6"></span>
-							Blue
+							<?php $L->p('Blue') ?>
 						</span>
 					</label>
 				</div>
@@ -173,7 +173,7 @@
 						<input type="radio" name="theme-scheme" value="azure" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #4299e1"></span>
-							Azure
+							<?php $L->p('Azure') ?>
 						</span>
 					</label>
 				</div>
@@ -182,7 +182,7 @@
 						<input type="radio" name="theme-scheme" value="indigo" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #4263eb"></span>
-							Indigo
+							<?php $L->p('Indigo') ?>
 						</span>
 					</label>
 				</div>
@@ -191,7 +191,7 @@
 						<input type="radio" name="theme-scheme" value="purple" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #ae3ec9"></span>
-							Purple
+							<?php $L->p('Purple') ?>
 						</span>
 					</label>
 				</div>
@@ -200,7 +200,7 @@
 						<input type="radio" name="theme-scheme" value="pink" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #d6336c"></span>
-							Pink
+							<?php $L->p('Pink') ?>
 						</span>
 					</label>
 				</div>
@@ -209,7 +209,7 @@
 						<input type="radio" name="theme-scheme" value="red" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #d63939"></span>
-							Red
+							<?php $L->p('Red') ?>
 						</span>
 					</label>
 				</div>
@@ -218,7 +218,7 @@
 						<input type="radio" name="theme-scheme" value="orange" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #f76707"></span>
-							Orange
+							<?php $L->p('Orange') ?>
 						</span>
 					</label>
 				</div>
@@ -227,7 +227,7 @@
 						<input type="radio" name="theme-scheme" value="yellow" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #f59f00"></span>
-							Yellow
+							<?php $L->p('Yellow') ?>
 						</span>
 					</label>
 				</div>
@@ -236,7 +236,7 @@
 						<input type="radio" name="theme-scheme" value="lime" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #74b816"></span>
-							Lime
+							<?php $L->p('Lime') ?>
 						</span>
 					</label>
 				</div>
@@ -245,7 +245,7 @@
 						<input type="radio" name="theme-scheme" value="green" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #2fb344"></span>
-							Green
+							<?php $L->p('Green') ?>
 						</span>
 					</label>
 				</div>
@@ -254,7 +254,7 @@
 						<input type="radio" name="theme-scheme" value="teal" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #0ca678"></span>
-							Teal
+							<?php $L->p('Teal') ?>
 						</span>
 					</label>
 				</div>
@@ -263,7 +263,7 @@
 						<input type="radio" name="theme-scheme" value="cyan" class="form-selectgroup-input">
 						<span class="form-selectgroup-label">
 							<span class="avatar avatar-xs rounded me-2" style="background: #17a2b8"></span>
-							Cyan
+							<?php $L->p('Cyan') ?>
 						</span>
 					</label>
 				</div>
