@@ -52,6 +52,8 @@ class plugineasyMDE extends Plugin
 		// Include plugin's CSS files
 		$html  = $this->includeCSS('easymde.min.css');
 		$html .= $this->includeCSS('bludit.css');
+		// EasyMDE internally uses FontAwesome icons, load FontAwesome 6 from CDN
+		$html .= '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />' . PHP_EOL;
 		return $html;
 	}
 
@@ -113,7 +115,7 @@ class plugineasyMDE extends Plugin
 				output = "$pageBreak";
 				cm.replaceSelection(output);
 				},
-			className: "fa fa-crop",
+			className: "bi bi-scissors",
 			title: "Page break",
 			}]
 	});
