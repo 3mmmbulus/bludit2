@@ -14,28 +14,6 @@
 		</div>
 		<!-- END NAVBAR LOGO -->
 		
-		<!-- Mobile User Menu -->
-		<div class="navbar-nav flex-row d-lg-none">
-			<div class="nav-item dropdown">
-				<a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">
-					<span class="avatar avatar-sm" style="background-image: url(<?php echo HTML_PATH_CORE_IMG ?>favicon.png)"></span>
-					<div class="d-none d-xl-block ps-2">
-						<div><?php echo $login->username() ?></div>
-						<div class="mt-1 small text-secondary"><?php echo ucfirst($login->role()) ?></div>
-					</div>
-				</a>
-				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a href="<?php echo HTML_PATH_ADMIN_ROOT.'edit-user/'.$login->username() ?>" class="dropdown-item">
-						<i class="bi bi-person me-2"></i><?php $L->p('Profile') ?>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="<?php echo HTML_PATH_ADMIN_ROOT.'logout' ?>" class="dropdown-item">
-						<i class="bi bi-box-arrow-right me-2"></i><?php $L->p('Logout') ?>
-					</a>
-				</div>
-			</div>
-		</div>
-		
 		<div class="collapse navbar-collapse" id="sidebar-menu">
 			<!-- BEGIN NAVBAR MENU -->
 			<ul class="navbar-nav pt-lg-3">
@@ -302,7 +280,7 @@
 			</ul>
 			<!-- END NAVBAR MENU -->
 			
-			<!-- Theme Settings & Logout (Bottom) -->
+			<!-- Bottom Navigation (Theme Settings & Logout) -->
 			<div class="navbar-nav d-none d-lg-flex mt-auto">
 				<!-- Theme Settings Button -->
 				<div class="nav-item">
@@ -322,28 +300,6 @@
 						</span>
 						<span class="nav-link-title"><?php $L->p('Logout') ?></span>
 					</a>
-				</div>
-			</div>
-			
-			<!-- Desktop User Menu at Bottom -->
-			<div class="navbar-nav d-none d-lg-flex">
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">
-						<span class="avatar avatar-sm" style="background-image: url(<?php echo HTML_PATH_CORE_IMG ?>favicon.png)"></span>
-						<div class="d-none d-xl-block ps-2">
-							<div><?php echo $login->username() ?></div>
-							<div class="mt-1 small text-secondary"><?php echo ucfirst($login->role()) ?></div>
-						</div>
-					</a>
-					<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-						<a href="<?php echo HTML_PATH_ADMIN_ROOT.'edit-user/'.$login->username() ?>" class="dropdown-item">
-							<i class="bi bi-person me-2"></i><?php $L->p('Profile') ?>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="<?php echo HTML_PATH_ADMIN_ROOT.'logout' ?>" class="dropdown-item">
-							<i class="bi bi-box-arrow-right me-2"></i><?php $L->p('Logout') ?>
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>
