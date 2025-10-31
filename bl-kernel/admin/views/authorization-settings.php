@@ -15,7 +15,7 @@
         <h3><?php echo $pageL->get('label_upload_license') ?></h3>
         
         <form method="post" enctype="multipart/form-data">
-            <div class="form-group">
+            <div class="mb-3">
                 <input type="file" name="license" accept=".json" required>
             </div>
             <button type="submit" class="btn btn-primary"><?php echo $pageL->get('btn_upload') ?></button>

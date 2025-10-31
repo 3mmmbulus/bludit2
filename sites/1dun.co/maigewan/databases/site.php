@@ -9,7 +9,7 @@
     "locale": "zh_CN",
     "timezone": "Asia\/Bangkok",
     "theme": "alternative",
-    "adminTheme": "booty",
+    "adminTheme": "tabler",
     "homepage": "",
     "pageNotFound": "",
     "uriPage": "\/",

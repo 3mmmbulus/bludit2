@@ -30,3 +30,6 @@ bl-themes/tagg
 bl-themes/small
 bl-themes/future-imperfect
 bl-themes/social-network
+tabler-temp/
+*.sh
+sites/*/maigewan/workspaces/

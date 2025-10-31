@@ -275,4 +275,26 @@ class Theme
 		// https://github.com/psfpro/bootstrap-html5sortable
 		return '<script ' . $attributes . ' src="' . DOMAIN_CORE_JS . 'jquery.sortable.min.js?version=' . BLUDIT_VERSION . '"></script>' . PHP_EOL;
 	}
+
+	// Tabler Admin Template
+	public static function cssTabler()
+	{
+		return '<link rel="stylesheet" href="' . DOMAIN_ADMIN_THEME . 'css/tabler.min.css?version=' . BLUDIT_VERSION . '">' . PHP_EOL;
+	}
+
+	public static function cssTablerVendors()
+	{
+		return '<link rel="stylesheet" href="' . DOMAIN_ADMIN_THEME . 'css/tabler-vendors.min.css?version=' . BLUDIT_VERSION . '">' . PHP_EOL;
+	}
+
+	public static function jsTabler()
+	{
+		return '<script src="' . DOMAIN_ADMIN_THEME . 'js/tabler.min.js?version=' . BLUDIT_VERSION . '"></script>' . PHP_EOL;
+	}
+
+	public static function cssTablerIcons()
+	{
+		// Tabler Icons 作为可选图标库
+		return '<link rel="stylesheet" href="' . DOMAIN_ADMIN_THEME . 'libs/@tabler/icons/tabler-icons.min.css?version=' . BLUDIT_VERSION . '">' . PHP_EOL;
+	}
 }

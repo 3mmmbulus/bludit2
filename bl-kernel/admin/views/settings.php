@@ -13,14 +13,14 @@
 <!-- TABS -->
 <nav class="mb-3">
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
-		<a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="nav-general" aria-selected="false"><?php $L->p('General') ?></a>
-		<a class="nav-item nav-link" id="nav-advanced-tab" data-toggle="tab" href="#advanced" role="tab" aria-controls="nav-advanced" aria-selected="false"><?php $L->p('Advanced') ?></a>
-		<a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="nav-seo" aria-selected="false"><?php $L->p('SEO') ?></a>
-		<a class="nav-item nav-link" id="nav-social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="nav-social" aria-selected="false"><?php $L->p('Social Networks') ?></a>
-		<a class="nav-item nav-link" id="nav-images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="nav-images" aria-selected="false"><?php $L->p('Images') ?></a>
-		<a class="nav-item nav-link" id="nav-language-tab" data-toggle="tab" href="#language" role="tab" aria-controls="nav-language" aria-selected="false"><?php $L->p('Language') ?></a>
-		<a class="nav-item nav-link" id="nav-custom-fields-tab" data-toggle="tab" href="#custom-fields" role="tab" aria-controls="nav-custom-fields" aria-selected="false"><?php $L->p('Custom fields') ?></a>
-		<a class="nav-item nav-link" id="nav-logo-tab" data-toggle="tab" href="#logo" role="tab" aria-controls="nav-logo" aria-selected="false"><?php $L->p('Logo') ?></a>
+		<a class="nav-item nav-link active" id="nav-general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="nav-general" aria-selected="false"><?php $L->p('General') ?></a>
+		<a class="nav-item nav-link" id="nav-advanced-tab" data-bs-toggle="tab" href="#advanced" role="tab" aria-controls="nav-advanced" aria-selected="false"><?php $L->p('Advanced') ?></a>
+		<a class="nav-item nav-link" id="nav-seo-tab" data-bs-toggle="tab" href="#seo" role="tab" aria-controls="nav-seo" aria-selected="false"><?php $L->p('SEO') ?></a>
+		<a class="nav-item nav-link" id="nav-social-tab" data-bs-toggle="tab" href="#social" role="tab" aria-controls="nav-social" aria-selected="false"><?php $L->p('Social Networks') ?></a>
+		<a class="nav-item nav-link" id="nav-images-tab" data-bs-toggle="tab" href="#images" role="tab" aria-controls="nav-images" aria-selected="false"><?php $L->p('Images') ?></a>
+		<a class="nav-item nav-link" id="nav-language-tab" data-bs-toggle="tab" href="#language" role="tab" aria-controls="nav-language" aria-selected="false"><?php $L->p('Language') ?></a>
+		<a class="nav-item nav-link" id="nav-custom-fields-tab" data-bs-toggle="tab" href="#custom-fields" role="tab" aria-controls="nav-custom-fields" aria-selected="false"><?php $L->p('Custom fields') ?></a>
+		<a class="nav-item nav-link" id="nav-logo-tab" data-bs-toggle="tab" href="#logo" role="tab" aria-controls="nav-logo" aria-selected="false"><?php $L->p('Logo') ?></a>
 	</div>
 </nav>
 
@@ -126,7 +126,7 @@ echo Bootstrap::formInputHidden(array(
 			var homepage = $("#jshomepage").select2({
 				placeholder: "<?php $L->p('Start typing to see a list of suggestions.') ?>",
 				allowClear: true,
-				theme: "bootstrap4",
+				theme: "bootstrap-5",
 				minimumInputLength: 2,
 				ajax: {
 					url: HTML_PATH_ADMIN_ROOT + "ajax/get-published",
@@ -174,7 +174,7 @@ echo Bootstrap::formInputHidden(array(
 			var homepage = $("#jspageNotFound").select2({
 				placeholder: "<?php $L->p('Start typing to see a list of suggestions.') ?>",
 				allowClear: true,
-				theme: "bootstrap4",
+				theme: "bootstrap-5",
 				minimumInputLength: 2,
 				ajax: {
 					url: HTML_PATH_ADMIN_ROOT + "ajax/get-published",
@@ -557,10 +557,10 @@ echo Bootstrap::formInputHidden(array(
 
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-4 col-sm-12 p-0 pr-2">
-				<div class="custom-file">
-					<input id="jssiteLogoInputFile" class="custom-file-input" type="file" name="inputFile">
-					<label for="jssiteLogoInputFile" class="custom-file-label"><?php $L->p('Upload image'); ?></label>
+			<div class="col-lg-4 col-sm-12 p-0 pe-2">
+				<div class="mb-3">
+					<input id="jssiteLogoInputFile" class="form-control" type="file" name="inputFile">
+					<label for="jssiteLogoInputFile" class="form-label"><?php $L->p('Upload image'); ?></label>
 				</div>
 				<button id="jsbuttonRemoveLogo" type="button" class="btn btn-primary w-100 mt-4 mb-4"><i class="bi bi-trash"></i><?php $L->p('Remove logo') ?></button>
 			</div>
@@ -602,7 +602,7 @@ echo Bootstrap::formInputHidden(array(
 <script>
 	// Open current tab after refresh page
 	$(function() {
-		$('a[data-toggle="tab"]').on('click', function(e) {
+		$('a[data-bs-toggle="tab"]').on('click', function(e) {
 			window.localStorage.setItem('activeTab', $(e.target).attr('href'));
 		});
 		var activeTab = window.localStorage.getItem('activeTab');

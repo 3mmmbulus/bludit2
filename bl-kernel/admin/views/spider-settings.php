@@ -6,12 +6,12 @@
     <h2><?php echo $pageL->get('title') ?></h2>
     
     <form method="post">
-        <div class="form-group checkbox-group">
+        <div class="checkbox-group">
             <input type="checkbox" name="enable_logging" id="enable_logging">
             <label for="enable_logging"><?php echo $pageL->get('label_enable_logging') ?></label>
         </div>
         
-        <div class="form-group">
+        <div class="mb-3">
             <label><?php echo $pageL->get('label_whitelist') ?></label>
             <textarea name="whitelist" placeholder="Googlebot&#10;Bingbot&#10;..."></textarea>
         </div>

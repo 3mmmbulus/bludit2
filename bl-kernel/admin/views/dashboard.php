@@ -41,7 +41,7 @@
 
                 <div class="row">
                     <div class="col p-0">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <select id="jsclippy" class="clippy" name="state"></select>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             placeholder: "<?php $L->p('Start typing to see a list of suggestions') ?>",
                             allowClear: true,
                             width: "100%",
-                            theme: "bootstrap4",
+                            theme: "bootstrap-5",
                             minimumInputLength: 2,
                             dropdownParent: "#jsclippyContainer",
                             language: {
@@ -88,7 +88,7 @@
                                     html += '<div class="search-suggestion-item">' + data.text + ' <span class="badge badge-pill badge-light">' + data.type + '</span></div>';
                                     html += '<div class="search-suggestion-options">';
                                     html += '<a target="_blank" href="' + DOMAIN_PAGES + data.id + '"><?php $L->p('view') ?></a>';
-                                    html += '<a class="ml-2" href="' + DOMAIN_ADMIN + 'edit-content/' + data.id + '"><?php $L->p('edit') ?></a>';
+                                    html += '<a class="ms-2" href="' + DOMAIN_ADMIN + 'edit-content/' + data.id + '"><?php $L->p('edit') ?></a>';
                                     html += '</div></div>';
                                 }
 

@@ -9,7 +9,7 @@
     "locale": "zh_CN",
     "timezone": "Asia\/Bangkok",
     "theme": "alternative",
-    "adminTheme": "booty",
+    "adminTheme": "tabler",
     "homepage": "",
     "pageNotFound": "",
     "uriPage": "\/",
@@ -37,5 +37,13 @@
     "titleFormatCategory": "{{category-name}} | {{site-title}}",
     "titleFormatTag": "{{tag-name}} | {{site-title}}",
     "imageRestrict": true,
-    "imageRelativeToAbsolute": false
+    "imageRelativeToAbsolute": false,
+    "mastodon": "",
+    "dribbble": "",
+    "vk": "",
+    "thumbnailWidth": 400,
+    "thumbnailHeight": 400,
+    "thumbnailQuality": 100,
+    "markdownParser": true,
+    "customFields": "[]"
 }

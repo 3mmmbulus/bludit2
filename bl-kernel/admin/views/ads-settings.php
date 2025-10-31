@@ -6,12 +6,12 @@
     <h2><?php echo $pageL->get('title') ?></h2>
     
     <form method="post">
-        <div class="form-group">
+        <div class="mb-3">
             <label><?php echo $pageL->get('label_ad_code') ?></label>
             <textarea name="ad_code" placeholder="<script>...</script>"></textarea>
         </div>
         
-        <div class="form-group">
+        <div class="mb-3">
             <label><?php echo $pageL->get('label_position') ?></label>
             <select name="position" class="form-control">
                 <option value="header">Header</option>
