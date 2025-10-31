@@ -19,7 +19,8 @@
 		echo Theme::css(array(
 			'jquery.datetimepicker.min.css',
 			'select2.min.css',
-			'select2-bootstrap-5-theme.min.css'
+			'select2-bootstrap-5-theme.min.css',
+			'theme-settings.css'
 		), DOMAIN_CORE_CSS);
 	?>
 
@@ -32,7 +33,8 @@
 		echo Theme::js(array(
 			'jquery.datetimepicker.full.min.js',
 			'select2.full.min.js',
-			'functions.js'
+			'functions.js',
+			'theme-settings.js'
 		), DOMAIN_CORE_JS, null);
 	?>
 
@@ -120,6 +122,191 @@
 				</div>
 			</div>
 		</footer>
+	</div>
+</div>
+
+<!-- Theme Settings Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasTheme" aria-labelledby="offcanvasThemeLabel">
+	<div class="offcanvas-header">
+		<h2 class="offcanvas-title" id="offcanvasThemeLabel"><?php $L->p('Theme Settings') ?></h2>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<!-- Color Mode -->
+		<div class="mb-4">
+			<h3 class="h5"><?php $L->p('Color Mode') ?></h3>
+			<div class="row g-2">
+				<div class="col-6">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-mode" value="light" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<i class="bi bi-sun me-1"></i> <?php $L->p('Light') ?>
+						</span>
+					</label>
+				</div>
+				<div class="col-6">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-mode" value="dark" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<i class="bi bi-moon me-1"></i> <?php $L->p('Dark') ?>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Color Scheme -->
+		<div class="mb-4">
+			<h3 class="h5"><?php $L->p('Color Scheme') ?></h3>
+			<div class="row g-2">
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="blue" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #0054a6"></span>
+							Blue
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="azure" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #4299e1"></span>
+							Azure
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="indigo" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #4263eb"></span>
+							Indigo
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="purple" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #ae3ec9"></span>
+							Purple
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="pink" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #d6336c"></span>
+							Pink
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="red" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #d63939"></span>
+							Red
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="orange" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #f76707"></span>
+							Orange
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="yellow" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #f59f00"></span>
+							Yellow
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="lime" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #74b816"></span>
+							Lime
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="green" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #2fb344"></span>
+							Green
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="teal" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #0ca678"></span>
+							Teal
+						</span>
+					</label>
+				</div>
+				<div class="col-6 col-sm-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-scheme" value="cyan" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<span class="avatar avatar-xs rounded me-2" style="background: #17a2b8"></span>
+							Cyan
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Border Radius -->
+		<div class="mb-4">
+			<h3 class="h5"><?php $L->p('Border Radius') ?></h3>
+			<div class="row g-2">
+				<div class="col-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-radius" value="none" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<?php $L->p('Theme Radius None') ?>
+						</span>
+					</label>
+				</div>
+				<div class="col-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-radius" value="default" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<?php $L->p('Theme Radius Default') ?>
+						</span>
+					</label>
+				</div>
+				<div class="col-4">
+					<label class="form-selectgroup-item">
+						<input type="radio" name="theme-radius" value="large" class="form-selectgroup-input">
+						<span class="form-selectgroup-label">
+							<?php $L->p('Theme Radius Large') ?>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Reset Button -->
+		<div class="mt-4">
+			<button type="button" class="btn btn-outline-danger w-100" id="theme-reset">
+				<i class="bi bi-arrow-counterclockwise me-2"></i><?php $L->p('Reset to Default') ?>
+			</button>
+		</div>
 	</div>
 </div>
 

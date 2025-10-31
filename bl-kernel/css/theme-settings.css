@@ -1,0 +1,166 @@
+/**
+ * MAIGEWAN Theme Settings CSS
+ * Provides color scheme variations and border radius customization
+ */
+
+/* ==========================================================================
+   Color Scheme Variables
+   ========================================================================== */
+
+:root {
+	/* Default Blue Scheme */
+	--tblr-primary: #0054a6;
+	--tblr-primary-rgb: 0, 84, 166;
+}
+
+/* Azure Scheme */
+[data-theme-scheme="azure"] {
+	--tblr-primary: #4299e1;
+	--tblr-primary-rgb: 66, 153, 225;
+}
+
+/* Indigo Scheme */
+[data-theme-scheme="indigo"] {
+	--tblr-primary: #4263eb;
+	--tblr-primary-rgb: 66, 99, 235;
+}
+
+/* Purple Scheme */
+[data-theme-scheme="purple"] {
+	--tblr-primary: #ae3ec9;
+	--tblr-primary-rgb: 174, 62, 201;
+}
+
+/* Pink Scheme */
+[data-theme-scheme="pink"] {
+	--tblr-primary: #d6336c;
+	--tblr-primary-rgb: 214, 51, 108;
+}
+
+/* Red Scheme */
+[data-theme-scheme="red"] {
+	--tblr-primary: #d63939;
+	--tblr-primary-rgb: 214, 57, 57;
+}
+
+/* Orange Scheme */
+[data-theme-scheme="orange"] {
+	--tblr-primary: #f76707;
+	--tblr-primary-rgb: 247, 103, 7;
+}
+
+/* Yellow Scheme */
+[data-theme-scheme="yellow"] {
+	--tblr-primary: #f59f00;
+	--tblr-primary-rgb: 245, 159, 0;
+}
+
+/* Lime Scheme */
+[data-theme-scheme="lime"] {
+	--tblr-primary: #74b816;
+	--tblr-primary-rgb: 116, 184, 22;
+}
+
+/* Green Scheme */
+[data-theme-scheme="green"] {
+	--tblr-primary: #2fb344;
+	--tblr-primary-rgb: 47, 179, 68;
+}
+
+/* Teal Scheme */
+[data-theme-scheme="teal"] {
+	--tblr-primary: #0ca678;
+	--tblr-primary-rgb: 12, 166, 120;
+}
+
+/* Cyan Scheme */
+[data-theme-scheme="cyan"] {
+	--tblr-primary: #17a2b8;
+	--tblr-primary-rgb: 23, 162, 184;
+}
+
+/* ==========================================================================
+   Border Radius Customization
+   ========================================================================== */
+
+/* No Border Radius */
+[data-theme-radius="none"] {
+	--tblr-border-radius: 0;
+	--tblr-border-radius-sm: 0;
+	--tblr-border-radius-lg: 0;
+	--tblr-border-radius-xl: 0;
+	--tblr-border-radius-2xl: 0;
+}
+
+[data-theme-radius="none"] .btn,
+[data-theme-radius="none"] .card,
+[data-theme-radius="none"] .form-control,
+[data-theme-radius="none"] .form-select,
+[data-theme-radius="none"] .dropdown-menu,
+[data-theme-radius="none"] .modal-content,
+[data-theme-radius="none"] .offcanvas,
+[data-theme-radius="none"] .alert,
+[data-theme-radius="none"] .badge,
+[data-theme-radius="none"] .avatar,
+[data-theme-radius="none"] .page-item .page-link {
+	border-radius: 0 !important;
+}
+
+/* Default Border Radius (Tabler default) */
+[data-theme-radius="default"] {
+	--tblr-border-radius: 4px;
+	--tblr-border-radius-sm: 2px;
+	--tblr-border-radius-lg: 6px;
+	--tblr-border-radius-xl: 8px;
+	--tblr-border-radius-2xl: 12px;
+}
+
+/* Large Border Radius */
+[data-theme-radius="large"] {
+	--tblr-border-radius: 8px;
+	--tblr-border-radius-sm: 6px;
+	--tblr-border-radius-lg: 12px;
+	--tblr-border-radius-xl: 16px;
+	--tblr-border-radius-2xl: 24px;
+}
+
+/* ==========================================================================
+   Theme Settings Offcanvas Enhancements
+   ========================================================================== */
+
+.offcanvas#offcanvasTheme {
+	width: 360px;
+	max-width: 90vw;
+}
+
+.offcanvas#offcanvasTheme .form-selectgroup-label {
+	padding: 0.5rem 0.75rem;
+	font-size: 0.875rem;
+}
+
+.offcanvas#offcanvasTheme .form-selectgroup-item input:checked + .form-selectgroup-label {
+	background-color: var(--tblr-primary);
+	color: #fff;
+	border-color: var(--tblr-primary);
+}
+
+/* Color scheme preview squares */
+.offcanvas#offcanvasTheme .avatar-xs {
+	width: 1.25rem;
+	height: 1.25rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 575.98px) {
+	.offcanvas#offcanvasTheme {
+		width: 100%;
+		max-width: 100%;
+	}
+	
+	.offcanvas#offcanvasTheme .col-6 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+}
