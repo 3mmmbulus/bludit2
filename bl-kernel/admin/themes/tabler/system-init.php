@@ -89,7 +89,7 @@
 			</div>
 
 			<!-- Footer -->
-			<?php include(PATH_ADMIN_THEMES . $site->adminTheme() . DS . 'includes' . DS . 'footer-simple.php'); ?>
+			<?php include(PATH_ADMIN_THEMES . $site->adminTheme() . DS . 'includes' . DS . 'footer.php'); ?>
 		</div>
 	</div>
 

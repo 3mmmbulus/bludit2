@@ -1,7 +1,7 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 
 <!-- Footer -->
-<footer class="footer footer-transparent d-print-none mt-auto">
+<footer class="footer footer-transparent d-print-none" style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--tblr-bg-surface);">
 	<div class="container-xl">
 		<div class="row text-center align-items-center">
 			<div class="col-12">
