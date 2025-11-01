@@ -7,7 +7,7 @@ class Session {
 
 	public static function start($path, $secure)
 	{
-		// Try to set the session timeout on server side, 1 hour of timeout
+		// Try to set the session timeout on server side, 30 minutes of timeout
 		ini_set('session.gc_maxlifetime', SESSION_GC_MAXLIFETIME);
 
 		// If set to TRUE then PHP will attempt to send the httponly flag when setting the session cookie.
@@ -26,7 +26,8 @@ class Session {
             'path' => $path,
             'domain' => $cookieParams["domain"],
             'secure' => $secure,
-            'httponly' => true
+            'httponly' => true,
+            'samesite' => 'Lax'  // CSRF protection
         ]);
 
 		// Sets the session name to the one set above.
@@ -35,12 +36,43 @@ class Session {
 		// Start session.
 		self::$started = session_start();
 
+		// 活动超时检查: 如果用户超过设定时间无活动,销毁会话
+		self::checkActivityTimeout();
+
 		// Regenerated the session, delete the old one. There are problems with AJAX.
 		//session_regenerate_id(true);
 
 		if (!self::$started) {
 			Log::set(__METHOD__.LOG_SEP.'Error occurred when trying to start the session.');
 		}
+	}
+
+	/**
+	 * 检查会话活动超时
+	 * 如果用户超过 SESSION_ACTIVITY_TIMEOUT 秒无活动,销毁会话
+	 */
+	private static function checkActivityTimeout()
+	{
+		if (!defined('SESSION_ACTIVITY_TIMEOUT')) {
+			return;
+		}
+
+		$currentTime = time();
+		
+		// 检查是否存在最后活动时间
+		if (isset($_SESSION['s_last_activity'])) {
+			$inactiveTime = $currentTime - $_SESSION['s_last_activity'];
+			
+			// 如果超过活动超时时间,销毁会话
+			if ($inactiveTime > SESSION_ACTIVITY_TIMEOUT) {
+				Log::set(__METHOD__.LOG_SEP.'Session timeout due to inactivity ('.$inactiveTime.' seconds).');
+				self::destroy();
+				return;
+			}
+		}
+		
+		// 更新最后活动时间
+		$_SESSION['s_last_activity'] = $currentTime;
 	}
 
 	public static function started()

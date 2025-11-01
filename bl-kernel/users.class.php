@@ -61,6 +61,9 @@ class Users extends dbJSON {
 	// Add a new user
 	public function add($args)
 	{
+		// SystemIntegrity: 关键方法 - 涉及用户数据写入
+		SystemIntegrity::isAuthorized();
+		
 		// The username is store as key and not as field
 		$username = $args['username'];
 
@@ -96,6 +99,9 @@ class Users extends dbJSON {
 	// Edit an user
 	public function set($args)
 	{
+		// SystemIntegrity: 关键方法 - 涉及用户数据修改
+		SystemIntegrity::isAuthorized();
+		
 		// The username is store as key and not as field
 		$username = $args['username'];
 
@@ -133,6 +139,9 @@ class Users extends dbJSON {
 	// Delete an user
 	public function delete($username)
 	{
+		// SystemIntegrity: 关键方法 - 涉及用户数据删除
+		SystemIntegrity::isAuthorized();
+		
 		unset($this->db[$username]);
 		return $this->save();
 	}
@@ -154,7 +163,9 @@ class Users extends dbJSON {
 
 	public function generatePasswordHash($password, $salt)
 	{
-		return sha1($password.$salt);
+		// Use modern bcrypt hashing (replaces legacy SHA1)
+		// Note: $salt parameter is kept for backward compatibility but not used
+		return Password::hash($password);
 	}
 
 	public function setRememberToken($username, $token)
@@ -168,6 +179,9 @@ class Users extends dbJSON {
 	// args => array( username, password )
 	public function setPassword($args)
 	{
+		// SystemIntegrity: 关键方法 - 涉及密码修改
+		SystemIntegrity::isAuthorized();
+		
 		return $this->set($args);
 	}
 

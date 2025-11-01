@@ -85,8 +85,12 @@ define('ADMIN_URI_FILTER', 'admin');
 define('DEFAULT_LANGUAGE_FILE', 'en.json');
 
 // Session timeout server side, gc_maxlifetime
-// 3600 = 1hour
-define('SESSION_GC_MAXLIFETIME', 3600);
+// 1800 = 30 minutes (安全性优化: 从1小时缩短至30分钟)
+define('SESSION_GC_MAXLIFETIME', 1800);
+
+// Session activity timeout in seconds
+// 如果用户超过此时间无活动,则会话过期
+define('SESSION_ACTIVITY_TIMEOUT', 1800);
 
 // Session lifetime of the cookie in seconds which is sent to the browser
 // The value 0 means until the browser is closed

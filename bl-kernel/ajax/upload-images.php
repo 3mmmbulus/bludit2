@@ -73,6 +73,45 @@ foreach ($_FILES['images']['name'] as $uuid => $filename) {
 		}
 	}
 
+	// Enhanced: Validate file content by magic bytes (file signature)
+	$fileContent = file_get_contents($_FILES['images']['tmp_name'][$uuid], false, null, 0, 12);
+	$isValidImage = false;
+	
+	// Check for common image file signatures (magic bytes)
+	$imageSignatures = array(
+		'jpeg' => array("\xFF\xD8\xFF"),                                  // JPEG
+		'png'  => array("\x89\x50\x4E\x47\x0D\x0A\x1A\x0A"),            // PNG
+		'gif'  => array("GIF87a", "GIF89a"),                             // GIF
+		'webp' => array("RIFF", "\x57\x45\x42\x50"),                     // WebP (needs RIFF + WEBP)
+		'bmp'  => array("BM"),                                           // BMP
+		'svg'  => array("<?xml", "<svg")                                 // SVG
+	);
+	
+	foreach ($imageSignatures as $type => $signatures) {
+		foreach ($signatures as $signature) {
+			if (strpos($fileContent, $signature) === 0 || 
+			    ($type === 'webp' && strpos($fileContent, 'RIFF') === 0 && strpos($fileContent, 'WEBP') !== false) ||
+			    ($type === 'svg' && (strpos($fileContent, '<?xml') !== false || strpos($fileContent, '<svg') !== false))) {
+				$isValidImage = true;
+				break 2;
+			}
+		}
+	}
+	
+	if (!$isValidImage) {
+		$message = 'File content validation failed. The file does not appear to be a valid image.';
+		Log::set($message, LOG_TYPE_ERROR);
+		ajaxResponse(1, $message);
+	}
+	
+	// Additional security: Check file size
+	$maxFileSize = 10 * 1024 * 1024; // 10MB limit
+	if ($_FILES['images']['size'][$uuid] > $maxFileSize) {
+		$message = 'File size exceeds maximum allowed size of 10MB.';
+		Log::set($message, LOG_TYPE_ERROR);
+		ajaxResponse(1, $message);
+	}
+
 	// Move from PHP tmp file to Bludit tmp directory
 	Filesystem::mv($_FILES['images']['tmp_name'][$uuid], PATH_TMP . $filename);
 

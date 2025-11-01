@@ -535,6 +535,7 @@ include(PATH_HELPERS . 'image.class.php');
 include(PATH_HELPERS . 'tcp.class.php');
 include(PATH_HELPERS . 'dom.class.php');
 include(PATH_HELPERS . 'cookie.class.php');
+include(PATH_HELPERS . 'password.class.php');
 
 if (file_exists(PATH_KERNEL . 'bludit.pro.php')) {
 	include(PATH_KERNEL . 'bludit.pro.php');
@@ -552,6 +553,11 @@ SystemIntegrity::registerCritical('authz_dir', rtrim(PATH_AUTHZ, DS), ['required
 SystemIntegrity::registerCritical('authz_users', PATH_AUTHZ.'users.php', ['required' => false, 'type' => 'file']);
 SystemIntegrity::registerCritical('authz_license', PATH_AUTHZ.'license.json', ['required' => false, 'type' => 'file']);
 SystemIntegrity::registerCritical('sites_root', PATH_ROOT.'sites', ['required' => true, 'type' => 'dir']);
+
+// 安全增强类文件登记
+SystemIntegrity::registerCritical('helper_password', PATH_HELPERS.'password.class.php', ['required' => true, 'type' => 'file']);
+SystemIntegrity::registerCritical('helper_cookie', PATH_HELPERS.'cookie.class.php', ['required' => true, 'type' => 'file']);
+SystemIntegrity::registerCritical('helper_session', PATH_HELPERS.'session.class.php', ['required' => true, 'type' => 'file']);
 
 // 导航页面关键路径登记
 $navPages = [

@@ -58,16 +58,27 @@ class Login
 	// Set the session for the user logged
 	public function setLogin($username, $role)
 	{
+		// SystemIntegrity: 关键方法 - 涉及会话写入
+		SystemIntegrity::isAuthorized();
+		
 		Session::set('username',	$username);
 		Session::set('role', 		$role);
 		Session::set('fingerPrint',	$this->fingerPrint());
 		Session::set('sessionTime',	time());
+
+		// Regenerate session ID to prevent session fixation attacks
+		if (session_status() === PHP_SESSION_ACTIVE) {
+			session_regenerate_id(true);
+		}
 
 		Log::set(__METHOD__ . LOG_SEP . 'User logged, fingerprint [' . $this->fingerPrint() . ']');
 	}
 
 	public function setRememberMe($username)
 	{
+		// SystemIntegrity: 关键方法 - 涉及Cookie写入
+		SystemIntegrity::isAuthorized();
+		
 		$username = Sanitize::html($username);
 
 		// Set the token on the users database
@@ -117,10 +128,10 @@ class Login
 			return false;
 		}
 
-		$passwordHash = $this->users->generatePasswordHash($password, $user->salt());
-		if ($passwordHash === $user->password()) {
+		// Use Password helper to verify and auto-upgrade legacy SHA1 hashes
+		if (Password::verify($password, $user->password(), $user->salt(), $username)) {
 			$this->setLogin($username, $user->role());
-			Log::set(__METHOD__ . LOG_SEP . 'Successful user login by username and password - Username [' . $username . ']');
+			Log::set(__METHOD__ . LOG_SEP . 'Successful user login - Username [' . $username . ']');
 			return true;
 		}
 

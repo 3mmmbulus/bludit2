@@ -13,6 +13,15 @@
 // ============================================================================
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	// CSRF Token 验证
+	if (!isset($_POST['tokenCSRF']) || !$security->validateTokenCSRF($_POST['tokenCSRF'])) {
+		Alert::set($L->g('Invalid security token'), ALERT_STATUS_FAIL);
+		if ($login->role()==='admin') {
+			Redirect::page('users');
+		}
+		Redirect::page('edit-user/'.$login->username());
+	}
+	
 	// Prevent non-administrators to change other users
 	$username = $_POST['username'];
 	if ($login->role()!=='admin') {

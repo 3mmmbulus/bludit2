@@ -18,13 +18,29 @@ class Cookie {
 		// Or you might use mktime(). time()+60*60*24*30 will set the cookie to expire in 30 days.
 		// If set to 0, or omitted, the cookie will expire at the end of the session (when the browser closes).
 		$expire = time()+60*60*24*$daysToExpire;
-		setcookie($key, $value, $expire);
+		
+		// Security-enhanced cookie settings (PHP 7.3+)
+		setcookie($key, $value, [
+			'expires' => $expire,
+			'path' => '/',
+			'domain' => '',
+			'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+			'httponly' => true,
+			'samesite' => 'Lax'  // Lax allows safe cross-site requests (e.g., links)
+		]);
 	}
 	
 	public static function remove($key)
 	{
 		unset($_COOKIE[$key]);
-		setcookie($key, null, time()-3600);
+		setcookie($key, '', [
+			'expires' => time()-3600,
+			'path' => '/',
+			'domain' => '',
+			'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+			'httponly' => true,
+			'samesite' => 'Lax'
+		]);
 	}
 
 	public static function isEmpty($key)

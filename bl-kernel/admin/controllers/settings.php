@@ -19,6 +19,12 @@ checkRole(array('admin'));
 // ============================================================================
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	// CSRF Token 验证
+	if (!isset($_POST['tokenCSRF']) || !$security->validateTokenCSRF($_POST['tokenCSRF'])) {
+		Alert::set($L->g('Invalid security token'), ALERT_STATUS_FAIL);
+		Redirect::page('settings');
+	}
+	
 	editSettings($_POST);
 	Redirect::page('settings');
 }
