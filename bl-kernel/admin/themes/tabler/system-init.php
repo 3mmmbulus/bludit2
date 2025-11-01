@@ -18,7 +18,7 @@
 	<!-- Tabler Theme Script (must be loaded before body) -->
 	<script src="/bl-kernel/admin/themes/tabler/js/tabler-theme.min.js"></script>
 </head>
-<body class="d-flex flex-column">
+<body>
 	
 	<!-- jQuery must load before view to support Bootstrap::formClose() -->
 	<script src="/bl-kernel/js/jquery.min.js"></script>
@@ -55,8 +55,8 @@
 		</div>
 	</div>
 
-	<div class="page page-center d-flex flex-column min-vh-100">
-		<div class="container container-tight py-4 flex-fill d-flex flex-column">
+	<div class="page page-center">
+		<div class="container container-tight py-4">
 			
 			<!-- Brand Logo -->
 			<div class="text-center mb-4">
