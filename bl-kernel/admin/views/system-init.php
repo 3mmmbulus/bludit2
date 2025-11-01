@@ -8,9 +8,6 @@
 <p class="text-center text-muted mb-4"><?php echo $pageL->get('subtitle') ?></p>
 <?php endif ?>
 
-<!-- Alert Messages -->
-<?php echo Alert::get() ?>
-
 <!-- Form -->
 <?php echo Bootstrap::formOpen(array('id' => 'jsformInit', 'autocomplete' => 'off')) ?>
 

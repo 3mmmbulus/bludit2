@@ -368,10 +368,11 @@ $(document).ready(function() {
 			'<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
 			'</div>';
 		
-		$('.card-body').prepend(alertHtml);
+		// Only insert into the first card-body (the form card)
+		$('.card-body').first().prepend(alertHtml);
 		
 		// Scroll to top
-		$('.card').get(0).scrollIntoView({ behavior: 'smooth', block: 'start' });
+		$('.card').first().get(0).scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 	
 	// Real-time validation (optional)
