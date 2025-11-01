@@ -430,3 +430,628 @@ PASS: Init check passed
 Request Method: GET
 users.php exists: NO
 PASS: users.php does not exist, continuing...
+
+2025-11-01 23:00:43 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:00:43 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:00:43 - Loading system-init controller
+
+2025-11-01 23:00:43 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:00:54 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:00:54 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:00:54 - Loading system-init controller
+
+2025-11-01 23:00:54 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:02:05 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:02:05 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:02:05 - Loading system-init controller
+
+2025-11-01 23:02:05 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:02:08 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:02:08 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:02:08 - Loading system-init controller
+
+2025-11-01 23:02:08 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:02:36 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/ads-settings
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: ads-settings
+2025-11-01 23:02:36 - Initialization check
+isSystemInitialized: false
+Current slug: ads-settings
+REDIRECT: Uninit && not system-init -> redirect to system-init
+
+2025-11-01 23:02:36 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:02:36 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:02:36 - Loading system-init controller
+
+2025-11-01 23:02:36 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:14 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:14 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:14 - Loading system-init controller
+
+2025-11-01 23:03:14 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:24 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:24 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:24 - Loading system-init controller
+
+2025-11-01 23:03:24 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:27 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:27 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:27 - Loading system-init controller
+
+2025-11-01 23:03:27 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:29 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:29 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:29 - Loading system-init controller
+
+2025-11-01 23:03:29 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:30 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:30 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:30 - Loading system-init controller
+
+2025-11-01 23:03:30 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:32 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:32 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:32 - Loading system-init controller
+
+2025-11-01 23:03:32 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:34 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:34 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:34 - Loading system-init controller
+
+2025-11-01 23:03:34 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:03:37 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:03:37 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:03:37 - Loading system-init controller
+
+2025-11-01 23:03:37 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:04:02 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:04:02 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:04:02 - Loading system-init controller
+
+2025-11-01 23:04:02 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:06:01 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:06:01 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:06:01 - Loading system-init controller
+
+2025-11-01 23:06:01 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:06:13 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:06:13 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:06:13 - Loading system-init controller
+
+2025-11-01 23:06:13 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:06:20 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:06:20 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:06:20 - Loading system-init controller
+
+2025-11-01 23:06:20 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:06:41 - admin.php START
+REQUEST_METHOD: POST
+REQUEST_URI: /admin/system-init
+POST count at START: 3
+POST keys at START: username, password, confirm_password
+Session started
+POST count after session: 3
+Login object created
+Slug: system-init
+2025-11-01 23:06:41 - 99.security.php POST check
+POST count BEFORE check: 3
+POST keys BEFORE: username, password, confirm_password
+Slug: system-init
+tokenCSRF in POST: NO
+SKIP: CSRF check bypassed for system-init
+2025-11-01 23:06:41 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:06:41 - Loading system-init controller
+
+2025-11-01 23:06:41 - Controller loaded
+Request Method: POST
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+2025-11-01 23:06:41 - POST request received
+POST data: {"username":"123123","password":"3213123123a","confirm_password":"3213123123a"}
+POST keys: username, password, confirm_password
+POST count: 3
+REQUEST data: {"username":"123123","password":"3213123123a","confirm_password":"3213123123a"}
+php://input: 
+2025-11-01 23:06:41 - initializeSystem started
+Username: '123123', Password length: 11
+Attempting to write file: /www/wwwroot/maigewan/bl-kernel/_maigewan/authz/users.php
+Content length: 755 bytes
+Bytes written: 755
+SUCCESS: File verified
+About to redirect to login
+Calling Redirect::page('login')
+
+2025-11-01 23:06:42 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/login
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: login
+2025-11-01 23:06:42 - Initialization check
+isSystemInitialized: true
+Current slug: login
+PASS: Init check passed
+
+2025-11-01 23:06:44 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/login
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: login
+2025-11-01 23:06:44 - Initialization check
+isSystemInitialized: true
+Current slug: login
+PASS: Init check passed
+
+2025-11-01 23:06:49 - admin.php START
+REQUEST_METHOD: POST
+REQUEST_URI: /admin/login
+POST count at START: 4
+POST keys at START: tokenCSRF, username, password, save
+Session started
+POST count after session: 4
+Login object created
+Slug: login
+2025-11-01 23:06:49 - 99.security.php POST check
+POST count BEFORE check: 4
+POST keys BEFORE: tokenCSRF, username, password, save
+Slug: login
+tokenCSRF in POST: YES
+PASS: CSRF validation passed
+2025-11-01 23:06:49 - Initialization check
+isSystemInitialized: true
+Current slug: login
+PASS: Init check passed
+
+2025-11-01 23:07:06 - admin.php START
+REQUEST_METHOD: POST
+REQUEST_URI: /admin/login
+POST count at START: 4
+POST keys at START: tokenCSRF, username, password, save
+Session started
+POST count after session: 4
+Login object created
+Slug: login
+2025-11-01 23:07:06 - 99.security.php POST check
+POST count BEFORE check: 4
+POST keys BEFORE: tokenCSRF, username, password, save
+Slug: login
+tokenCSRF in POST: YES
+FAIL: CSRF validation failed
+
+2025-11-01 23:07:06 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/login
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: login
+2025-11-01 23:07:06 - Initialization check
+isSystemInitialized: false
+Current slug: login
+REDIRECT: Uninit && not system-init -> redirect to system-init
+
+2025-11-01 23:07:06 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:07:06 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:07:06 - Loading system-init controller
+
+2025-11-01 23:07:06 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:07:23 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:07:24 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:07:24 - Loading system-init controller
+
+2025-11-01 23:07:24 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:07:37 - admin.php START
+REQUEST_METHOD: POST
+REQUEST_URI: /admin/system-init
+POST count at START: 3
+POST keys at START: username, password, confirm_password
+Session started
+POST count after session: 3
+Login object created
+Slug: system-init
+2025-11-01 23:07:37 - 99.security.php POST check
+POST count BEFORE check: 3
+POST keys BEFORE: username, password, confirm_password
+Slug: system-init
+tokenCSRF in POST: NO
+SKIP: CSRF check bypassed for system-init
+2025-11-01 23:07:37 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:07:37 - Loading system-init controller
+
+2025-11-01 23:07:37 - Controller loaded
+Request Method: POST
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+2025-11-01 23:07:37 - POST request received
+POST data: {"username":"123123321","password":"fdsafdsafdsaf1","confirm_password":"fdsafdsafdsaf1"}
+POST keys: username, password, confirm_password
+POST count: 3
+REQUEST data: {"username":"123123321","password":"fdsafdsafdsaf1","confirm_password":"fdsafdsafdsaf1"}
+php://input: 
+2025-11-01 23:07:37 - initializeSystem started
+Username: '123123321', Password length: 14
+Attempting to write file: /www/wwwroot/maigewan/bl-kernel/_maigewan/authz/users.php
+Content length: 761 bytes
+Bytes written: 761
+SUCCESS: File verified
+About to redirect to login
+Calling Redirect::page('login')
+
+2025-11-01 23:07:37 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/login
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: login
+2025-11-01 23:07:37 - Initialization check
+isSystemInitialized: true
+Current slug: login
+PASS: Init check passed
+
+2025-11-01 23:07:39 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/login
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: login
+2025-11-01 23:07:39 - Initialization check
+isSystemInitialized: true
+Current slug: login
+PASS: Init check passed
+
+2025-11-01 23:08:00 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/login
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: login
+2025-11-01 23:08:00 - Initialization check
+isSystemInitialized: false
+Current slug: login
+REDIRECT: Uninit && not system-init -> redirect to system-init
+
+2025-11-01 23:08:00 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:08:00 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:08:00 - Loading system-init controller
+
+2025-11-01 23:08:00 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:12:44 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:12:44 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:12:44 - Loading system-init controller
+
+2025-11-01 23:12:44 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:13:02 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=zh_CN
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:13:02 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:13:02 - Loading system-init controller
+
+2025-11-01 23:13:02 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...

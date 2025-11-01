@@ -55,8 +55,8 @@
 		</div>
 	</div>
 
-	<div class="page page-center">
-		<div class="container container-tight py-4">
+	<div class="page page-center d-flex flex-column min-vh-100">
+		<div class="container container-tight py-4 flex-fill d-flex flex-column">
 			
 			<!-- Brand Logo -->
 			<div class="text-center mb-4">

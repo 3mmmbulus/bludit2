@@ -1,11 +1,10 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 
 <!-- Footer -->
-<footer class="footer footer-transparent d-print-none">
+<footer class="footer footer-transparent d-print-none mt-auto">
 	<div class="container-xl">
-		<div class="row text-center align-items-center flex-row-reverse">
-			<!-- Copyright Info -->
-			<div class="col-lg-auto ms-lg-auto">
+		<div class="row text-center align-items-center">
+			<div class="col-12">
 				<ul class="list-inline list-inline-dots mb-0">
 					<li class="list-inline-item">
 						<a href="https://maigewan.com" target="_blank" rel="noopener noreferrer" class="link-secondary">
@@ -21,17 +20,6 @@
 						<a href="https://maigewan.com/docs" target="_blank" rel="noopener noreferrer" class="link-secondary">
 							<?php echo isset($L) ? $L->get('Documentation') : 'Documentation' ?>
 						</a>
-					</li>
-				</ul>
-			</div>
-			<!-- Powered By -->
-			<div class="col-12 col-lg-auto mt-3 mt-lg-0">
-				<ul class="list-inline list-inline-dots mb-0">
-					<li class="list-inline-item">
-						Powered by <a href="https://bludit.com" target="_blank" rel="noopener noreferrer" class="link-secondary">Bludit</a>
-					</li>
-					<li class="list-inline-item">
-						<a href="https://tabler.io" target="_blank" rel="noopener noreferrer" class="link-secondary">Tabler</a>
 					</li>
 				</ul>
 			</div>

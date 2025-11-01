@@ -5,7 +5,7 @@
     "description": "Congratulations you have successfully installed your**Bludit**",
     "footer": "Copyright \u00a9 2025",
     "itemsPerPage": 6,
-    "language": "en",
+    "language": "zh_CN",
     "locale": "zh_CN",
     "timezone": "Asia\/Bangkok",
     "theme": "alternative",
