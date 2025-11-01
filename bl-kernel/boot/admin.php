@@ -67,6 +67,11 @@ else
 	// User not logged.
 	// Slug is login.
 	if ($url->notFound() || !$login->isLogged() || ($url->slug()==='login') ) {
+		// If user is not logged and trying to access /admin/ (dashboard), redirect to login
+		if (!$login->isLogged() && ($layout['slug'] === 'dashboard' || $url->slug() === '')) {
+			Redirect::page('login');
+		}
+		
 		$layout['controller']	= 'login';
 		$layout['view']			= 'login';
 		$layout['template']		= 'login.php';
