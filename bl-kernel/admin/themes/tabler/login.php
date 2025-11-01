@@ -65,14 +65,12 @@
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<div class="text-center text-secondary mt-3">
-				<?php echo $L->g('Powered by Bludit') ?> <?php echo (defined('BLUDIT_PRO')) ? 'PRO' : '' ?> v<?php echo BLUDIT_VERSION ?>
-			</div>
+		<!-- Footer -->
+		<div class="text-center text-secondary mt-3">
+			© <?php echo date('Y') ?> <a href="https://maigewan.com" target="_blank" rel="noopener noreferrer" class="link-secondary">Maigewan</a>
 		</div>
 	</div>
-
-	<!-- Plugins -->
+</div>	<!-- Plugins -->
 	<?php Theme::plugins('loginBodyEnd') ?>
 
 </body>
