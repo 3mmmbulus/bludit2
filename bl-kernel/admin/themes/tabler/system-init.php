@@ -89,9 +89,7 @@
 			</div>
 
 			<!-- Footer -->
-			<div class="text-center text-secondary mt-3 small">
-				Powered by <a href="https://maigewan.com" target="_blank" rel="noopener noreferrer">Maigewan</a>
-			</div>
+			<?php include(PATH_ADMIN_THEMES . $site->adminTheme() . DS . 'includes' . DS . 'footer-simple.php'); ?>
 		</div>
 	</div>
 
