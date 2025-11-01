@@ -19,12 +19,8 @@ checkRole(array('admin'));
 // ============================================================================
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	// CSRF Token 验证
-	if (!isset($_POST['tokenCSRF']) || !$security->validateTokenCSRF($_POST['tokenCSRF'])) {
-		Alert::set($L->g('Invalid security token'), ALERT_STATUS_FAIL);
-		Redirect::page('settings');
-	}
-	
+	// CSRF Token 已在 99.security.php 中验证并移除
+	// 这里直接处理表单数据
 	editSettings($_POST);
 	Redirect::page('settings');
 }

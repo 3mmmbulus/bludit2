@@ -448,7 +448,12 @@ define('PATH_LANGUAGES',		PATH_ROOT . 'bl-languages' . DS);
 define('PATH_THEMES',			PATH_ROOT . 'bl-themes' . DS);
 define('PATH_PLUGINS',			PATH_ROOT . 'bl-plugins' . DS);
 define('PATH_KERNEL',			PATH_ROOT . 'bl-kernel' . DS);
-define('PATH_CONTENT',			PATH_ROOT . 'bl-content' . DS);
+
+// 多站点支持：PATH_CONTENT 可能已在 index.php 中动态定义
+// 如果未定义，则使用默认的 bl-content 目录
+if (!defined('PATH_CONTENT')) {
+	define('PATH_CONTENT',		PATH_ROOT . 'bl-content' . DS);
+}
 
 define('PATH_ABSTRACT',			PATH_KERNEL . 'abstract' . DS);
 define('PATH_RULES',			PATH_KERNEL . 'boot' . DS . 'rules' . DS);

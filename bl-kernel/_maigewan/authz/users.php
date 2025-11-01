@@ -1,16 +1,22 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 {
-    "chuanqi": {
-        "nickname": "Chuanqi",
+    "_global": {
+        "language": "zh_CN",
+        "timezone": "Asia\/Bangkok",
+        "locale": "zh_CN",
+        "tokenRemember": ""
+    },
+    "woshichuanqi": {
+        "nickname": "Woshichuanqi",
         "firstName": "",
         "lastName": "",
         "role": "admin",
-        "password": "$2y$10$cj42QoU1x18sXhi7zZZHN.pfga5GZ79ulEh.mAcR.Q.pQaX5eVFee",
-        "salt": "1zq5yea^",
+        "password": "$2y$10$tIQFMdYlgDSBAI0O1i1J3OAYaDmYMUI4mVHl1rKoQOqn26uakkOMq",
+        "salt": "p#gfohbk",
         "email": "",
-        "registered": "2025-11-01 23:43:07",
+        "registered": "2025-11-02 01:01:19",
         "tokenRemember": "",
-        "tokenAuth": "39a91909034bb0129fd5bfa54a340f139e6429b9d80f81e4b8ebe33075078cbee302aea44b8a8663ef37228d9543a63ff46188cb7f51137e678505cdb4501300",
+        "tokenAuth": "d36496958a04d49e138894d0c903b5b7a6aac796cb1aad1c6f756306f720c2aafd5a3bcac37ba010310c623262cac188bf20c234a313240f347db00179a327e9",
         "tokenAuthTTL": "2009-03-15 14:00",
         "twitter": "",
         "facebook": "",
