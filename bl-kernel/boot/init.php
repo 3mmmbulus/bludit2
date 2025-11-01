@@ -66,6 +66,9 @@ class SystemIntegrity
     /** @var int|null 上次 quickCheck 通过的时间戳（进程级软缓存） */
     protected static $lastQuickOk = null;
 
+    /** @var bool|null 系统是否已初始化的缓存（进程级静态缓存，只检测一次） */
+    protected static $isInitialized = null;
+
     /** @var callable|null 日志回调：(string $level, string $message, array $context) => void */
     protected static $logger = null;
 
@@ -154,7 +157,7 @@ class SystemIntegrity
 
     /**
      * 完整检查（可在后台入口、安装/升级流程手动触发）
-     * - 在 quickCheck 基础上，按每个已登记项的“可选规则”（大小/mtime/哈希）逐项校验。
+     * - 在 quickCheck 基础上，按每个已登记项的"可选规则"（大小/mtime/哈希）逐项校验。
      */
     public static function verify()
     {
@@ -171,6 +174,53 @@ class SystemIntegrity
                 self::reportViolation('LICENSE_MISSING', ['file' => (string)$lf]);
             }
         }
+    }
+
+    /**
+     * 检查系统是否已初始化（懒加载+缓存机制）
+     * - 使用静态变量缓存，每个 PHP 进程只检测一次文件系统
+     * - 性能开销：首次 ~0.05ms，后续 0ms（直接返回缓存值）
+     * 
+     * @return bool true=已初始化，false=需要初始化
+     */
+    public static function isSystemInitialized()
+    {
+        // 进程级静态缓存：只检测一次，结果永久缓存在当前进程
+        if (self::$isInitialized !== null) {
+            return self::$isInitialized;
+        }
+
+        self::boot();
+
+        // 检查授权用户文件是否存在
+        $usersFile = defined('PATH_AUTHZ') ? PATH_AUTHZ . 'users.php' : '';
+        
+        if (empty($usersFile)) {
+            // PATH_AUTHZ 未定义，认为未初始化
+            self::$isInitialized = false;
+            return false;
+        }
+
+        // 检查文件是否存在且可读
+        $exists = file_exists($usersFile) && is_readable($usersFile);
+        
+        // 可选：进一步验证文件有效性（文件大小 > 0）
+        if ($exists) {
+            $filesize = @filesize($usersFile);
+            $exists = ($filesize !== false && $filesize > 0);
+        }
+
+        self::$isInitialized = $exists;
+
+        return self::$isInitialized;
+    }
+
+    /**
+     * 强制清除初始化状态缓存（用于测试或特殊场景）
+     */
+    public static function clearInitCache()
+    {
+        self::$isInitialized = null;
     }
 
     // ========== 二、对外辅助（注册/配置/日志） ==========
@@ -498,7 +548,8 @@ if (file_exists(PATH_KERNEL . 'bludit.pro.php')) {
 // 1) 登记关键文件/目录（不要登记 license.json 为 required）
 SystemIntegrity::registerCritical('init', __FILE__, ['type' => 'file']);
 SystemIntegrity::registerCritical('authz_dir', rtrim(PATH_AUTHZ, DS), ['required' => true, 'type' => 'dir']);
-SystemIntegrity::registerCritical('authz_users', PATH_AUTHZ.'users.php', ['required' => true, 'type' => 'file']);
+// authz_users 设为非必需，因为首次访问时可能不存在（需要通过 system-init 初始化）
+SystemIntegrity::registerCritical('authz_users', PATH_AUTHZ.'users.php', ['required' => false, 'type' => 'file']);
 SystemIntegrity::registerCritical('authz_license', PATH_AUTHZ.'license.json', ['required' => false, 'type' => 'file']);
 SystemIntegrity::registerCritical('sites_root', PATH_ROOT.'sites', ['required' => true, 'type' => 'dir']);
 
@@ -508,7 +559,7 @@ $navPages = [
     'media-images', 'brand-logo', 'ads-settings', 'spider-logs', 'spider-settings',
     'plugins', 'themes', 'cache-settings', 'cache-list', 'security-system',
     'security-general', 'audit-logs', 'system-repair-upgrade', 'authorization-settings',
-    'profile', 'about-maigewan', 'site-bootstrap'
+    'profile', 'about-maigewan', 'site-bootstrap', 'system-init'
 ];
 
 foreach ($navPages as $navKey) {

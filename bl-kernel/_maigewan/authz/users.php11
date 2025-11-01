@@ -1,16 +1,16 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 {
-    "chuanqi": {
-        "nickname": "Chuanqi",
-        "firstName": "",
+    "admin": {
+        "nickname": "Admin",
+        "firstName": "\u7ba1\u7406\u5458",
         "lastName": "",
         "role": "admin",
-        "password": "d988414d103bc9b7e925afca85cf1a951d91d0bd",
-        "salt": "sfjwls!jw^aq@g7u",
+        "password": "eb53f11a9816ea02c0eceff1262990c59dfc96fa",
+        "salt": "6903b68bd3c0d",
         "email": "",
-        "registered": "2025-11-01 19:03:08",
+        "registered": "2025-10-31 02:03:39",
         "tokenRemember": "",
-        "tokenAuth": "c29d33c421a9b0d10cbd1466f9b0075fe6261a5f286f69d25b313836b069291a",
+        "tokenAuth": "16b70d48879aadec18a00f55a533af37",
         "tokenAuthTTL": "2009-03-15 14:00",
         "twitter": "",
         "facebook": "",
@@ -20,8 +20,6 @@
         "xing": "",
         "telegram": "",
         "github": "",
-        "gitlab": "",
-        "mastodon": "",
-        "vk": ""
+        "gitlab": ""
     }
 }
