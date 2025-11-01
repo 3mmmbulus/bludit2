@@ -410,14 +410,3 @@ $(document).ready(function() {
 	}, 1000);
 	
 });
-
-// Make page language variables available (will be set by PHP)
-var pageL_show_password = '';
-var pageL_hide_password = '';
-var pageL_username_required = '';
-var pageL_username_invalid = '';
-var pageL_username_length = '';
-var pageL_password_required = '';
-var pageL_password_too_short = '';
-var pageL_password_weak = '';
-var pageL_password_mismatch = '';
