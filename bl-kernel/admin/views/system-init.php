@@ -95,4 +95,15 @@
 	var pageL_password_too_short = '<?php echo $pageL->get('password_too_short') ?>';
 	var pageL_password_weak = '<?php echo $pageL->get('password_weak') ?>';
 	var pageL_password_mismatch = '<?php echo $pageL->get('password_mismatch') ?>';
+	var pageL_validation_failed = '<?php echo $pageL->get('validation_failed') ?>';
+	var pageL_submitting = '<?php echo $pageL->get('submitting') ?>';
+	var pageL_submitting_wait = '<?php echo $pageL->get('submitting_wait') ?>';
+	var pageL_success_redirect = '<?php echo $pageL->get('success_redirect') ?>';
+	var pageL_server_error = '<?php echo $pageL->get('server_error') ?>';
+	var pageL_unexpected_response = '<?php echo $pageL->get('unexpected_response') ?>';
+	var pageL_submit_failed = '<?php echo $pageL->get('submit_failed') ?>';
+	var pageL_alert_error = '<?php echo $pageL->get('alert_error') ?>';
+	var pageL_alert_success = '<?php echo $pageL->get('alert_success') ?>';
+	var pageL_alert_info = '<?php echo $pageL->get('alert_info') ?>';
+	var pageL_alert_warning = '<?php echo $pageL->get('alert_warning') ?>';
 </script>

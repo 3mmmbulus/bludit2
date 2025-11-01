@@ -328,3 +328,105 @@ PASS: Init check passed
 Request Method: GET
 users.php exists: NO
 PASS: users.php does not exist, continuing...
+
+2025-11-01 22:58:13 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: dashboard
+2025-11-01 22:58:13 - Initialization check
+isSystemInitialized: false
+Current slug: dashboard
+REDIRECT: Uninit && not system-init -> redirect to system-init
+
+2025-11-01 22:58:14 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 22:58:14 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 22:58:14 - Loading system-init controller
+
+2025-11-01 22:58:14 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 22:58:43 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/settings
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: settings
+2025-11-01 22:58:43 - Initialization check
+isSystemInitialized: false
+Current slug: settings
+REDIRECT: Uninit && not system-init -> redirect to system-init
+
+2025-11-01 22:58:43 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 22:58:43 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 22:58:43 - Loading system-init controller
+
+2025-11-01 22:58:43 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 22:58:52 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 22:58:52 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 22:58:52 - Loading system-init controller
+
+2025-11-01 22:58:52 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...
+
+2025-11-01 23:00:34 - admin.php START
+REQUEST_METHOD: GET
+REQUEST_URI: /admin/system-init?language=en
+POST count at START: 0
+Session started
+POST count after session: 0
+Login object created
+Slug: system-init
+2025-11-01 23:00:34 - Initialization check
+isSystemInitialized: false
+Current slug: system-init
+PASS: Init check passed
+2025-11-01 23:00:34 - Loading system-init controller
+
+2025-11-01 23:00:34 - Controller loaded
+Request Method: GET
+users.php exists: NO
+PASS: users.php does not exist, continuing...

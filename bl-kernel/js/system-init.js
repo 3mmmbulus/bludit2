@@ -167,17 +167,17 @@ $(document).ready(function() {
 		
 		// Validate Username
 		if (!username) {
-			showError('input[name="username"]', pageL_username_required || '❌ 用户名不能为空');
+			showError('input[name="username"]', pageL_username_required);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="username"]';
 			console.error('❌ Validation failed: username_required');
 		} else if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
-			showError('input[name="username"]', pageL_username_invalid || '❌ 用户名只能包含字母、数字、下划线和连字符');
+			showError('input[name="username"]', pageL_username_invalid);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="username"]';
 			console.error('❌ Validation failed: username_invalid');
 		} else if (username.length < 3 || username.length > 20) {
-			showError('input[name="username"]', pageL_username_length || '❌ 用户名长度必须在 3-20 个字符之间');
+			showError('input[name="username"]', pageL_username_length);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="username"]';
 			console.error('❌ Validation failed: username_length');
@@ -185,17 +185,17 @@ $(document).ready(function() {
 		
 		// Validate Password
 		if (!password) {
-			showError('input[name="password"]', pageL_password_required || '❌ 密码不能为空');
+			showError('input[name="password"]', pageL_password_required);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="password"]';
 			console.error('❌ Validation failed: password_required');
 		} else if (password.length < 8) {
-			showError('input[name="password"]', pageL_password_too_short || '❌ 密码至少需要 8 个字符');
+			showError('input[name="password"]', pageL_password_too_short);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="password"]';
 			console.error('❌ Validation failed: password_too_short');
 		} else if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
-			showError('input[name="password"]', pageL_password_weak || '❌ 密码必须包含至少一个字母和一个数字');
+			showError('input[name="password"]', pageL_password_weak);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="password"]';
 			console.error('❌ Validation failed: password_weak');
@@ -203,12 +203,12 @@ $(document).ready(function() {
 		
 		// Validate Confirm Password
 		if (!confirmPassword) {
-			showError('input[name="confirm_password"]', pageL_password_required || '❌ 请确认密码');
+			showError('input[name="confirm_password"]', pageL_password_required);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="confirm_password"]';
 			console.error('❌ Validation failed: confirm_password_required');
 		} else if (password !== confirmPassword) {
-			showError('input[name="confirm_password"]', pageL_password_mismatch || '❌ 两次输入的密码不一致');
+			showError('input[name="confirm_password"]', pageL_password_mismatch);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="confirm_password"]';
 			console.error('❌ Validation failed: password_mismatch');
@@ -219,7 +219,7 @@ $(document).ready(function() {
 			console.error('❌ Form validation failed - submission prevented');
 			
 			// Show alert at top of form
-			showTopAlert('danger', '表单验证失败，请检查输入的信息');
+			showTopAlert('danger', pageL_validation_failed);
 			
 			if (firstError) {
 				$(firstError).focus();
@@ -233,11 +233,11 @@ $(document).ready(function() {
 		// Show loading state
 		var btn = $('#jsbtnSubmit');
 		var originalText = btn.text();
-		btn.addClass('btn-loading').prop('disabled', true).text('正在创建账户...');
+		btn.addClass('btn-loading').prop('disabled', true).text(pageL_submitting);
 		$('input').prop('disabled', true);
 		
 		// Show info alert
-		showTopAlert('info', '正在提交数据，请稍候...');
+		showTopAlert('info', pageL_submitting_wait);
 		
 		// Prepare form data
 		var formData = new FormData();
@@ -268,14 +268,14 @@ $(document).ready(function() {
 				// Check if response contains redirect or success indicators
 				if (response.includes('login') || response.includes('Login')) {
 					console.log('✅ Success - redirecting to login');
-					showTopAlert('success', '✅ 用户创建成功！正在跳转到登录页面...');
+					showTopAlert('success', pageL_success_redirect);
 					
 					setTimeout(function() {
 						window.location.href = '/admin/login';
 					}, 2000);
 				} else if (response.includes('alert-danger') || response.includes('alert-fail')) {
 					console.error('❌ Server returned error');
-					showTopAlert('danger', '❌ 服务器返回错误，请查看控制台');
+					showTopAlert('danger', pageL_server_error);
 					
 					// Try to extract error message
 					var tempDiv = $('<div>').html(response);
@@ -290,7 +290,7 @@ $(document).ready(function() {
 					$('input').prop('disabled', false);
 				} else {
 					console.warn('⚠️ Unexpected response');
-					showTopAlert('warning', '⚠️ 响应异常，请查看浏览器控制台的详细信息');
+					showTopAlert('warning', pageL_unexpected_response);
 					
 					// Re-enable form
 					btn.removeClass('btn-loading').prop('disabled', false).text(originalText);
@@ -304,7 +304,7 @@ $(document).ready(function() {
 				console.error('HTTP status code:', xhr.status);
 				console.error('Response text:', xhr.responseText);
 				
-				showTopAlert('danger', '❌ 提交失败：' + error + ' (HTTP ' + xhr.status + ')');
+				showTopAlert('danger', pageL_submit_failed + error + ' (HTTP ' + xhr.status + ')');
 				
 				// Re-enable form
 				btn.removeClass('btn-loading').prop('disabled', false).text(originalText);
@@ -340,16 +340,16 @@ $(document).ready(function() {
 		
 		if (type === 'danger') {
 			iconHtml = '<circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>';
-			titleText = '错误';
+			titleText = pageL_alert_error;
 		} else if (type === 'success') {
 			iconHtml = '<polyline points="20 6 9 17 4 12"></polyline>';
-			titleText = '成功';
+			titleText = pageL_alert_success;
 		} else if (type === 'info') {
 			iconHtml = '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>';
-			titleText = '提示';
+			titleText = pageL_alert_info;
 		} else if (type === 'warning') {
 			iconHtml = '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>';
-			titleText = '警告';
+			titleText = pageL_alert_warning;
 		}
 		
 		var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
