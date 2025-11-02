@@ -273,7 +273,13 @@
 				const toggle = navItem.querySelector('.dropdown-toggle');
 				const menu = navItem.querySelector('.dropdown-menu');
 				
-				if (toggle && menu && !menu.classList.contains('show')) {
+				// 如果菜单已经展开（服务器端渲染），跳过
+				if (menu && menu.classList.contains('show')) {
+					return;
+				}
+				
+				// 只展开未展开的菜单
+				if (toggle && menu) {
 					// 使用 Bootstrap Dropdown API 展开菜单
 					if (window.bootstrap && window.bootstrap.Dropdown) {
 						const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
@@ -290,15 +296,21 @@
 	 * 初始化导航状态管理
 	 */
 	function initNavPersistence() {
-		// 页面加载时恢复状态
-		restoreNavState();
-		
-		// 监听所有 dropdown 的显示/隐藏事件
+		// 预初始化所有 dropdown，避免首次点击时的闪动
 		const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
 		dropdownToggles.forEach(toggle => {
+			if (window.bootstrap && window.bootstrap.Dropdown) {
+				// 预创建 Dropdown 实例
+				bootstrap.Dropdown.getOrCreateInstance(toggle);
+			}
+			
+			// 监听显示/隐藏事件
 			toggle.addEventListener('shown.bs.dropdown', saveNavState);
 			toggle.addEventListener('hidden.bs.dropdown', saveNavState);
 		});
+		
+		// 页面加载时恢复状态
+		restoreNavState();
 	}
 	
 	// 在 DOM 加载完成后初始化
