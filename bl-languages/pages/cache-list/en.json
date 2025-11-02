@@ -5,5 +5,6 @@
     "col_size": "Size",
     "col_date": "Date",
     "btn_clear": "Clear Cache",
-    "msg_cleared": "Cache cleared successfully"
+    "msg_cleared": "Cache cleared successfully",
+    "cache-overview": "Cache Overview"
 }

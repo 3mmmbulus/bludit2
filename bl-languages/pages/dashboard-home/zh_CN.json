@@ -4,5 +4,6 @@
     "welcome": "欢迎使用 MAIGEWAN CMS",
     "total_pages": "总页面数",
     "total_users": "总用户数",
-    "recent_activity": "最近活动"
+    "recent_activity": "最近活动",
+    "dashboard": "首页"
 }

@@ -61,6 +61,7 @@ else
 	include(PATH_RULES.'99.header.php');
 	include(PATH_RULES.'99.paginator.php');
 	include(PATH_RULES.'99.themes.php');
+	include(PATH_RULES.'98.page-languages.php');
 	include(PATH_RULES.'99.security.php');
 
 	// ========== 系统初始化检测（懒加载+缓存） ==========

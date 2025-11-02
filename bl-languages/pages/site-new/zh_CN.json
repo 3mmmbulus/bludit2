@@ -5,5 +5,6 @@
     "label_site_name": "站点名称",
     "btn_create": "创建站点",
     "msg_created": "站点创建成功",
-    "msg_error_exists": "站点已存在"
+    "msg_error_exists": "站点已存在",
+    "create-new-site": "创建新网站"
 }

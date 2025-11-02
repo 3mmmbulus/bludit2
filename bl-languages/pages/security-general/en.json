@@ -4,5 +4,6 @@
     "label_https_only": "HTTPS Only",
     "label_csrf_protection": "CSRF Protection",
     "btn_save": "Save Settings",
-    "msg_saved": "Settings saved successfully"
+    "msg_saved": "Settings saved successfully",
+    "security-general-settings": "Security General Settings"
 }

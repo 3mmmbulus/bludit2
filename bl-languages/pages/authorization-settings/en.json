@@ -5,5 +5,6 @@
     "btn_upload": "Upload",
     "msg_uploaded": "License uploaded successfully",
     "msg_invalid": "Invalid license file",
-    "msg_missing": "License file is missing. Please upload a valid license to continue."
+    "msg_missing": "License file is missing. Please upload a valid license to continue.",
+    "authorization": "Authorization"
 }

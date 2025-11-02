@@ -5,5 +5,6 @@
     "label_meta_keywords": "Meta Keywords",
     "label_robots_txt": "Robots.txt",
     "btn_save": "Save Settings",
-    "msg_saved": "Settings saved successfully"
+    "msg_saved": "Settings saved successfully",
+    "seo-settings": "SEO Settings"
 }

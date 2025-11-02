@@ -4,5 +4,6 @@
     "col_date": "日期",
     "col_ip": "IP地址",
     "col_user_agent": "用户代理",
-    "col_url": "URL"
+    "col_url": "URL",
+    "spider-logs": "爬虫日志"
 }

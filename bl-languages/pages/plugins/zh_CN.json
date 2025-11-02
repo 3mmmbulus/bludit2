@@ -6,5 +6,6 @@
     "col_actions": "操作",
     "btn_activate": "激活",
     "btn_deactivate": "停用",
-    "msg_activated": "插件激活成功"
+    "msg_activated": "插件激活成功",
+    "plugins": "插件"
 }

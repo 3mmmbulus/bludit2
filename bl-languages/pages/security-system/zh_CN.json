@@ -4,5 +4,6 @@
     "label_ip_whitelist": "IP白名单",
     "label_brute_force_protection": "暴力破解防护",
     "btn_save": "保存设置",
-    "msg_saved": "设置保存成功"
+    "msg_saved": "设置保存成功",
+    "system-settings": "系统设置"
 }

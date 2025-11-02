@@ -4,5 +4,6 @@
     "label_ad_code": "广告代码",
     "label_position": "位置",
     "btn_save": "保存设置",
-    "msg_saved": "设置保存成功"
+    "msg_saved": "设置保存成功",
+    "advertising": "广告设置"
 }

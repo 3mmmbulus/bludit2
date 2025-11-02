@@ -4,5 +4,6 @@
     "col_date": "日期",
     "col_user": "用户",
     "col_action": "操作",
-    "col_details": "详情"
+    "col_details": "详情",
+    "audit-logs": "操作日志"
 }

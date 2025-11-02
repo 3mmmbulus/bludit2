@@ -5,5 +5,6 @@
     "label_site_name": "Site Name",
     "btn_create": "Create Site",
     "msg_created": "Site created successfully",
-    "msg_error_exists": "Site already exists"
+    "msg_error_exists": "Site already exists",
+    "create-new-site": "Create New Site"
 }

@@ -4,5 +4,6 @@
     "label_enable_logging": "启用日志记录",
     "label_whitelist": "白名单",
     "btn_save": "保存设置",
-    "msg_saved": "设置保存成功"
+    "msg_saved": "设置保存成功",
+    "spider-settings": "爬虫设置"
 }

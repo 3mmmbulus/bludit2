@@ -1,4 +1,4 @@
-<?php
+g<?php
 /**
  * Navigation State Helpers
  * 检查当前路由并添加对应的 active/show 类
@@ -221,13 +221,13 @@ function getShowClass($routes) {
 						<a class="dropdown-item <?php echo getActiveClass('security-general') ?>" href="<?php echo HTML_PATH_ADMIN_ROOT.'security-general' ?>">
 							<i class="bi bi-sliders me-2"></i><?php $L->p('Security General Settings') ?>
 						</a>
-						<a class="dropdown-item <?php echo getActiveClass('audit-logs') ?>" href="<?php echo HTML_PATH_ADMIN_ROOT.'audit-logs' ?>">
-							<i class="bi bi-journal-text me-2"></i><?php $L->p('Audit Logs') ?>
-						</a>
-						<a class="dropdown-item <?php echo getActiveClass('system-repair-upgrade') ?>" href="<?php echo HTML_PATH_ADMIN_ROOT.'system-repair-upgrade' ?>">
-							<i class="bi bi-tools me-2"></i><?php $L->p('System Repair & Upgrade') ?>
-						</a>
-					</div>
+					<a class="dropdown-item <?php echo getActiveClass('audit-logs') ?>" href="<?php echo HTML_PATH_ADMIN_ROOT.'audit-logs' ?>">
+						<i class="bi bi-journal-text me-2"></i><?php $L->p('Audit Logs') ?>
+					</a>
+					<a class="dropdown-item <?php echo getActiveClass('system-repair-upgrade') ?>" href="<?php echo HTML_PATH_ADMIN_ROOT.'system-repair-upgrade' ?>">
+						<i class="bi bi-tools me-2"></i><?php $L->p('Repair & Upgrade') ?>
+					</a>
+				</div>
 				</div>
 			</div>
 		</li>

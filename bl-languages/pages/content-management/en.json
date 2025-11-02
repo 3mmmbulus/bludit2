@@ -8,5 +8,6 @@
     "btn_new": "New Content",
     "btn_edit": "Edit",
     "btn_delete": "Delete",
-    "msg_deleted": "Content deleted successfully"
+    "msg_deleted": "Content deleted successfully",
+    "content-management": "Content Management"
 }

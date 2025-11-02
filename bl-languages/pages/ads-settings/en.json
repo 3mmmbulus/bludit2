@@ -4,5 +4,6 @@
     "label_ad_code": "Ad Code",
     "label_position": "Position",
     "btn_save": "Save Settings",
-    "msg_saved": "Settings saved successfully"
+    "msg_saved": "Settings saved successfully",
+    "advertising": "Advertising"
 }

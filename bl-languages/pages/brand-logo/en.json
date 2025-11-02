@@ -5,5 +5,6 @@
     "btn_remove": "Remove Logo",
     "msg_uploaded": "Logo uploaded successfully",
     "msg_removed": "Logo removed successfully",
-    "msg_error_format": "Invalid file format"
+    "msg_error_format": "Invalid file format",
+    "brand-logo": "Brand Logo"
 }

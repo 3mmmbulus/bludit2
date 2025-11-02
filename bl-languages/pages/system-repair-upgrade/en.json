@@ -1,5 +1,6 @@
 {
-    "nav": "System Repair & Upgrade",
+    "nav": "Repair & Upgrade",
+    "repair-&-upgrade": "Repair & Upgrade",
     "title": "System Maintenance",
     "btn_verify": "Verify System",
     "btn_repair": "Repair",

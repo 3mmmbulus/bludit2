@@ -4,5 +4,6 @@
     "col_date": "Date",
     "col_ip": "IP Address",
     "col_user_agent": "User Agent",
-    "col_url": "URL"
+    "col_url": "URL",
+    "spider-logs": "Spider Logs"
 }

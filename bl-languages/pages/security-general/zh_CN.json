@@ -4,5 +4,6 @@
     "label_https_only": "仅HTTPS",
     "label_csrf_protection": "CSRF防护",
     "btn_save": "保存设置",
-    "msg_saved": "设置保存成功"
+    "msg_saved": "设置保存成功",
+    "security-general-settings": "安全常规设置"
 }

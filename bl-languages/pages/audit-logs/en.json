@@ -4,5 +4,6 @@
     "col_date": "Date",
     "col_user": "User",
     "col_action": "Action",
-    "col_details": "Details"
+    "col_details": "Details",
+    "audit-logs": "Audit Logs"
 }
