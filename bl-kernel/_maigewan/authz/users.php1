@@ -1,17 +1,17 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 {
-    "language": "zh_CN",
+    "language": "en",
     "chuanqi": {
         "nickname": "Chuanqi",
         "firstName": "",
         "lastName": "",
         "role": "admin",
-        "password": "$2y$10$pYZr\/PKjm7L9Rf8n1q2WBODEcN9XHu2E.FyuRhtXW\/SqLAdKDGxZa",
-        "salt": "xdwaty7^",
+        "password": "$2y$10$JoxuirsXmZQ82MEWYsE6CeXQ9ZKL39HGXPa9PhfPf3Xw43XgK.mGW",
+        "salt": "r&%@8g9^",
         "email": "",
-        "registered": "2025-11-02 05:34:25",
+        "registered": "2025-11-02 04:40:19",
         "tokenRemember": "",
-        "tokenAuth": "62c03b94bbbab5204fc14184a779fa2e23d53f6925b29c9cd5613b7af7e3c9b40f733bf953fdb51c9e45153afb8bf4fae1f4e69972a757f8c70481e92bedb773",
+        "tokenAuth": "00a32d8cf27b53841ab4f8ad084b93c5f4659b2ed6558d28dbea1ce220391ba66125236defbab47933f47c195f4691230be1ee917fdaff7616c3d5d98c2bb05e",
         "tokenAuthTTL": "2009-03-15 14:00",
         "twitter": "",
         "facebook": "",

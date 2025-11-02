@@ -49,40 +49,49 @@ if (is_dir($fullMatchPath) && is_readable($fullMatchPath)) {
 	}
 }
 
-// 4) 如果站点目录不存在，输出提示并退出
+// 4) 如果站点目录不存在，使用默认站点模板
 if ($siteContentPath === null) {
-	// 加载基础语言文件以显示友好提示
-	$langCode = 'en'; // 默认英语
-	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-		$acceptLang = strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-		if (strpos($acceptLang, 'zh') !== false) {
-			$langCode = 'zh_CN';
-		}
+	// 使用默认站点模板
+	$defaultSitePath = $sitesRoot . 'default' . DS . 'maigewan' . DS;
+	
+	if (is_dir($defaultSitePath) && is_readable($defaultSitePath)) {
+		// 使用默认站点目录
+		$siteContentPath = $defaultSitePath;
+		// 标记为默认站点（可选，供后续逻辑判断）
+		define('SITE_IS_DEFAULT', true);
+	} else {
+		// 默认站点模板也不存在，显示错误
+		http_response_code(503);
+		header('Content-Type: text/html; charset=UTF-8');
+		echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>System Error</title>';
+		echo '<style>body{font-family:sans-serif;text-align:center;padding:50px;}h1{color:#d63939;}p{color:#999;}</style></head><body>';
+		echo '<h1>System Configuration Error</h1>';
+		echo '<p>Default site template not found. Please contact system administrator.</p>';
+		echo '<p style="font-size:0.9em;margin-top:30px;">Path: <code>' . htmlspecialchars($defaultSitePath, ENT_QUOTES, 'UTF-8') . '</code></p>';
+		echo '</body></html>';
+		exit;
 	}
-	
-	$langFile = PATH_ROOT . 'bl-languages' . DS . 'pages' . DS . 'site-bootstrap' . DS . $langCode . '.json';
-	$messages = ['site_missing_title' => 'Website Not Created', 'site_missing_hint' => 'Please create this website in admin panel.'];
-	
-	if (file_exists($langFile)) {
-		$langData = @json_decode(file_get_contents($langFile), true);
-		if (is_array($langData)) {
-			$messages = array_merge($messages, $langData);
-		}
-	}
-	
-	http_response_code(404);
-	header('Content-Type: text/html; charset=UTF-8');
-	echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' . htmlspecialchars($messages['site_missing_title'], ENT_QUOTES, 'UTF-8') . '</title>';
-	echo '<style>body{font-family:sans-serif;text-align:center;padding:50px;}h1{color:#666;}p{color:#999;}</style></head><body>';
-	echo '<h1>' . htmlspecialchars($messages['site_missing_title'], ENT_QUOTES, 'UTF-8') . '</h1>';
-	echo '<p>' . htmlspecialchars($messages['site_missing_hint'], ENT_QUOTES, 'UTF-8') . '</p>';
-	echo '<p style="font-size:0.9em;margin-top:30px;">Domain: <strong>' . htmlspecialchars($currentHost, ENT_QUOTES, 'UTF-8') . '</strong></p>';
-	echo '</body></html>';
-	exit;
 }
 
 // 5) 动态定义 PATH_CONTENT 为解析后的站点目录
 define('PATH_CONTENT', $siteContentPath);
+
+// 6) 如果是默认站点，直接显示维护页面（不执行后续的 init.php 和站点逻辑）
+if (defined('SITE_IS_DEFAULT')) {
+	// 加载默认站点的维护页面
+	$maintenancePage = PATH_CONTENT . 'index.php';
+	if (file_exists($maintenancePage)) {
+		include($maintenancePage);
+		exit;
+	} else {
+		// 如果维护页面不存在，显示简单错误
+		http_response_code(503);
+		echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Site Not Available</title></head><body>';
+		echo '<h1>Site Not Available</h1><p>This site has not been created yet.</p>';
+		echo '</body></html>';
+		exit;
+	}
+}
 
 // 检查站点是否已安装（站点目录下必须有 databases/site.php）
 if (!file_exists(PATH_CONTENT . 'databases' . DS . 'site.php')) {

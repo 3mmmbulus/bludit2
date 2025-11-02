@@ -1,4 +1,20 @@
 {
 	"site_missing_title": "Website Not Created",
-	"site_missing_hint": "The website for this domain has not been created yet. Please go to the admin panel to create it!"
+	"site_missing_hint": "The website for this domain has not been created yet. Please go to the admin panel to create it!",
+	"page_title": "Website Under Construction",
+	"main_title": "Website Not Created",
+	"description": "The website for this domain has not been created yet. Please go to the admin panel to create a new site.",
+	"admin_button": "Go to Admin Panel",
+	"settings_title": "Theme Settings",
+	"color_mode_label": "Color mode",
+	"color_mode_hint": "Choose the color mode for your app.",
+	"light": "Light",
+	"dark": "Dark",
+	"color_scheme_label": "Color scheme",
+	"color_scheme_hint": "The perfect color mode for your app.",
+	"reset_changes": "Reset changes",
+	"save": "Save",
+	"domain_label": "Domain",
+	"About": "About",
+	"Documentation": "Documentation"
 }

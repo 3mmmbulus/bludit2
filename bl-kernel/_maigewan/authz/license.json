@@ -1,0 +1,12 @@
+{
+    "username": "kaixin123",
+    "code_enc": "QTdOMGs3VlFITTVaSTZ3QTkxZlJjR1FkSUZ6ZndaWkU0MFkrSzV4THVRND06Othr7BBkAViN7VMZqeDcn\/w=",
+    "created_at": 1761817204,
+    "expires_at": null,
+    "last_check_at": 1761817233,
+    "next_check_at": 1761903633,
+    "last_random_days": 3,
+    "signature_version": 3,
+    "signature_time": 1761817233,
+    "signature": "33ff6a28695a531cdd76e5225467423819bf3fdbdaae53cdc601e8ce0b99693d"
+}

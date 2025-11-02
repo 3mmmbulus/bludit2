@@ -1,4 +1,20 @@
 {
 	"site_missing_title": "网站未创建",
-	"site_missing_hint": "此域名的网站尚未创建，请前往后台创建！"
+	"site_missing_hint": "此域名的网站尚未创建，请前往后台创建！",
+	"page_title": "网站建设中",
+	"main_title": "网站未创建",
+	"description": "此域名的网站尚未创建，请前往后台管理面板创建新站点。",
+	"admin_button": "访问后台管理",
+	"settings_title": "主题设置",
+	"color_mode_label": "颜色模式",
+	"color_mode_hint": "选择您应用的颜色模式。",
+	"light": "浅色",
+	"dark": "深色",
+	"color_scheme_label": "配色方案",
+	"color_scheme_hint": "为您的应用选择完美的颜色。",
+	"reset_changes": "重置更改",
+	"save": "保存",
+	"domain_label": "域名",
+	"About": "关于",
+	"Documentation": "文档"
 }
