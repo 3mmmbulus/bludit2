@@ -39,8 +39,18 @@
 					</svg>
 				</button>
 				<ul class="dropdown-menu dropdown-menu-end">
-					<li><a class="dropdown-item" href="?language=zh_CN">简体中文</a></li>
-					<li><a class="dropdown-item" href="?language=en">English</a></li>
+					<?php
+					// 动态生成语言列表
+					if (isset($layout['availableLanguages']) && is_array($layout['availableLanguages'])) {
+						foreach ($layout['availableLanguages'] as $locale => $nativeName) {
+							echo '<li><a class="dropdown-item" href="?language=' . $locale . '">' . htmlspecialchars($nativeName) . '</a></li>';
+						}
+					} else {
+						// 兜底：如果没有语言列表，显示默认选项
+						echo '<li><a class="dropdown-item" href="?language=zh_CN">简体中文</a></li>';
+						echo '<li><a class="dropdown-item" href="?language=en">English</a></li>';
+					}
+					?>
 				</ul>
 			</div>
 			
@@ -178,6 +188,6 @@
 	
 	<!-- JavaScript -->
 	<script src="/bl-kernel/admin/themes/tabler/js/tabler.min.js"></script>
-	<script src="/bl-kernel/js/system-init.js"></script>
+	<script src="/bl-kernel/js/system-init.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

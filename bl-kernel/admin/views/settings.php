@@ -492,11 +492,26 @@ echo Bootstrap::formInputHidden(array(
 	<?php
 	echo Bootstrap::formTitle(array('title' => $L->g('Language and timezone')));
 
+	// ============================================================================
+	// 语言设置单一真源（LANG_SINGLE_SOURCE）
+	// 从 users.php 读取当前语言，而不是 site.php
+	// ============================================================================
+	$currentLanguage = 'zh_CN'; // 默认值
+	$usersFile = PATH_AUTHZ . 'users.php';
+	if (file_exists($usersFile) && is_readable($usersFile)) {
+		$usersContent = file_get_contents($usersFile);
+		$usersContent = str_replace("<?php defined('BLUDIT') or die('Bludit CMS.'); ?>", '', $usersContent);
+		$usersData = json_decode(trim($usersContent), true);
+		if (is_array($usersData) && isset($usersData['language'])) {
+			$currentLanguage = $usersData['language'];
+		}
+	}
+
 	echo Bootstrap::formSelect(array(
 		'name' => 'language',
 		'label' => $L->g('Language'),
 		'options' => $L->getLanguageList(),
-		'selected' => $site->language(),
+		'selected' => $currentLanguage,  // ★ 从 users.php 读取
 		'class' => '',
 		'tip' => $L->g('select-your-sites-language')
 	));

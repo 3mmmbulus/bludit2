@@ -5,9 +5,6 @@
     "description": "Congratulations you have successfully installed your**Bludit**",
     "footer": "Copyright \u00a9 2025",
     "itemsPerPage": 6,
-    "language": "zh_CN",
-    "locale": "zh_CN",
-    "timezone": "Asia\/Bangkok",
     "theme": "alternative",
     "adminTheme": "tabler",
     "homepage": "",
@@ -37,5 +34,6 @@
     "titleFormatCategory": "{{category-name}} | {{site-title}}",
     "titleFormatTag": "{{tag-name}} | {{site-title}}",
     "imageRestrict": true,
-    "imageRelativeToAbsolute": false
+    "imageRelativeToAbsolute": false,
+    "language": "en"
 }

@@ -707,7 +707,32 @@ define('HTML_PATH_UPLOADS_THUMBNAILS',	HTML_PATH_UPLOADS . 'thumbnails/');
 define('HTML_PATH_PLUGINS',		HTML_PATH_ROOT . 'bl-plugins/');
 
 // --- Objects with dependency ---
-$language = new Language($site->language());
+
+// ============================================================================
+// 语言设置单一真源（LANG_SINGLE_SOURCE）
+// ============================================================================
+// 从 users.php 顶层读取全局 language 设置
+// 完全忽略 site.php 的 language/locale/timezone 字段
+$globalLanguage = 'zh_CN'; // 默认值
+$usersFile = PATH_AUTHZ . 'users.php';
+
+if (file_exists($usersFile) && is_readable($usersFile)) {
+    $usersContent = file_get_contents($usersFile);
+    // 移除 PHP 标签
+    $usersContent = str_replace("<?php defined('BLUDIT') or die('Bludit CMS.'); ?>", '', $usersContent);
+    $usersData = json_decode(trim($usersContent), true);
+    
+    if (is_array($usersData) && isset($usersData['language'])) {
+        $langCode = $usersData['language'];
+        // 验证语言文件是否存在
+        if (file_exists(PATH_LANGUAGES . $langCode . '.json')) {
+            $globalLanguage = $langCode;
+        }
+    }
+}
+
+// 使用全局语言创建 Language 对象（忽略 $site->language()）
+$language = new Language($globalLanguage);
 $url->checkFilters($site->uriFilters());
 
 // --- CONSTANTS with dependency ---

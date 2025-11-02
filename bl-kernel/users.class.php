@@ -189,6 +189,11 @@ class Users extends dbJSON {
 	public function getByEmail($email)
 	{
 		foreach ($this->db as $username=>$values) {
+			// ★ 跳过顶层配置键（language 等），只处理用户对象
+			if (!is_array($values)) {
+				continue;
+			}
+			
 			if ($values['email']==$email) {
 				return $username;
 			}
@@ -200,6 +205,11 @@ class Users extends dbJSON {
 	public function getByAuthToken($token)
 	{
 		foreach ($this->db as $username=>$fields) {
+			// ★ 跳过顶层配置键（language 等），只处理用户对象
+			if (!is_array($fields)) {
+				continue;
+			}
+			
 			if ($fields['tokenAuth']==$token) {
 				return $username;
 			}
@@ -211,6 +221,11 @@ class Users extends dbJSON {
 	public function getByRememberToken($token)
 	{
 		foreach ($this->db as $username=>$fields) {
+			// ★ 跳过顶层配置键（language 等），只处理用户对象
+			if (!is_array($fields)) {
+				continue;
+			}
+			
 			if (!empty($fields['tokenRemember'])) {
 				if ($fields['tokenRemember']==$token) {
 					return $username;
@@ -225,6 +240,11 @@ class Users extends dbJSON {
 	public function invalidateAllRememberTokens()
 	{
 		foreach ($this->db as $username=>$values) {
+			// ★ 跳过顶层配置键（language 等），只处理用户对象
+			if (!is_array($values)) {
+				continue;
+			}
+			
 			$this->db[$username]['tokenRemember'] = '';
 		}
 		return $this->save();
@@ -232,6 +252,13 @@ class Users extends dbJSON {
 
 	public function keys()
 	{
-		return array_keys($this->db);
+		// ★ 过滤掉顶层配置键（language 等），只返回用户名
+		$userKeys = [];
+		foreach ($this->db as $key => $value) {
+			if (is_array($value)) {
+				$userKeys[] = $key;
+			}
+		}
+		return $userKeys;
 	}
 }

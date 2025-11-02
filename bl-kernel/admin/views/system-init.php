@@ -11,6 +11,18 @@
 <!-- Form -->
 <?php echo Bootstrap::formOpen(array('id' => 'jsformInit', 'autocomplete' => 'off')) ?>
 
+	<!-- Hidden Language Field - 保存用户选择的语言 -->
+	<?php
+	$selectedLang = 'zh_CN'; // 默认值
+	if (isset($_GET['language'])) {
+		$requestedLang = Sanitize::html($_GET['language']);
+		if (file_exists(PATH_LANGUAGES . $requestedLang . '.json')) {
+			$selectedLang = $requestedLang;
+		}
+	}
+	?>
+	<input type="hidden" name="language" value="<?php echo $selectedLang ?>" />
+
 	<!-- Username Input -->
 	<div class="mb-3">
 		<label class="form-label"><?php echo $pageL->get('username') ?></label>

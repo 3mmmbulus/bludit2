@@ -51,24 +51,12 @@ function initializeSystem($args)
     
     global $pageL;
     
-    // 🔍 调试：函数开始
-    $debugLog = PATH_ROOT . 'system-init-debug.log';
-    file_put_contents($debugLog, date('Y-m-d H:i:s') . " - initializeSystem started\n", FILE_APPEND);
-    
-    error_log('[System-Init] initializeSystem started');
-    
     $username = isset($args['username']) ? trim($args['username']) : '';
     $password = isset($args['password']) ? $args['password'] : '';
     $confirmPassword = isset($args['confirm_password']) ? $args['confirm_password'] : '';
     
-    file_put_contents($debugLog, "Username: '$username', Password length: " . strlen($password) . "\n", FILE_APPEND);
-    
-    error_log('[System-Init] Username: ' . $username . ', Password length: ' . strlen($password));
-    
     // 验证用户名
     if (empty($username)) {
-        file_put_contents($debugLog, "FAIL: username_required\n", FILE_APPEND);
-        error_log('[System-Init] Validation failed: username_required');
         Alert::set($pageL->get('username_required'), ALERT_STATUS_FAIL);
         return false;
     }
@@ -118,76 +106,74 @@ function initializeSystem($args)
     // 生成认证令牌
     $tokenAuth = bin2hex(openssl_random_pseudo_bytes(32));
     
-    // 构建用户数据
-    $userData = [
-        $username => [
-            'nickname' => ucfirst($username),
-            'firstName' => '',
-            'lastName' => '',
-            'role' => 'admin',
-            'password' => $passwordHash,
-            'salt' => $salt,
-            'email' => '', // 系统初始化不收集邮箱
-            'registered' => date('Y-m-d H:i:s'),
-            'tokenRemember' => '',
-            'tokenAuth' => $tokenAuth,
-            'tokenAuthTTL' => '2009-03-15 14:00',
-            'twitter' => '',
-            'facebook' => '',
-            'instagram' => '',
-            'codepen' => '',
-            'linkedin' => '',
-            'xing' => '',
-            'telegram' => '',
-            'github' => '',
-            'gitlab' => '',
-            'mastodon' => '',
-            'vk' => ''
-        ]
-    ];
+    // 确定初始语言（单一真源：users.php 顶层）
+    // 优先级：POST['language'] > GET['language'] > 默认 zh_CN
+    $initLang = 'zh_CN'; // 默认中文
     
-    // 写入文件
+    // 检查 POST 数据（表单提交时）
+    if (isset($args['language'])) {
+        $requestedLang = Sanitize::html($args['language']);
+        // 验证语言文件是否存在
+        if (file_exists(PATH_LANGUAGES . $requestedLang . '.json')) {
+            $initLang = $requestedLang;
+        }
+    }
+    // 检查 GET 参数（URL 切换时）
+    elseif (isset($_GET['language'])) {
+        $requestedLang = Sanitize::html($_GET['language']);
+        // 验证语言文件是否存在
+        if (file_exists(PATH_LANGUAGES . $requestedLang . '.json')) {
+            $initLang = $requestedLang;
+        }
+    }
+    
+    // 构建用户数据（顶层添加 language 键）
+    $userData = [
+        'language' => $initLang,  // ★ 全局语言设置（单一真源）
+        $username => [
+            'nickname'      => ucfirst($username),
+            'firstName'     => '',
+            'lastName'      => '',
+            'role'          => 'admin',
+            'password'      => $passwordHash,
+            'salt'          => $salt,
+            'email'         => '',
+            'registered'    => Date::current(DB_DATE_FORMAT),
+            'tokenRemember' => '',
+            'tokenAuth'     => $tokenAuth,
+            'tokenAuthTTL'  => '2009-03-15 14:00',
+            'twitter'       => '',
+            'facebook'      => '',
+            'instagram'     => '',
+            'codepen'       => '',
+            'linkedin'      => '',
+            'xing'          => '',
+            'telegram'      => '',
+            'github'        => '',
+            'gitlab'        => '',
+            'mastodon'      => '',
+            'vk'            => '',
+            'description'   => ''
+        ]
+    ];    // 写入文件
     $content = "<?php defined('BLUDIT') or die('Bludit CMS.'); ?>\n";
     $content .= json_encode($userData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    
-    $debugLog = PATH_ROOT . 'system-init-debug.log';
-    file_put_contents($debugLog, "Attempting to write file: $usersFile\n", FILE_APPEND);
-    file_put_contents($debugLog, "Content length: " . strlen($content) . " bytes\n", FILE_APPEND);
-    
-    error_log('[System-Init] Attempting to write file: ' . $usersFile);
-    error_log('[System-Init] Content length: ' . strlen($content) . ' bytes');
     
     // 使用 LOCK_EX 防止并发写入
     $bytesWritten = file_put_contents($usersFile, $content, LOCK_EX);
     
-    file_put_contents($debugLog, "Bytes written: " . ($bytesWritten === false ? 'FAILED' : $bytesWritten) . "\n", FILE_APPEND);
-    
-    error_log('[System-Init] Bytes written: ' . ($bytesWritten === false ? 'FAILED' : $bytesWritten));
-    
     if ($bytesWritten === false) {
-        $error = error_get_last();
-        file_put_contents($debugLog, "Write error: " . json_encode($error) . "\n", FILE_APPEND);
-        error_log('[System-Init] Write error: ' . json_encode($error));
-        Log::set(__METHOD__ . LOG_SEP . 'Failed to create users file: ' . ($error['message'] ?? 'Unknown error'), LOG_TYPE_ERROR);
+        Log::set(__METHOD__ . LOG_SEP . 'Failed to create users file', LOG_TYPE_ERROR);
         Alert::set($pageL->get('create_failed') . ' (Path: ' . $usersFile . ')', ALERT_STATUS_FAIL);
         return false;
     }
     
     // 验证文件确实被创建
     if (!file_exists($usersFile)) {
-        $debugLog = PATH_ROOT . 'system-init-debug.log';
-        file_put_contents($debugLog, "FAIL: File verification - file not found after creation\n", FILE_APPEND);
-        error_log('[System-Init] File verification failed - file not found after creation');
         Log::set(__METHOD__ . LOG_SEP . 'Users file not found after creation: ' . $usersFile, LOG_TYPE_ERROR);
         Alert::set('File creation verification failed!', ALERT_STATUS_FAIL);
         return false;
     }
-    
-    $debugLog = PATH_ROOT . 'system-init-debug.log';
-    file_put_contents($debugLog, "SUCCESS: File verified\n", FILE_APPEND);
-    file_put_contents($debugLog, "About to redirect to login\n", FILE_APPEND);
-    
-    error_log('[System-Init] File verified successfully');
     
     // 设置文件权限
     chmod($usersFile, 0644);
@@ -197,8 +183,6 @@ function initializeSystem($args)
     // ✅ 清除初始化状态缓存，确保系统能识别到新创建的 users.php
     SystemIntegrity::clearInitCache();
     
-    error_log('[System-Init] Cache cleared, preparing redirect');
-    
     // 记录日志
     Log::set(__METHOD__ . LOG_SEP . 'System initialized with admin user: ' . $username);
     
@@ -206,8 +190,6 @@ function initializeSystem($args)
     Alert::set($pageL->get('init_success'), ALERT_STATUS_OK);
     
     // 重定向到登录页
-    error_log('[System-Init] Redirecting to login page');
-    file_put_contents($debugLog, "Calling Redirect::page('login')\n", FILE_APPEND);
     Redirect::page('login');
     
     return true;
@@ -217,22 +199,12 @@ function initializeSystem($args)
 // Main before POST
 // ============================================================================
 
-// 🔍 调试：记录每次请求
-$debugLog = PATH_ROOT . 'system-init-debug.log';
-$debugMsg = "\n" . date('Y-m-d H:i:s') . " - Controller loaded\n";
-$debugMsg .= "Request Method: " . $_SERVER['REQUEST_METHOD'] . "\n";
-$debugMsg .= "users.php exists: " . (file_exists(PATH_AUTHZ . 'users.php') ? 'YES' : 'NO') . "\n";
-file_put_contents($debugLog, $debugMsg, FILE_APPEND);
-
 // 检查是否已经初始化
 if (file_exists(PATH_AUTHZ . 'users.php')) {
     // 已初始化，重定向到登录页
-    file_put_contents($debugLog, "REDIRECT: users.php exists, redirecting to login\n", FILE_APPEND);
     Redirect::page('login');
     exit;
 }
-
-file_put_contents($debugLog, "PASS: users.php does not exist, continuing...\n", FILE_APPEND);
 
 // ============================================================================
 // POST Method
@@ -240,32 +212,31 @@ file_put_contents($debugLog, "PASS: users.php does not exist, continuing...\n", 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 系统初始化不需要 CSRF token 验证（首次访问）
-    
-    // 🔍 调试：记录 POST 请求
-    $debugLog = PATH_ROOT . 'system-init-debug.log';
-    $debugMsg = date('Y-m-d H:i:s') . " - POST request received\n";
-    $debugMsg .= "POST data: " . json_encode($_POST) . "\n";
-    $debugMsg .= "POST keys: " . implode(', ', array_keys($_POST)) . "\n";
-    $debugMsg .= "POST count: " . count($_POST) . "\n";
-    $debugMsg .= "REQUEST data: " . json_encode($_REQUEST) . "\n";
-    $debugMsg .= "php://input: " . file_get_contents('php://input') . "\n";
-    file_put_contents($debugLog, $debugMsg, FILE_APPEND);
-    
-    error_log('[System-Init] POST request received');
-    error_log('[System-Init] POST data: ' . json_encode($_POST));
-    
-    $result = initializeSystem($_POST);
-    
-    // 🔍 调试：记录结果
-    $debugMsg = date('Y-m-d H:i:s') . " - Result: " . ($result ? 'true' : 'false') . "\n";
-    file_put_contents($debugLog, $debugMsg, FILE_APPEND);
-    
-    error_log('[System-Init] initializeSystem result: ' . ($result ? 'true' : 'false'));
+    initializeSystem($_POST);
 }
 
 // ============================================================================
 // Main after POST
 // ============================================================================
+
+// 获取可用的语言列表（动态扫描 bl-languages 目录）
+$availableLanguages = [];
+if (isset($Language)) {
+    $availableLanguages = $Language->getLanguageList();
+} else {
+    // 如果 Language 对象不存在，手动扫描
+    $langFiles = Filesystem::listFiles(PATH_LANGUAGES, '*', 'json');
+    foreach ($langFiles as $file) {
+        $locale = basename($file, '.json');
+        $langData = json_decode(file_get_contents($file), true);
+        if (isset($langData['language-data']['native'])) {
+            $availableLanguages[$locale] = $langData['language-data']['native'];
+        }
+    }
+}
+
+// 将语言列表传递给模板
+$layout['availableLanguages'] = $availableLanguages;
 
 // Build page
 $layout['title'] = $pageL->get('title');

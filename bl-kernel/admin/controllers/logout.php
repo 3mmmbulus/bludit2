@@ -23,3 +23,4 @@
 if ($login->logout()) {
 	Redirect::page('login');
 }
+

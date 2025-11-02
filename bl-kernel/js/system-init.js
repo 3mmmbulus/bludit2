@@ -5,11 +5,6 @@
 
 $(document).ready(function() {
 	
-	// 🔍 调试：页面加载
-	console.log('✅ System Init JS loaded');
-	console.log('Form found:', $('#jsformInit').length > 0);
-	console.log('Current URL:', window.location.href);
-	
 	// ===========================================
 	// Language Switcher
 	// ===========================================
@@ -145,18 +140,10 @@ $(document).ready(function() {
 		var isValid = true;
 		var firstError = null;
 		
-		console.log('🔍 Form submit triggered');
-		
 		// Get form values
 		var username = $('input[name="username"]').val().trim();
 		var password = $('input[name="password"]').val();
 		var confirmPassword = $('input[name="confirm_password"]').val();
-		
-		console.log('📝 Form data:');
-		console.log('  Username:', username);
-		console.log('  Password length:', password.length);
-		console.log('  Confirm password length:', confirmPassword.length);
-		console.log('  Passwords match:', password === confirmPassword);
 		
 		// Remove previous error messages
 		$('.invalid-feedback').remove();
@@ -175,12 +162,10 @@ $(document).ready(function() {
 			showError('input[name="username"]', pageL_username_invalid);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="username"]';
-			console.error('❌ Validation failed: username_invalid');
 		} else if (username.length < 3 || username.length > 20) {
 			showError('input[name="username"]', pageL_username_length);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="username"]';
-			console.error('❌ Validation failed: username_length');
 		}
 		
 		// Validate Password
@@ -188,17 +173,14 @@ $(document).ready(function() {
 			showError('input[name="password"]', pageL_password_required);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="password"]';
-			console.error('❌ Validation failed: password_required');
 		} else if (password.length < 8) {
 			showError('input[name="password"]', pageL_password_too_short);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="password"]';
-			console.error('❌ Validation failed: password_too_short');
 		} else if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
 			showError('input[name="password"]', pageL_password_weak);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="password"]';
-			console.error('❌ Validation failed: password_weak');
 		}
 		
 		// Validate Confirm Password
@@ -206,18 +188,14 @@ $(document).ready(function() {
 			showError('input[name="confirm_password"]', pageL_password_required);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="confirm_password"]';
-			console.error('❌ Validation failed: confirm_password_required');
 		} else if (password !== confirmPassword) {
 			showError('input[name="confirm_password"]', pageL_password_mismatch);
 			isValid = false;
 			if (!firstError) firstError = 'input[name="confirm_password"]';
-			console.error('❌ Validation failed: password_mismatch');
 		}
 		
 		// If validation failed, prevent submit and focus first error
 		if (!isValid) {
-			console.error('❌ Form validation failed - submission prevented');
-			
 			// Show alert at top of form
 			showTopAlert('danger', pageL_validation_failed);
 			
@@ -226,9 +204,6 @@ $(document).ready(function() {
 			}
 			return false;
 		}
-		
-		console.log('✅ Form validation passed');
-		console.log('🚀 Submitting form via AJAX');
 		
 		// Show loading state
 		var btn = $('#jsbtnSubmit');
@@ -245,11 +220,11 @@ $(document).ready(function() {
 		formData.append('password', password);
 		formData.append('confirm_password', confirmPassword);
 		
-		// Debug: Log form data being submitted
-		console.log('📤 Sending data via AJAX POST:');
-		console.log('  username:', username);
-		console.log('  password: [' + password.length + ' characters]');
-		console.log('  confirm_password: [' + confirmPassword.length + ' characters]');
+		// ★ 添加语言字段（从隐藏字段读取）
+		var language = $('input[name="language"]').val();
+		if (language) {
+			formData.append('language', language);
+		}
 		
 		// Submit via AJAX
 		$.ajax({
@@ -259,29 +234,20 @@ $(document).ready(function() {
 			processData: false,
 			contentType: false,
 			success: function(response, status, xhr) {
-				console.log('✅ AJAX success');
-				console.log('Response status:', status);
-				console.log('HTTP status code:', xhr.status);
-				console.log('Response length:', response.length);
-				console.log('Response preview:', response.substring(0, 500));
-				
 				// Check if response contains redirect or success indicators
 				if (response.includes('login') || response.includes('Login')) {
-					console.log('✅ Success - redirecting to login');
 					showTopAlert('success', pageL_success_redirect);
 					
 					setTimeout(function() {
 						window.location.href = '/admin/login';
 					}, 2000);
 				} else if (response.includes('alert-danger') || response.includes('alert-fail')) {
-					console.error('❌ Server returned error');
 					showTopAlert('danger', pageL_server_error);
 					
 					// Try to extract error message
 					var tempDiv = $('<div>').html(response);
 					var errorMsg = tempDiv.find('.alert-danger, .alert-fail').text();
 					if (errorMsg) {
-						console.error('Error message:', errorMsg);
 						showTopAlert('danger', errorMsg);
 					}
 					
@@ -289,7 +255,6 @@ $(document).ready(function() {
 					btn.removeClass('btn-loading').prop('disabled', false).text(originalText);
 					$('input').prop('disabled', false);
 				} else {
-					console.warn('⚠️ Unexpected response');
 					showTopAlert('warning', pageL_unexpected_response);
 					
 					// Re-enable form
@@ -298,12 +263,6 @@ $(document).ready(function() {
 				}
 			},
 			error: function(xhr, status, error) {
-				console.error('❌ AJAX error');
-				console.error('Status:', status);
-				console.error('Error:', error);
-				console.error('HTTP status code:', xhr.status);
-				console.error('Response text:', xhr.responseText);
-				
 				showTopAlert('danger', pageL_submit_failed + error + ' (HTTP ' + xhr.status + ')');
 				
 				// Re-enable form
@@ -397,16 +356,5 @@ $(document).ready(function() {
 			$(this).addClass('is-invalid');
 		}
 	});
-	
-	// 🔍 页面加载后的状态检查
-	setTimeout(function() {
-		console.log('📊 Page state after 1 second:');
-		console.log('  jQuery version:', $.fn.jquery);
-		console.log('  Form exists:', $('#jsformInit').length);
-		console.log('  Username field:', $('input[name="username"]').length);
-		console.log('  Password field:', $('input[name="password"]').length);
-		console.log('  Confirm field:', $('input[name="confirm_password"]').length);
-		console.log('  Submit button:', $('#jsbtnSubmit').length);
-	}, 1000);
 	
 });

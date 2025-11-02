@@ -1,13 +1,10 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 {
     "title": "BLUDIT",
-    "slogan": "\u6b22\u8fce\u4f7f\u7528Bludit",
+    "slogan": "欢迎使用Bludit",
     "description": "Congratulations you have successfully installed your**Bludit**",
-    "footer": "Copyright \u00a9 2025",
+    "footer": "Copyright © 2025",
     "itemsPerPage": 6,
-    "language": "en",
-    "locale": "zh_CN",
-    "timezone": "Asia\/Bangkok",
     "theme": "alternative",
     "adminTheme": "tabler",
     "homepage": "",
