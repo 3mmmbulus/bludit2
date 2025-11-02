@@ -48,18 +48,18 @@ $domain = $_SERVER['HTTP_HOST'] ?? 'localhost';
                 </div>
             </div>
         </div>
+        <?php
+        // Footer
+        if (!isset($L)) {
+            $L = new class($lang) {
+                private $d;
+                function __construct($l) { $this->d = json_decode(file_get_contents(__DIR__.'/../../../bl-languages/pages/site-bootstrap/'.$l.'.json'), true) ?: []; }
+                function get($k) { return $this->d[$k] ?? $k; }
+            };
+        }
+        include __DIR__ . '/../../../bl-kernel/admin/themes/tabler/includes/footer.php';
+        ?>
     </div>
-    <?php
-    // Footer
-    if (!isset($L)) {
-        $L = new class($lang) {
-            private $d;
-            function __construct($l) { $this->d = json_decode(file_get_contents(__DIR__.'/../../../bl-languages/pages/site-bootstrap/'.$l.'.json'), true) ?: []; }
-            function get($k) { return $this->d[$k] ?? $k; }
-        };
-    }
-    include __DIR__ . '/../../../bl-kernel/admin/themes/tabler/includes/footer.php';
-    ?>
     <script src="/bl-kernel/admin/themes/tabler/js/tabler.min.js" defer></script>
 </body>
 </html>
