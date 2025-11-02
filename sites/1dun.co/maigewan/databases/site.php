@@ -35,5 +35,5 @@
     "titleFormatTag": "{{tag-name}} | {{site-title}}",
     "imageRestrict": true,
     "imageRelativeToAbsolute": false,
-    "language": "en"
+    "language": "zh_CN"
 }
