@@ -18,5 +18,7 @@
     "hint_license": "Enter the license code provided to you",
     "card_title_server": "Server Information",
     "card_title_credentials": "Authorization Credentials",
-    "card_title_license": "License Code"
+    "card_title_license": "License Code",
+    "welcome_title": "Please Support Genuine Licenses!",
+    "welcome_text": "Code is hard work. Please support us by purchasing a genuine license. Every contribution fuels our continuous optimization and iteration; every upgrade safeguards your business data and security. Data is priceless — let genuine licenses make its value visible."
 }

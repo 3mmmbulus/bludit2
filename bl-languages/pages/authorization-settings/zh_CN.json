@@ -18,5 +18,7 @@
     "hint_license": "请输入提供给您的授权码",
     "card_title_server": "服务器信息",
     "card_title_credentials": "授权凭据",
-    "card_title_license": "授权码"
+    "card_title_license": "授权码",
+    "welcome_title": "请支持正版授权!",
+    "welcome_text": "代码不易,请您支持正版购买授权。每一份投入,都是我们持续优化与迭代的动力;每一次升级,都守护着您业务的数据与安全。数据无价,用正版让价值被看见。"
 }

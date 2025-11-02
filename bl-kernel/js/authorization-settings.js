@@ -118,6 +118,12 @@
                     return false;
                 }
                 
+                // Show progress bar
+                const progressBar = document.getElementById('auth-progress');
+                if (progressBar) {
+                    progressBar.style.display = 'block';
+                }
+                
                 // Add loading state to submit button
                 const submitBtn = form.querySelector('button[type="submit"]');
                 if (submitBtn) {
@@ -125,11 +131,15 @@
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>处理中...';
                     
-                    // Re-enable after 5 seconds (in case of error)
+                    // Note: Progress bar will be hidden automatically on page reload
+                    // If submission fails, re-enable button and hide progress
                     setTimeout(() => {
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalText;
-                    }, 5000);
+                        if (progressBar) {
+                            progressBar.style.display = 'none';
+                        }
+                    }, 10000); // 10 seconds timeout
                 }
             });
             
