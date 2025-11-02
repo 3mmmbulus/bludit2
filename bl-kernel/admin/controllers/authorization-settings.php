@@ -91,7 +91,7 @@ function getServerIP() {
  * This is a simple example - in production, this should connect to a remote
  * authorization server or use cryptographic validation
  */
-function validateCredentials($username, $password, $licenseCode) {
+function validateCredentials($username, $licenseCode) {
     // Example validation logic
     // In production, implement proper validation:
     // 1. Connect to remote authorization API
@@ -99,7 +99,7 @@ function validateCredentials($username, $password, $licenseCode) {
     // 3. Use cryptographic signature validation
     
     // For now, just check that all fields are filled
-    if (empty($username) || empty($password) || empty($licenseCode)) {
+    if (empty($username) || empty($licenseCode)) {
         return false;
     }
     
@@ -127,11 +127,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Get form data
     $username = isset($_POST['username']) ? trim($_POST['username']) : '';
-    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
     $licenseCode = isset($_POST['license_code']) ? trim($_POST['license_code']) : '';
     
     // Validate credentials
-    if (validateCredentials($username, $password, $licenseCode)) {
+    if (validateCredentials($username, $licenseCode)) {
         // Prepare license data
         $licenseData = [
             'server_ip' => $serverIP,

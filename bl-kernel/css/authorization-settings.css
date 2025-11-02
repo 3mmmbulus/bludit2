@@ -1,18 +1,20 @@
 /* Authorization Settings Styles */
 
-/* Main container */
-.authorization-settings {
-    max-width: 700px;
-    margin: 0 auto;
+/* Page center layout */
+.page-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-/* Card spacing */
-.authorization-settings .card {
-    margin-bottom: 1.5rem;
+/* Card medium size */
+.card-md {
+    max-width: 28rem;
 }
 
 /* Read-only input styling */
-.authorization-settings input[readonly] {
+input[readonly] {
     background-color: #f8f9fa;
     cursor: not-allowed;
     color: #495057;
@@ -46,18 +48,8 @@
     transition: transform 0.3s ease;
 }
 
-/* Password toggle icon */
-#toggle-password {
-    cursor: pointer;
-    user-select: none;
-}
-
-#toggle-password:hover {
-    color: #066fd1 !important;
-}
-
 /* Form hints */
-.authorization-settings .form-hint {
+.form-hint {
     display: block;
     margin-top: 0.25rem;
     font-size: 0.875rem;
@@ -65,70 +57,61 @@
 }
 
 /* Alert icons alignment */
-.authorization-settings .alert .bi {
+.alert .bi {
     font-size: 1.25rem;
     vertical-align: middle;
 }
 
 /* License info badge */
-.authorization-settings .badge {
+.badge {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
 }
 
 /* Submit button */
-.authorization-settings .btn-primary {
+.btn-primary {
     font-size: 1rem;
     padding: 0.625rem 1.25rem;
 }
 
-.authorization-settings .btn-primary i {
+.btn-primary i {
     font-size: 1.125rem;
-}
-
-/* Card title icons */
-.authorization-settings .card-title i {
-    font-size: 1.125rem;
-    vertical-align: middle;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .authorization-settings {
-        max-width: 100%;
-        padding: 0;
-    }
-    
-    .authorization-settings .card-body {
-        padding: 1rem;
-    }
-    
-    .authorization-settings .page-title {
-        font-size: 1.5rem;
-    }
 }
 
 /* Input group button styling */
-.authorization-settings .input-group .btn-icon {
+.input-group .btn-icon {
     padding: 0.375rem 0.75rem;
 }
 
-.authorization-settings .input-group-text {
-    background-color: transparent;
-    border-left: 0;
-}
-
-.authorization-settings .input-group .form-control:focus + .input-group-text {
-    border-color: #80bdff;
-}
-
 /* Alert dismissible */
-.authorization-settings .alert-dismissible {
+.alert-dismissible {
     padding-right: 3rem;
 }
 
-.authorization-settings .alert-dismissible .btn-close {
+.alert-dismissible .btn-close {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
+}
+
+/* Form check label */
+.form-check-label a {
+    color: #066fd1;
+    text-decoration: none;
+}
+
+.form-check-label a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .card-md {
+        max-width: 100%;
+    }
+    
+    .page-center {
+        min-height: auto;
+        padding: 1rem 0;
+    }
 }

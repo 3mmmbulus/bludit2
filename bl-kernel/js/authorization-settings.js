@@ -64,42 +64,15 @@
         }
         
         // ====================
-        // Password Visibility Toggle
-        // ====================
-        const togglePassword = document.getElementById('toggle-password');
-        const passwordInput = document.getElementById('password-input');
-        
-        if (togglePassword && passwordInput) {
-            togglePassword.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const icon = this.querySelector('i');
-                if (!icon) return;
-                
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    icon.classList.remove('bi-eye');
-                    icon.classList.add('bi-eye-slash');
-                    this.setAttribute('title', '隐藏密码');
-                } else {
-                    passwordInput.type = 'password';
-                    icon.classList.remove('bi-eye-slash');
-                    icon.classList.add('bi-eye');
-                    this.setAttribute('title', '显示密码');
-                }
-            });
-        }
-        
-        // ====================
         // Form Validation
         // ====================
-        const form = document.querySelector('.authorization-settings form');
+        const form = document.querySelector('form');
         
         if (form) {
             form.addEventListener('submit', function(e) {
                 const username = form.querySelector('[name="username"]');
-                const password = form.querySelector('[name="password"]');
                 const licenseCode = form.querySelector('[name="license_code"]');
+                const termsAgree = form.querySelector('#terms-agree');
                 
                 let isValid = true;
                 let errorMessage = '';
@@ -113,17 +86,6 @@
                     }
                 } else if (username) {
                     username.classList.remove('is-invalid');
-                }
-                
-                // Validate password
-                if (!password || !password.value.trim()) {
-                    isValid = false;
-                    errorMessage = '请填写密码';
-                    if (password) {
-                        password.classList.add('is-invalid');
-                    }
-                } else if (password) {
-                    password.classList.remove('is-invalid');
                 }
                 
                 // Validate license code
@@ -141,6 +103,12 @@
                     }
                 } else if (licenseCode) {
                     licenseCode.classList.remove('is-invalid');
+                }
+                
+                // Validate terms agreement
+                if (termsAgree && !termsAgree.checked) {
+                    isValid = false;
+                    errorMessage = '请同意服务条款';
                 }
                 
                 // If validation fails, prevent form submission and show error
