@@ -225,3 +225,87 @@
 	};
 	
 })();
+
+/**
+ * Navigation State Persistence
+ * 保存和恢复侧边栏菜单展开状态
+ */
+(function() {
+	'use strict';
+	
+	const NAV_STATE_KEY = 'maigewan_nav_state';
+	
+	/**
+	 * 保存导航状态到 localStorage
+	 */
+	function saveNavState() {
+		const expandedMenus = [];
+		document.querySelectorAll('.navbar-nav .nav-item.dropdown').forEach(item => {
+			const navId = item.getAttribute('data-nav-id');
+			const dropdownMenu = item.querySelector('.dropdown-menu');
+			
+			if (navId && dropdownMenu && dropdownMenu.classList.contains('show')) {
+				expandedMenus.push(navId);
+			}
+		});
+		
+		try {
+			localStorage.setItem(NAV_STATE_KEY, JSON.stringify(expandedMenus));
+		} catch (e) {
+			console.warn('Failed to save nav state:', e);
+		}
+	}
+	
+	/**
+	 * 从 localStorage 恢复导航状态
+	 */
+	function restoreNavState() {
+		try {
+			const saved = localStorage.getItem(NAV_STATE_KEY);
+			if (!saved) return;
+			
+			const expandedMenus = JSON.parse(saved);
+			
+			expandedMenus.forEach(navId => {
+				const navItem = document.querySelector(`[data-nav-id="${navId}"]`);
+				if (!navItem) return;
+				
+				const toggle = navItem.querySelector('.dropdown-toggle');
+				const menu = navItem.querySelector('.dropdown-menu');
+				
+				if (toggle && menu && !menu.classList.contains('show')) {
+					// 使用 Bootstrap Dropdown API 展开菜单
+					if (window.bootstrap && window.bootstrap.Dropdown) {
+						const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+						bsDropdown.show();
+					}
+				}
+			});
+		} catch (e) {
+			console.warn('Failed to restore nav state:', e);
+		}
+	}
+	
+	/**
+	 * 初始化导航状态管理
+	 */
+	function initNavPersistence() {
+		// 页面加载时恢复状态
+		restoreNavState();
+		
+		// 监听所有 dropdown 的显示/隐藏事件
+		const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+		dropdownToggles.forEach(toggle => {
+			toggle.addEventListener('shown.bs.dropdown', saveNavState);
+			toggle.addEventListener('hidden.bs.dropdown', saveNavState);
+		});
+	}
+	
+	// 在 DOM 加载完成后初始化
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initNavPersistence);
+	} else {
+		initNavPersistence();
+	}
+	
+})();

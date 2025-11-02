@@ -1,5 +1,44 @@
 /* Bludit Tabler Custom Styles */
 
+/**
+ * Navigation State Optimization
+ * 防止菜单展开/折叠时的视觉闪烁
+ */
+
+/* 平滑过渡 */
+.navbar-nav .dropdown-menu {
+	transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+/* 当前激活的菜单项高亮 */
+.navbar-nav .dropdown-item.active {
+	color: var(--tblr-primary);
+	background-color: var(--tblr-active-bg);
+	font-weight: 500;
+}
+
+/* 激活的 dropdown 父级高亮 */
+.navbar-nav .nav-item.dropdown.active > .nav-link {
+	color: var(--tblr-primary);
+	background-color: rgba(var(--tblr-primary-rgb), 0.06);
+}
+
+/* 防止页面加载时的闪烁 */
+.navbar-nav .dropdown-menu.show {
+	display: block;
+}
+
+/* 移动端优化 */
+@media (max-width: 991.98px) {
+	.navbar-nav .dropdown-menu {
+		position: static;
+		float: none;
+		width: auto;
+	}
+}
+
+/* Login Page Styles */
+
 .login-page {
 	display: flex;
 	flex-direction: column;
