@@ -25,7 +25,7 @@ if (Session::started()===false) {
 	if (ob_get_level()) {
 		ob_end_clean();
 	}
-	exit('Bludit CMS. Session initialization failed.');
+	exit('Maigewan CMS. 为防止恶意请求，请刷新该网页!');
 }
 
 $login = new Login();
