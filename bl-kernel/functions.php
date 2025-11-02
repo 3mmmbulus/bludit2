@@ -641,6 +641,41 @@ function editSettings($args)
   }
 
   if ($site->set($args)) {
+    // 多站点模式：同步更新 users.php 中的全局配置
+    if (isset($args['language']) || isset($args['timezone']) || isset($args['locale'])) {
+      $usersFile = PATH_AUTHZ . 'users.php';
+      
+      if (file_exists($usersFile) && is_readable($usersFile)) {
+        // 读取现有 users.php
+        $content = file_get_contents($usersFile);
+        $content = preg_replace('/^<\?php[^?]*\?>\s*/i', '', $content);
+        $usersData = json_decode($content, true);
+        
+        if (is_array($usersData)) {
+          // 确保 _global 节点存在
+          if (!isset($usersData['_global'])) {
+            $usersData['_global'] = array();
+          }
+          
+          // 更新全局配置
+          if (isset($args['language'])) {
+            $usersData['_global']['language'] = $args['language'];
+          }
+          if (isset($args['timezone'])) {
+            $usersData['_global']['timezone'] = $args['timezone'];
+          }
+          if (isset($args['locale'])) {
+            $usersData['_global']['locale'] = $args['locale'];
+          }
+          
+          // 写回 users.php
+          $newContent = "<?php defined('BLUDIT') or die('Bludit CMS.'); ?>\n";
+          $newContent .= json_encode($usersData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+          @file_put_contents($usersFile, $newContent, LOCK_EX);
+        }
+      }
+    }
+    
     // Check current order-by if changed it reorder the content
     if ($site->orderBy() != ORDER_BY) {
       if ($site->orderBy() == 'date') {

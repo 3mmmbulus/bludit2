@@ -53,6 +53,40 @@ class Site extends dbJSON
 		'customFields' =>	'{}'
 	);
 
+	// 静态缓存：避免重复读取 users.php
+	private static $globalConfigCache = null;
+
+	// 读取 users.php 中的全局配置（带缓存）
+	private static function getGlobalConfig()
+	{
+		if (self::$globalConfigCache !== null) {
+			return self::$globalConfigCache;
+		}
+
+		// 检查 PATH_AUTHZ 常量是否已定义
+		if (!defined('PATH_AUTHZ')) {
+			self::$globalConfigCache = array();
+			return self::$globalConfigCache;
+		}
+
+		$usersFile = PATH_AUTHZ . 'users.php';
+		if (file_exists($usersFile) && is_readable($usersFile)) {
+			$content = @file_get_contents($usersFile);
+			if ($content !== false) {
+				// 移除 PHP 标签后解析 JSON
+				$content = preg_replace('/^<\?php[^?]*\?>\s*/i', '', $content);
+				$usersData = @json_decode($content, true);
+				if (is_array($usersData) && isset($usersData['_global'])) {
+					self::$globalConfigCache = $usersData['_global'];
+					return self::$globalConfigCache;
+				}
+			}
+		}
+
+		self::$globalConfigCache = array(); // 缓存空数组，避免重复读取
+		return self::$globalConfigCache;
+	}
+
 	function __construct()
 	{
 		parent::__construct(DB_SITE);
@@ -363,8 +397,15 @@ class Site extends dbJSON
 	}
 
 	// Returns the timezone.
+	// 多站点模式：优先使用 users.php 中的全局配置
 	public function timezone()
 	{
+		$globalConfig = self::getGlobalConfig();
+		if (!empty($globalConfig) && isset($globalConfig['timezone'])) {
+			return $globalConfig['timezone'];
+		}
+		
+		// 回退：使用站点自己的配置
 		return $this->getField('timezone');
 	}
 
@@ -412,8 +453,15 @@ class Site extends dbJSON
 	}
 
 	// Returns the current language.
+	// 多站点模式：优先使用 users.php 中的全局配置
 	public function language()
 	{
+		$globalConfig = self::getGlobalConfig();
+		if (!empty($globalConfig) && isset($globalConfig['language'])) {
+			return $globalConfig['language'];
+		}
+		
+		// 回退：使用站点自己的配置
 		return $this->getField('language');
 	}
 
@@ -426,8 +474,15 @@ class Site extends dbJSON
 	}
 
 	// Returns the current locale.
+	// 多站点模式：优先使用 users.php 中的全局配置
 	public function locale()
 	{
+		$globalConfig = self::getGlobalConfig();
+		if (!empty($globalConfig) && isset($globalConfig['locale'])) {
+			return $globalConfig['locale'];
+		}
+		
+		// 回退：使用站点自己的配置
 		return $this->getField('locale');
 	}
 
