@@ -1,4 +1,4 @@
-g<?php
+<?php
 /**
  * Navigation State Helpers
  * 检查当前路由并添加对应的 active/show 类
