@@ -1,9 +1,30 @@
 <?php defined('BLUDIT') or die('Bludit CMS.');
 
+// Start output buffering to prevent "headers already sent" errors
+if (!ob_get_level()) {
+	ob_start();
+}
+
 // Start the session
 // If the session is not possible to start the admin area is not available
 Session::start($site->urlPath(), $site->isHTTPS());
 if (Session::started()===false) {
+	// 记录详细错误信息
+	$sessionError = [
+		'php_version' => PHP_VERSION,
+		'session_status' => session_status(),
+		'headers_sent' => headers_sent($file, $line),
+		'file' => $file ?? 'unknown',
+		'line' => $line ?? 'unknown',
+		'session_save_path' => session_save_path(),
+		'session_name' => session_name()
+	];
+	Log::set('Session initialization failed: ' . json_encode($sessionError));
+	
+	// 清理输出缓冲并退出
+	if (ob_get_level()) {
+		ob_end_clean();
+	}
 	exit('Bludit CMS. Session initialization failed.');
 }
 

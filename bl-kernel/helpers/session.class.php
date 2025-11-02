@@ -7,6 +7,13 @@ class Session {
 
 	public static function start($path, $secure)
 	{
+		// 如果 session 已经启动，直接返回
+		if (session_status() === PHP_SESSION_ACTIVE) {
+			self::$started = true;
+			self::checkActivityTimeout();
+			return;
+		}
+		
 		// Try to set the session timeout on server side, 30 minutes of timeout
 		ini_set('session.gc_maxlifetime', SESSION_GC_MAXLIFETIME);
 
@@ -16,34 +23,59 @@ class Session {
 		// Gets current cookies params.
 		$cookieParams = session_get_cookie_params();
 
+		// 确保 path 不为空或 null，默认为 '/'
         if (empty($path)) {
 			$httponly = true;
             $path = '/';
         }
+		
+		// 确保 path 是字符串
+		$path = (string)$path;
 
-        session_set_cookie_params([
-            'lifetime' => $cookieParams["lifetime"],
-            'path' => $path,
-            'domain' => $cookieParams["domain"],
-            'secure' => $secure,
-            'httponly' => true,
-            'samesite' => 'Lax'  // CSRF protection
-        ]);
+		// 设置 session cookie 参数
+		try {
+			session_set_cookie_params([
+				'lifetime' => $cookieParams["lifetime"],
+				'path' => $path,
+				'domain' => $cookieParams["domain"],
+				'secure' => (bool)$secure,
+				'httponly' => true,
+				'samesite' => 'Lax'  // CSRF protection
+			]);
+		} catch (Exception $e) {
+			Log::set(__METHOD__.LOG_SEP.'Error setting cookie params: ' . $e->getMessage());
+			// 尝试使用旧式语法作为后备
+			@session_set_cookie_params(
+				$cookieParams["lifetime"],
+				$path,
+				$cookieParams["domain"],
+				(bool)$secure,
+				true  // httponly
+			);
+		}
 
 		// Sets the session name to the one set above.
 		session_name(self::$sessionName);
 
 		// Start session.
-		self::$started = session_start();
+		try {
+			self::$started = @session_start();
+		} catch (Exception $e) {
+			Log::set(__METHOD__.LOG_SEP.'Exception when starting session: ' . $e->getMessage());
+			self::$started = false;
+		}
 
 		// 活动超时检查: 如果用户超过设定时间无活动,销毁会话
-		self::checkActivityTimeout();
+		if (self::$started) {
+			self::checkActivityTimeout();
+		}
 
 		// Regenerated the session, delete the old one. There are problems with AJAX.
 		//session_regenerate_id(true);
 
 		if (!self::$started) {
-			Log::set(__METHOD__.LOG_SEP.'Error occurred when trying to start the session.');
+			$error = error_get_last();
+			Log::set(__METHOD__.LOG_SEP.'Error occurred when trying to start the session. Error: ' . ($error ? json_encode($error) : 'Unknown'));
 		}
 	}
 
