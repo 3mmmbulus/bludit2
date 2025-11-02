@@ -49,57 +49,44 @@ if (is_dir($fullMatchPath) && is_readable($fullMatchPath)) {
 	}
 }
 
-// 4) 如果站点目录不存在，使用默认站点模板
+// 4) 如果站点目录不存在，尝试使用默认站点模板（如果存在）
 if ($siteContentPath === null) {
-	// 使用默认站点模板
 	$defaultSitePath = $sitesRoot . 'default' . DS . 'maigewan' . DS;
-	
 	if (is_dir($defaultSitePath) && is_readable($defaultSitePath)) {
-		// 使用默认站点目录
 		$siteContentPath = $defaultSitePath;
-		// 标记为默认站点（可选，供后续逻辑判断）
 		define('SITE_IS_DEFAULT', true);
 	} else {
-		// 默认站点模板也不存在，显示错误
-		http_response_code(503);
-		header('Content-Type: text/html; charset=UTF-8');
-		echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>System Error</title>';
-		echo '<style>body{font-family:sans-serif;text-align:center;padding:50px;}h1{color:#d63939;}p{color:#999;}</style></head><body>';
-		echo '<h1>System Configuration Error</h1>';
-		echo '<p>Default site template not found. Please contact system administrator.</p>';
-		echo '<p style="font-size:0.9em;margin-top:30px;">Path: <code>' . htmlspecialchars($defaultSitePath, ENT_QUOTES, 'UTF-8') . '</code></p>';
-		echo '</body></html>';
-		exit;
+		// 默认站点也不存在，使用 bl-content 作为后备（让系统走正常安装流程）
+		$siteContentPath = PATH_ROOT . 'bl-content' . DS;
 	}
 }
 
 // 5) 动态定义 PATH_CONTENT 为解析后的站点目录
 define('PATH_CONTENT', $siteContentPath);
 
-// 6) 如果是默认站点，直接显示维护页面（不执行后续的 init.php 和站点逻辑）
+// 6) 如果是默认站点，检查是否访问后台，非后台才显示维护页面
 if (defined('SITE_IS_DEFAULT')) {
-	// 加载默认站点的维护页面
-	$maintenancePage = PATH_CONTENT . 'index.php';
-	if (file_exists($maintenancePage)) {
-		include($maintenancePage);
-		exit;
-	} else {
-		// 如果维护页面不存在，显示简单错误
-		http_response_code(503);
-		echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Site Not Available</title></head><body>';
-		echo '<h1>Site Not Available</h1><p>This site has not been created yet.</p>';
-		echo '</body></html>';
-		exit;
+	// 检查是否访问 /admin 或 /admin/ 路径（白名单）
+	$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+	
+	// 判断是否为后台路径：精确匹配 /admin 或以 /admin/ 开头
+	$isAdminPath = ($requestPath === '/admin' || $requestPath === '/admin/' || strpos($requestPath, '/admin/') === 0);
+	
+	// 如果不是访问后台，显示维护页面
+	if (!$isAdminPath) {
+		$maintenancePage = PATH_CONTENT . 'index.php';
+		if (file_exists($maintenancePage)) {
+			include($maintenancePage);
+			exit;
+		} else {
+			http_response_code(503);
+			echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Site Not Available</title></head><body>';
+			echo '<h1>Site Not Available</h1><p>This site has not been created yet.</p>';
+			echo '</body></html>';
+			exit;
+		}
 	}
-}
-
-// 检查站点是否已安装（站点目录下必须有 databases/site.php）
-if (!file_exists(PATH_CONTENT . 'databases' . DS . 'site.php')) {
-	$base = dirname($_SERVER['SCRIPT_NAME']);
-	$base = rtrim($base, '/');
-	$base = rtrim($base, '\\'); // Workaround for Windows Servers
-	header('Location:'.$base.'/install.php');
-	exit('<a href="./install.php">Install Bludit first.</a>');
+	// 如果是访问后台，继续执行，不显示维护页面
 }
 
 // Init
@@ -111,5 +98,15 @@ if ($url->whereAmI()==='admin') {
 }
 // Site
 else {
+	// 如果是默认站点或站点未安装，不加载前台，显示维护信息
+	if (defined('SITE_IS_DEFAULT') || !file_exists(PATH_CONTENT . 'databases' . DS . 'site.php')) {
+		http_response_code(503);
+		echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Site Not Available</title></head><body>';
+		echo '<style>body{font-family:sans-serif;text-align:center;padding:50px;}h1{color:#333;}</style>';
+		echo '<h1>Site Not Available</h1>';
+		echo '<p>This site has not been created yet. Please contact the administrator.</p>';
+		echo '</body></html>';
+		exit;
+	}
 	require(PATH_BOOT.'site.php');
 }

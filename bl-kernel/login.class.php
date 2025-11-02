@@ -125,6 +125,7 @@ class Login
 		try {
 			$user = new User($username);
 		} catch (Exception $e) {
+			Log::set(__METHOD__ . LOG_SEP . 'User not found in database. Username: ' . $username);
 			return false;
 		}
 
