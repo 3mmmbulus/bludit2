@@ -4,6 +4,67 @@
 (function() {
     'use strict';
     
+    // ====================
+    // Toast Notification Functions
+    // ====================
+    
+    /**
+     * 显示提示消息
+     * @param {string} message 消息内容
+     * @param {string} type 类型：success, error, info, warning
+     * @param {number} duration 持续时间（毫秒）
+     */
+    function showToast(message, type = 'info', duration = 3000) {
+        // 创建 toast 容器（如果不存在）
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999;';
+            document.body.appendChild(container);
+        }
+        
+        // 创建 toast 元素
+        const toast = document.createElement('div');
+        toast.className = `alert alert-${type} alert-dismissible fade show`;
+        toast.style.cssText = 'min-width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 10px;';
+        toast.setAttribute('role', 'alert');
+        
+        const iconMap = {
+            success: '✓',
+            error: '✗',
+            info: 'ℹ',
+            warning: '⚠'
+        };
+        
+        toast.innerHTML = `
+            <strong>${iconMap[type] || 'ℹ'}</strong> ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
+        container.appendChild(toast);
+        
+        // 自动移除
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 150);
+        }, duration);
+    }
+    
+    /**
+     * 显示成功消息
+     */
+    function showSuccessMessage(message) {
+        showToast(message, 'success', 2000);
+    }
+    
+    /**
+     * 显示错误消息
+     */
+    function showErrorMessage(message) {
+        showToast(message, 'error', 3000);
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
         
         // ====================
@@ -24,7 +85,7 @@
                 icon.classList.add('rotating');
                 
                 // AJAX request to get server IP
-                fetch('/bl-kernel/ajax/get-server-ip.php', {
+                fetch(HTML_PATH_ADMIN_ROOT + 'ajax/get-server-ip', {
                     method: 'GET',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest'
@@ -40,17 +101,29 @@
                     if (data.status === 'success' && data.ip) {
                         serverIpInput.value = data.ip;
                         
-                        // Show success feedback
+                        // 显示成功提示
+                        showSuccessMessage('IP地址已刷新');
+                        
+                        // 显示成功反馈
                         serverIpInput.classList.add('is-valid');
                         setTimeout(() => {
                             serverIpInput.classList.remove('is-valid');
                         }, 2000);
+                        
+                        // 可选：控制台输出详细信息（调试用）
+                        if (data.details) {
+                            console.log('IP检测详情:', data.details);
+                        }
                     } else {
                         throw new Error(data.message || 'Failed to get server IP');
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching server IP:', error);
+                    
+                    // 显示错误提示
+                    showErrorMessage('刷新IP失败，请稍后重试');
+                    
                     serverIpInput.classList.add('is-invalid');
                     setTimeout(() => {
                         serverIpInput.classList.remove('is-invalid');

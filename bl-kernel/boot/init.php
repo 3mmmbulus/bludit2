@@ -614,6 +614,7 @@ if (!is_readable($licenseFile) && $isAdminReq) {
         '',                     // 空路径（/admin/ 默认跳转到授权页）
         'login',                // 登录页
         'logout',               // 允许退出
+        'ajax',                 // AJAX 请求（内部有权限验证）
         'authorization-settings',// 授权页（配置/上传 license.json）
         'new-user',             // 创建首个管理员（如有）
         'user-password',        // 设置/修改密码

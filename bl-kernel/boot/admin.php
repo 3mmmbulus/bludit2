@@ -69,8 +69,10 @@ if ($layout['slug']==='ajax') {
 		// Load the ajax file
 		if (Sanitize::pathFile(PATH_AJAX, $layout['parameters'].'.php')) {
 			include(PATH_AJAX.$layout['parameters'].'.php');
+			exit(0); // ← 成功执行后退出
 		}
 	}
+	// 如果未登录或文件不存在，返回 401
 	header('HTTP/1.1 401 User not logged.');
 	exit(0);
 }
