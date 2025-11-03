@@ -23,5 +23,10 @@
     "welcome_text": "代码不易,请您支持正版购买授权。每一份投入,都是我们持续优化与迭代的动力;每一次升级,都守护着您业务的数据与安全。数据无价,用正版让价值被看见。",
     "ip_refresh_success": "IP地址已刷新",
     "ip_refresh_error": "刷新IP失败，请稍后重试",
-    "ip_fetch_in_progress": "正在获取服务器IP..."
+    "ip_fetch_in_progress": "正在获取服务器IP...",
+    "license_active_title": "授权已激活",
+    "license_info_username": "用户名",
+    "license_info_authorized_at": "授权时间",
+    "license_info_expires_at": "到期时间",
+    "license_info_status": "状态"
 }

@@ -223,6 +223,21 @@ class SystemIntegrity
         self::$isInitialized = null;
     }
 
+    /**
+     * 清除所有进程级缓存（用于授权文件更新后立即生效）
+     * 应在以下场景调用：
+     * - 授权文件上传/更新后
+     * - 关键配置文件修改后
+     * - 系统初始化完成后
+     * - 测试环境重置时
+     */
+    public static function clearCache()
+    {
+        self::$lastQuickOk = null;
+        self::$isInitialized = null;
+        clearstatcache(false); // 同时清理 PHP 文件状态缓存
+    }
+
     // ========== 二、对外辅助（注册/配置/日志） ==========
 
     /**
@@ -414,10 +429,10 @@ class SystemIntegrity
     }
 }
 // Bludit version
-define('BLUDIT_VERSION',        '3.16.2');
+define('BLUDIT_VERSION',        '1.00.2');
 define('BLUDIT_CODENAME',       'Valencia');
-define('BLUDIT_RELEASE_DATE',   '2024-08-23');
-define('BLUDIT_BUILD',          '20240806');
+define('BLUDIT_RELEASE_DATE',   '2025-12-01');
+define('BLUDIT_BUILD',          '20251201');
 
 // Change to TRUE for debugging
 define('DEBUG_MODE', TRUE);
@@ -585,10 +600,11 @@ foreach ($navPages as $navKey) {
     }
 }
 
-// 2) 策略（初始化阶段不强制授权文件）
+// 2) 策略（动态检测：如果授权文件存在则强制检查）
+$licenseFileExists = is_readable(PATH_AUTHZ.'license.json');
 SystemIntegrity::setPolicy([
-  'require_license' => false,                       // ★ 这里关闭全局授权强制
-  'license_file'    => PATH_AUTHZ.'license.json',   // 仍然保留路径，后面要用
+  'require_license' => $licenseFileExists,          // ★ 动态策略：有授权文件则强制检查
+  'license_file'    => PATH_AUTHZ.'license.json',
   'cache_ttl'       => 60,
   'fail_http_500'   => true,
 ]);

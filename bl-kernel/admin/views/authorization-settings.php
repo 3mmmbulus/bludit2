@@ -30,12 +30,12 @@
 					<i class="bi bi-shield-check me-2"></i>
 				</div>
 				<div>
-					<h4 class="alert-title">授权已激活</h4>
+					<h4 class="alert-title"><?php echo $pageL->get('license_active_title') ?></h4>
 					<div class="text-secondary">
-						<strong>用户名:</strong> <?php echo htmlspecialchars($licenseData['username'] ?? '') ?><br>
-						<strong>授权时间:</strong> <?php echo htmlspecialchars($licenseData['authorized_at'] ?? '') ?><br>
-						<strong>到期时间:</strong> <?php echo htmlspecialchars($licenseData['expires_at'] ?? '') ?><br>
-						<strong>状态:</strong> <span class="badge bg-success"><?php echo htmlspecialchars($licenseData['status'] ?? '') ?></span>
+						<strong><?php echo $pageL->get('license_info_username') ?>:</strong> <?php echo htmlspecialchars($licenseData['username'] ?? '') ?><br>
+						<strong><?php echo $pageL->get('license_info_authorized_at') ?>:</strong> <?php echo htmlspecialchars($licenseData['authorized_at'] ?? '') ?><br>
+						<strong><?php echo $pageL->get('license_info_expires_at') ?>:</strong> <?php echo htmlspecialchars($licenseData['expires_at'] ?? '') ?><br>
+						<strong><?php echo $pageL->get('license_info_status') ?>:</strong> <span class="badge bg-success"><?php echo htmlspecialchars($licenseData['status'] ?? '') ?></span>
 					</div>
 				</div>
 			</div>

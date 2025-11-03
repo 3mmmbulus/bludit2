@@ -155,6 +155,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($result !== false) {
             chmod($licenseFile, 0644);
+            
+            // 清除 SystemIntegrity 进程级缓存，使授权立即生效
+            SystemIntegrity::clearCache();
+            
+            // 如果配置了 require_license，现在可以启用了
+            SystemIntegrity::setPolicy(['require_license' => true]);
+            
             $message = $pageL->get('msg_success');
             $messageType = 'success';
         } else {

@@ -23,5 +23,10 @@
     "welcome_text": "Code is hard work. Please support us by purchasing a genuine license. Every contribution fuels our continuous optimization and iteration; every upgrade safeguards your business data and security. Data is priceless — let genuine licenses make its value visible.",
     "ip_refresh_success": "IP address refreshed",
     "ip_refresh_error": "Failed to refresh IP, please try again",
-    "ip_fetch_in_progress": "Fetching server IP..."
+    "ip_fetch_in_progress": "Fetching server IP...",
+    "license_active_title": "License Activated",
+    "license_info_username": "Username",
+    "license_info_authorized_at": "Authorized At",
+    "license_info_expires_at": "Expires At",
+    "license_info_status": "Status"
 }
