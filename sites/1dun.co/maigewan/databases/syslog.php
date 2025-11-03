@@ -1,6 +1,14 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 [
     {
+        "date": "2025-11-03 10:35:49",
+        "dictionaryKey": "system-updated",
+        "notes": "Bludit v1.00.2",
+        "idExecution": "6908afb5ba28b",
+        "method": "GET",
+        "username": "chuanqi"
+    },
+    {
         "date": "2025-11-02 00:58:28",
         "dictionaryKey": "settings-changes",
         "notes": "",

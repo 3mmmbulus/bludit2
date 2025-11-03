@@ -120,6 +120,26 @@ input[readonly] {
     text-decoration: underline;
 }
 
+/* Terms checkbox validation styles */
+.form-check.is-invalid {
+    border: 1px solid #dc3545;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    background-color: #fff5f5;
+    animation: shake 0.5s;
+}
+
+.form-check.is-invalid .form-check-label {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
 /* Responsive adjustments */
 @media (max-width: 576px) {
     .card-md {

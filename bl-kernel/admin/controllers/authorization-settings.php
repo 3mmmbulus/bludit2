@@ -1,6 +1,11 @@
 <?php defined('BLUDIT') or die('Bludit CMS.');
 
-// SystemIntegrity check
+// 授权设置页面特殊处理：临时禁用授权文件强制检查
+// 因为这个页面就是用来管理授权的，删除授权时不应该被强制退出
+SystemIntegrity::setPolicy(['require_license' => false]);
+
+// SystemIntegrity check - 符合架构规范要求
+// 注意: 授权页面是特殊情况,quickCheck() 会执行但 isAuthorized() 在 POST 时需要特殊处理
 SystemIntegrity::quickCheck();
 
 // 使用全局语言对象
@@ -87,90 +92,250 @@ function getServerIP() {
 }
 
 /**
- * Validate authorization credentials
- * This is a simple example - in production, this should connect to a remote
- * authorization server or use cryptographic validation
+ * Validate authorization code via remote API
+ * 
+ * @param string $code License code
+ * @param string $ip Server IP address
+ * @param string $username Username (optional if email provided)
+ * @param string $email Email (optional if username provided)
+ * @return array Response array with 'success' and other fields
  */
-function validateCredentials($username, $licenseCode) {
-    // Example validation logic
-    // In production, implement proper validation:
-    // 1. Connect to remote authorization API
-    // 2. Verify against local encrypted database
-    // 3. Use cryptographic signature validation
+function validateLicenseViaAPI($code, $ip, $username = '', $email = '') {
+    $apiUrl = 'https://api.maigewan.com/api/validate-auth-code';
     
-    // For now, just check that all fields are filled
-    if (empty($username) || empty($licenseCode)) {
-        return false;
+    // Prepare request data
+    $requestData = [
+        'code' => $code,
+        'ip' => $ip
+    ];
+    
+    // Add username or email (at least one required)
+    if (!empty($username)) {
+        $requestData['username'] = $username;
+    }
+    if (!empty($email)) {
+        $requestData['email'] = $email;
     }
     
-    // Simple validation: license code should be at least 16 characters
-    if (strlen($licenseCode) < 16) {
-        return false;
+    // Initialize cURL
+    $ch = curl_init($apiUrl);
+    if ($ch === false) {
+        return [
+            'success' => false,
+            'code' => 'CURL_INIT_FAILED',
+            'errno' => 9997,
+            'message' => 'Failed to initialize cURL'
+        ];
     }
     
-    return true;
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestData));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    
+    // Execute request
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    // Check for network errors
+    if ($response === false || !empty($curlError)) {
+        return [
+            'success' => false,
+            'code' => 'NETWORK_ERROR',
+            'errno' => 9999,
+            'message' => 'Network error: ' . $curlError
+        ];
+    }
+    
+    // Parse JSON response
+    $data = json_decode($response, true);
+    if (!is_array($data)) {
+        return [
+            'success' => false,
+            'code' => 'INVALID_RESPONSE',
+            'errno' => 9998,
+            'message' => 'Invalid API response'
+        ];
+    }
+    
+    // Add HTTP code for reference
+    $data['http_code'] = $httpCode;
+    
+    return $data;
+}
+
+/**
+ * Map API error code to localized message key
+ * 
+ * @param string $errorCode API error code
+ * @return string Translation key
+ */
+function getErrorMessageKey($errorCode) {
+    $errorMap = [
+        'MISSING_PARAMS' => 'error_missing_params',
+        'USER_NOT_FOUND' => 'error_user_not_found',
+        'CODE_NOT_FOUND' => 'error_code_not_found',
+        'CODE_NOT_OWNED_BY_USER' => 'error_code_not_owned',
+        'CODE_BANNED' => 'error_code_banned',
+        'CODE_EXPIRED' => 'error_code_expired',
+        'IP_MISMATCH' => 'error_ip_mismatch',
+        'IP_OCCUPIED' => 'error_ip_occupied',
+        'UPDATE_FAILED' => 'error_update_failed',
+        'SERVER_ERROR' => 'error_server_error',
+        'NETWORK_ERROR' => 'error_network',
+        'CURL_INIT_FAILED' => 'error_network',
+        'INVALID_RESPONSE' => 'error_server_error'
+    ];
+    
+    return isset($errorMap[$errorCode]) ? $errorMap[$errorCode] : 'error_unknown';
 }
 
 // Get server IP
 $serverIP = getServerIP();
 
+// Initialize form values (for preserving input after failed submission)
+$formUserIdentity = '';
+$formLicenseCode = '';
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Note: This is a special case - we're creating the license file itself
-    // So we check if user is admin instead of calling isAuthorized()
-    // to avoid circular dependency
+    // 特殊处理: 授权页面创建授权文件时不能调用 isAuthorized()
+    // 因为这会导致循环依赖,所以只检查管理员权限
+    // 参考: SYSTEMINTEGRITY_REQUIREMENT_TEMPLATE.md 2.2.E 特殊处理
     
     if (!checkRole(['admin'], false)) {
         http_response_code(403);
         die('Forbidden');
     }
     
-    // Get form data
-    $username = isset($_POST['username']) ? trim($_POST['username']) : '';
-    $licenseCode = isset($_POST['license_code']) ? trim($_POST['license_code']) : '';
+    // Handle license removal (change license action)
+    if (isset($_POST['remove_license']) && $_POST['remove_license'] == '1') {
+        $licenseFile = PATH_AUTHZ . 'license.json';
+        if (file_exists($licenseFile)) {
+            if (unlink($licenseFile)) {
+                Log::set('Authorization - License removed successfully');
+                // 清除缓存，让系统立即识别授权状态变化
+                SystemIntegrity::clearCache();
+            } else {
+                Log::set('Authorization - Failed to remove license file');
+            }
+        }
+        // Redirect to refresh page and show license entry form
+        Redirect::page('authorization-settings');
+        exit;
+    }
     
-    // Validate credentials
-    if (validateCredentials($username, $licenseCode)) {
-        // Prepare license data
-        $licenseData = [
-            'server_ip' => $serverIP,
-            'username' => $username,
-            'license_code' => $licenseCode,
-            'authorized_at' => date('Y-m-d H:i:s'),
-            'status' => 'active',
-            'expires_at' => date('Y-m-d H:i:s', strtotime('+1 year'))
-        ];
-        
-        // Ensure directory exists
-        if (!is_dir(PATH_AUTHZ)) {
-            mkdir(PATH_AUTHZ, 0755, true);
+    // Get form data
+    $userIdentity = isset($_POST['user_identity']) ? trim($_POST['user_identity']) : '';
+    $licenseCode = isset($_POST['license_code']) ? trim($_POST['license_code']) : '';
+
+    // 保存表单值用于回显（只在验证失败时需要）
+    $formUserIdentity = $userIdentity;
+    $formLicenseCode = $licenseCode;
+    
+    // Debug: 记录接收到的POST数据
+    Log::set('Authorization POST data - user_identity: [' . $userIdentity . '], license_code: [' . $licenseCode . ']');
+    Log::set('Authorization POST raw - user_identity exists: ' . (isset($_POST['user_identity']) ? 'yes' : 'no') . ', license_code exists: ' . (isset($_POST['license_code']) ? 'yes' : 'no'));
+    
+    // Validate inputs
+    if (empty($userIdentity) || empty($licenseCode)) {
+        Log::set('Authorization validation failed - userIdentity empty: ' . (empty($userIdentity) ? 'yes' : 'no') . ', licenseCode empty: ' . (empty($licenseCode) ? 'yes' : 'no'));
+        $message = $pageL->get('error_missing_params');
+        $messageType = 'danger';
+    } else {
+        // 判断是邮箱还是用户名 (通过 @ 符号)
+        $username = '';
+        $email = '';
+        if (strpos($userIdentity, '@') !== false) {
+            $email = $userIdentity;
+        } else {
+            $username = $userIdentity;
         }
         
-        // Write license file
-        $licenseFile = PATH_AUTHZ . 'license.json';
-        $result = file_put_contents(
-            $licenseFile, 
-            json_encode($licenseData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-        );
+        // Call remote API to validate
+        $apiResponse = validateLicenseViaAPI($licenseCode, $serverIP, $username, $email);
         
-        if ($result !== false) {
-            chmod($licenseFile, 0644);
+        if (isset($apiResponse['success']) && $apiResponse['success'] === true) {
+            // Success - extract data from API response
+            $user = isset($apiResponse['user']) ? $apiResponse['user'] : [];
+            $license = isset($apiResponse['license']) ? $apiResponse['license'] : [];
             
-            // 清除 SystemIntegrity 进程级缓存，使授权立即生效
-            SystemIntegrity::clearCache();
+            // Prepare license data for local storage
+            $licenseData = [
+                'server_ip' => $serverIP,
+                'username' => isset($user['username']) ? $user['username'] : $username,
+                'email' => isset($user['email']) ? $user['email'] : $email,
+                'user_id' => isset($user['id']) ? $user['id'] : '',
+                'license_code' => $licenseCode,
+                'license_id' => isset($license['id']) ? $license['id'] : '',
+                'status' => isset($license['status']) ? $license['status'] : 'active',
+                'authorized_at' => isset($license['firstAuthorizedAt']) ? $license['firstAuthorizedAt'] : date('c'),
+                'expires_at' => isset($license['expiresAt']) ? $license['expiresAt'] : date('c', strtotime('+1 year')),
+                'bound_ip' => isset($license['macBound']) ? $license['macBound'] : $serverIP,
+                'check_count' => isset($license['checkCount']) ? $license['checkCount'] : 0,
+                'fail_count' => isset($license['failCount']) ? $license['failCount'] : 0,
+                'last_checked' => date('c'),
+                'server_time' => isset($apiResponse['server_time']) ? $apiResponse['server_time'] : date('c')
+            ];
             
-            // 如果配置了 require_license，现在可以启用了
-            SystemIntegrity::setPolicy(['require_license' => true]);
+            // Ensure directory exists
+            if (!is_dir(PATH_AUTHZ)) {
+                mkdir(PATH_AUTHZ, 0755, true);
+            }
             
-            $message = $pageL->get('msg_success');
-            $messageType = 'success';
+            // Write license file
+            $licenseFile = PATH_AUTHZ . 'license.json';
+            $result = file_put_contents(
+                $licenseFile, 
+                json_encode($licenseData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            );
+            
+            if ($result !== false) {
+                chmod($licenseFile, 0644);
+                
+                // 清除 SystemIntegrity 进程级缓存，使授权立即生效
+                SystemIntegrity::clearCache();
+                
+                // 如果配置了 require_license，现在可以启用了
+                SystemIntegrity::setPolicy(['require_license' => true]);
+                
+                $message = $pageL->get('msg_success');
+                $messageType = 'success';
+                
+                // 成功后清空表单值（防止重复提交）
+                $formUserIdentity = '';
+                $formLicenseCode = '';
+            } else {
+                $message = $pageL->get('error_update_failed');
+                $messageType = 'danger';
+            }
         } else {
-            $message = $pageL->get('msg_failed');
+            // API validation failed - map error code to message
+            $errorCode = isset($apiResponse['code']) ? $apiResponse['code'] : 'UNKNOWN';
+            
+            // 隐藏敏感错误：USER_NOT_FOUND 和 CODE_NOT_FOUND
+            // 这些错误会暴露系统中存在哪些用户/授权码，存在安全风险
+            if ($errorCode === 'USER_NOT_FOUND' || $errorCode === 'CODE_NOT_FOUND') {
+                // 使用通用错误提示，不暴露具体是用户不存在还是授权码不存在
+                $message = $pageL->get('error_auth_failed');
+                Log::set('Authorization failed - ' . $errorCode . ' (hidden from user for security)');
+            } else {
+                // 其他错误正常显示
+                $messageKey = getErrorMessageKey($errorCode);
+                $message = $pageL->get($messageKey);
+                
+                // Add errno for debugging if available
+                if (isset($apiResponse['errno'])) {
+                    $message .= ' (' . $pageL->get('error_code_label') . ': ' . $apiResponse['errno'] . ')';
+                }
+            }
+            
             $messageType = 'danger';
         }
-    } else {
-        $message = $pageL->get('msg_invalid_credentials');
-        $messageType = 'danger';
     }
 }
 

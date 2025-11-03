@@ -1,6 +1,6 @@
 <?php defined('BLUDIT') or die('Bludit CMS.'); ?>
 {
-    "language": "zh_CN",
+    "language": "en",
     "chuanqi": {
         "nickname": "Chuanqi",
         "firstName": "",

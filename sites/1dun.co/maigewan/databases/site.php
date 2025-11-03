@@ -16,7 +16,7 @@
     "url": "http:\/\/103.181.135.149",
     "emailFrom": "no-reply@103.181.135.149",
     "orderBy": "date",
-    "currentBuild": 20240806,
+    "currentBuild": 20251201,
     "twitter": "https:\/\/twitter.com\/bludit",
     "facebook": "https:\/\/www.facebook.com\/bluditcms",
     "codepen": "",

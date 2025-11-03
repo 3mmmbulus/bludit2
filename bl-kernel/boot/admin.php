@@ -102,7 +102,8 @@ else
 	// Page not found.
 	// User not logged.
 	// Slug is login.
-	// ⚠️ 特殊处理：system-init 页面允许在未登录状态下访问，不触发登录逻辑
+	// ⚠️ 特殊处理：system-init 页面允许在未登录状态下访问
+	// authorization-settings 需要登录但不需要授权文件
 	if (($url->notFound() || !$login->isLogged() || ($url->slug()==='login')) && $layout['slug'] !== 'system-init') {
 		// If user is not logged and trying to access /admin/ (dashboard), redirect to login
 		if (!$login->isLogged() && ($layout['slug'] === 'dashboard' || $url->slug() === '')) {

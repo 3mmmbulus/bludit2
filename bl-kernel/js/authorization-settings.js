@@ -1,8 +1,11 @@
 /**
  * Authorization Settings JavaScript
+ * Version: 2024-11-03 - Fixed user_identity field validation
  */
 (function() {
     'use strict';
+    
+    console.log('Authorization Settings JS loaded - Version 2024-11-03');
     
     // ====================
     // Toast Notification Functions
@@ -102,7 +105,7 @@
                         serverIpInput.value = data.ip;
                         
                         // 显示成功提示
-                        showSuccessMessage('IP地址已刷新');
+                        showSuccessMessage(window.authL10n?.ipRefreshed || 'IP address refreshed');
                         
                         // 显示成功反馈
                         serverIpInput.classList.add('is-valid');
@@ -122,7 +125,7 @@
                     console.error('Error fetching server IP:', error);
                     
                     // 显示错误提示
-                    showErrorMessage('刷新IP失败，请稍后重试');
+                    showErrorMessage(window.authL10n?.ipRefreshError || 'Failed to refresh IP');
                     
                     serverIpInput.classList.add('is-invalid');
                     setTimeout(() => {
@@ -139,55 +142,80 @@
         // ====================
         // Form Validation
         // ====================
-        const form = document.querySelector('form');
+        const form = document.getElementById('license-form');
         
         if (form) {
             form.addEventListener('submit', function(e) {
-                const username = form.querySelector('[name="username"]');
+                const userIdentity = form.querySelector('[name="user_identity"]');
                 const licenseCode = form.querySelector('[name="license_code"]');
                 const termsAgree = form.querySelector('#terms-agree');
+                
+                console.log('Form submit - userIdentity field found:', !!userIdentity);
+                console.log('Form submit - userIdentity value:', userIdentity ? userIdentity.value : 'FIELD NOT FOUND');
+                console.log('Form submit - licenseCode value:', licenseCode ? licenseCode.value : 'FIELD NOT FOUND');
+                console.log('Form submit - termsAgree checked:', termsAgree ? termsAgree.checked : 'FIELD NOT FOUND');
                 
                 let isValid = true;
                 let errorMessage = '';
                 
-                // Validate username
-                if (!username || !username.value.trim()) {
+                // Validate terms agreement FIRST (most common mistake)
+                if (termsAgree && !termsAgree.checked) {
                     isValid = false;
-                    errorMessage = '请填写用户名';
-                    if (username) {
-                        username.classList.add('is-invalid');
+                    errorMessage = window.authL10n?.errorTerms || 'Please agree to the terms';
+                    termsAgree.parentElement.classList.add('is-invalid');
+                    termsAgree.focus();
+                }
+                
+                // Validate user identity (username or email)
+                if (!userIdentity || !userIdentity.value.trim()) {
+                    isValid = false;
+                    errorMessage = window.authL10n?.errorUserIdentity || 'Please enter username or email';
+                    console.error('Validation failed: user_identity is empty');
+                    if (userIdentity) {
+                        userIdentity.classList.add('is-invalid');
+                        if (!termsAgree || termsAgree.checked) {
+                            userIdentity.focus();
+                        }
                     }
-                } else if (username) {
-                    username.classList.remove('is-invalid');
+                } else if (userIdentity) {
+                    userIdentity.classList.remove('is-invalid');
                 }
                 
                 // Validate license code
                 if (!licenseCode || !licenseCode.value.trim()) {
                     isValid = false;
-                    errorMessage = '请填写授权码';
+                    errorMessage = window.authL10n?.errorLicenseCode || 'Please enter license code';
                     if (licenseCode) {
                         licenseCode.classList.add('is-invalid');
+                        if (!termsAgree || termsAgree.checked) {
+                            if (userIdentity && userIdentity.value.trim()) {
+                                licenseCode.focus();
+                            }
+                        }
                     }
-                } else if (licenseCode.value.trim().length < 16) {
+                } else if (licenseCode.value.trim().length < 5) {
                     isValid = false;
-                    errorMessage = '授权码长度不能少于16个字符';
+                    errorMessage = window.authL10n?.errorLicenseMin || 'License code must be at least 5 characters';
                     if (licenseCode) {
                         licenseCode.classList.add('is-invalid');
+                        licenseCode.focus();
+                    }
+                } else if (licenseCode.value.trim().length > 200) {
+                    isValid = false;
+                    errorMessage = window.authL10n?.errorLicenseMax || 'License code cannot exceed 200 characters';
+                    if (licenseCode) {
+                        licenseCode.classList.add('is-invalid');
+                        licenseCode.focus();
                     }
                 } else if (licenseCode) {
                     licenseCode.classList.remove('is-invalid');
                 }
                 
-                // Validate terms agreement
-                if (termsAgree && !termsAgree.checked) {
-                    isValid = false;
-                    errorMessage = '请同意服务条款';
-                }
-                
                 // If validation fails, prevent form submission and show error
                 if (!isValid) {
                     e.preventDefault();
-                    alert(errorMessage);
+                    e.stopPropagation();
+                    showErrorMessage(errorMessage);
                     return false;
                 }
                 
@@ -225,6 +253,16 @@
                     }
                 });
             });
+            
+            // Remove invalid class when checkbox is checked
+            const termsCheckbox = form.querySelector('#terms-agree');
+            if (termsCheckbox) {
+                termsCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.classList.remove('is-invalid');
+                    }
+                });
+            }
         }
         
         // ====================

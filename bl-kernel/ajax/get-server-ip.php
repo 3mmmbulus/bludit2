@@ -2,22 +2,13 @@
 
 header('Content-Type: application/json');
 
-// Check if user is logged in
-if (!$login->isLogged()) {
-    http_response_code(401);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Unauthorized'
-    ]);
-    exit;
-}
-
-// Check if user is admin
+// 已登录用户必须是管理员（在 admin.php 已确保用户已登录）
+// 授权页面虽然允许未授权访问，但必须已登录
 if (!checkRole(['admin'], false)) {
     http_response_code(403);
     echo json_encode([
         'status' => 'error',
-        'message' => 'Forbidden'
+        'message' => 'Forbidden - Admin access required'
     ]);
     exit;
 }

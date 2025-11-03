@@ -22,26 +22,289 @@
 		</div>
 		<?php endif; ?>
 		
-		<?php if ($licenseExists && $licenseData): ?>
-		<div class="alert alert-success mb-3" role="alert">
-			<div class="d-flex">
-				<div>
-					<i class="bi bi-shield-check me-2"></i>
+		<!-- License Active - Image Top with List Style -->
+		<?php if ($licenseExists): ?>
+		<div class="row row-cards mb-4">
+			<div class="col-12">
+				<div class="card card-md">
+					<div class="card-body">
+						<!-- Image at Top -->
+						<div class="mb-4">
+							<img src="<?php echo HTML_PATH_CORE_IMG ?>good-news.svg" class="img-fluid rounded" alt="授权激活成功" style="width: 100%; height: auto;">
+						</div>
+						
+						<!-- Title and Description -->
+						<h2 class="mb-3"><?php echo $pageL->get('license_success_title') ?></h2>
+						<p class="text-secondary mb-4"><?php echo $pageL->get('license_success_subtitle') ?></p>
+						
+						<!-- License Info List -->
+						<ul class="list-unstyled space-y">
+							<li class="row g-2">
+								<span class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-1 text-success icon-2">
+										<path d="M5 12l5 5l10 -10"></path>
+									</svg>
+								</span>
+							<span class="col">
+								<strong class="d-block"><?php echo $pageL->get('license_info_username') ?></strong>
+								<span class="d-block text-secondary"><?php echo htmlspecialchars($licenseData['username'] ?? '') ?></span>
+							</span>
+							</li>
+							
+							<?php if (!empty($licenseData['email'])): ?>
+							<li class="row g-2">
+								<span class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-1 text-success icon-2">
+										<path d="M5 12l5 5l10 -10"></path>
+									</svg>
+								</span>
+							<span class="col">
+								<strong class="d-block"><?php echo $pageL->get('license_info_email') ?></strong>
+								<span class="d-block text-secondary"><?php echo htmlspecialchars($licenseData['email']) ?></span>
+							</span>
+							</li>
+							<?php endif; ?>
+							
+							<li class="row g-2">
+								<span class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-1 text-success icon-2">
+										<path d="M5 12l5 5l10 -10"></path>
+									</svg>
+								</span>
+							<span class="col">
+								<strong class="d-block"><?php echo $pageL->get('license_info_authorized_at') ?></strong>
+								<span class="d-block text-secondary"><?php echo date('Y-m-d', strtotime($licenseData['authorized_at'])) ?></span>
+							</span>
+							</li>
+							
+							<li class="row g-2">
+								<span class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-1 text-success icon-2">
+										<path d="M5 12l5 5l10 -10"></path>
+									</svg>
+								</span>
+							<span class="col">
+								<strong class="d-block"><?php echo $pageL->get('license_info_expires_at') ?></strong>
+								<span class="d-block text-secondary"><?php echo date('Y-m-d', strtotime($licenseData['expires_at'])) ?></span>
+							</span>
+							</li>
+							
+							<li class="row g-2">
+								<span class="col-auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-1 text-success icon-2">
+										<path d="M5 12l5 5l10 -10"></path>
+									</svg>
+								</span>
+								<span class="col">
+									<strong class="d-block"><?php echo $pageL->get('license_info_ip') ?></strong>
+									<span class="d-block text-secondary"><?php echo htmlspecialchars($licenseData['bound_ip'] ?? $licenseData['server_ip'] ?? '') ?></span>
+								</span>
+							</li>
+						</ul>
+						
+					<!-- Change License Button -->
+					<div class="my-4">
+						<button type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#change-license-modal">
+							<?php echo $pageL->get('btn_change_license') ?>
+						</button>
+					</div>
+					</div>
 				</div>
-				<div>
-					<h4 class="alert-title"><?php echo $pageL->get('license_active_title') ?></h4>
-					<div class="text-secondary">
-						<strong><?php echo $pageL->get('license_info_username') ?>:</strong> <?php echo htmlspecialchars($licenseData['username'] ?? '') ?><br>
-						<strong><?php echo $pageL->get('license_info_authorized_at') ?>:</strong> <?php echo htmlspecialchars($licenseData['authorized_at'] ?? '') ?><br>
-						<strong><?php echo $pageL->get('license_info_expires_at') ?>:</strong> <?php echo htmlspecialchars($licenseData['expires_at'] ?? '') ?><br>
-						<strong><?php echo $pageL->get('license_info_status') ?>:</strong> <span class="badge bg-success"><?php echo htmlspecialchars($licenseData['status'] ?? '') ?></span>
+			</div>
+		</div>
+		
+		<!-- Hidden Elements (kept for structure) -->
+		<div style="display: none;">
+		<div class="row row-cards mb-4">
+			<!-- 授权成功图片卡片 - 仿照 emails.html subscription 卡片 -->
+			<div class="col-lg-6 col-12 mb-3">
+				<div class="card">
+					<div class="card-body p-4">
+						<img src="<?php echo HTML_PATH_CORE_IMG ?>good-news.svg" class="img-fluid rounded" alt="授权激活成功" style="width: 100%; height: auto;">
+					</div>
+				</div>
+			</div>
+			
+			<!-- 授权信息卡片 -->
+			<div class="col-lg-6 col-12 mb-3">
+				<div class="card h-100">
+					<div class="card-body">
+						<!-- 成功标题 -->
+						<div class="text-center mb-4">
+							<span class="avatar avatar-xl avatar-rounded mb-3" style="background-color: #2fb344;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									<path d="M5 12l5 5l10 -10" />
+								</svg>
+							</span>
+							<h2 class="text-success mb-2">授权激活成功!</h2>
+							<p class="text-secondary mb-0">感谢支持正版!</p>
+						</div>
+						
+						<!-- 授权信息列表 -->
+						<div class="list-group list-group-flush">
+							<div class="list-group-item">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<span class="avatar bg-blue-lt">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+												<path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+											</svg>
+										</span>
+									</div>
+									<div class="col">
+										<div class="text-secondary small">用户名</div>
+										<div class="fw-bold"><?php echo htmlspecialchars($licenseData['username'] ?? '') ?></div>
+									</div>
+								</div>
+							</div>
+							
+							<?php if (!empty($licenseData['email'])): ?>
+							<div class="list-group-item">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<span class="avatar bg-cyan-lt">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+												<path d="M3 7l9 6l9 -6" />
+											</svg>
+										</span>
+									</div>
+									<div class="col">
+										<div class="text-secondary small">邮箱</div>
+										<div class="fw-bold"><?php echo htmlspecialchars($licenseData['email']) ?></div>
+									</div>
+								</div>
+							</div>
+							<?php endif; ?>
+							
+							<div class="list-group-item">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<span class="avatar bg-green-lt">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+												<path d="M16 3l0 4" />
+												<path d="M8 3l0 4" />
+												<path d="M4 11l16 0" />
+												<path d="M8 15h2v2h-2z" />
+											</svg>
+										</span>
+									</div>
+									<div class="col">
+										<div class="text-secondary small">授权时间</div>
+										<div class="fw-bold"><?php echo htmlspecialchars(substr($licenseData['authorized_at'] ?? '', 0, 10)) ?></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="list-group-item">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<span class="avatar bg-yellow-lt">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+												<path d="M12 7l0 5l3 3" />
+											</svg>
+										</span>
+									</div>
+									<div class="col">
+										<div class="text-secondary small">到期时间</div>
+										<div class="fw-bold"><?php echo htmlspecialchars(substr($licenseData['expires_at'] ?? '', 0, 10)) ?></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="list-group-item">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<span class="avatar bg-purple-lt">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" />
+												<path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" />
+												<path d="M9.7 17l4.6 0" />
+											</svg>
+										</span>
+									</div>
+									<div class="col">
+										<div class="text-secondary small">绑定IP</div>
+										<div class="fw-bold"><?php echo htmlspecialchars($licenseData['bound_ip'] ?? $licenseData['server_ip'] ?? '') ?></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="list-group-item">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<?php 
+										$statusText = $licenseData['status'] ?? '';
+										$statusClass = 'success';
+										$statusLabel = '正常';
+										$statusBg = 'green';
+										
+										switch($statusText) {
+											case 'used':
+											case 'active':
+												$statusClass = 'success';
+												$statusLabel = '已激活';
+												$statusBg = 'green';
+												break;
+											case 'expired':
+												$statusClass = 'danger';
+												$statusLabel = '已过期';
+												$statusBg = 'red';
+												break;
+											case 'banned':
+												$statusClass = 'danger';
+												$statusLabel = '已封禁';
+												$statusBg = 'red';
+												break;
+											default:
+												$statusClass = 'secondary';
+												$statusLabel = htmlspecialchars($statusText);
+												$statusBg = 'secondary';
+										}
+										?>
+										<span class="avatar bg-<?php echo $statusBg ?>-lt">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+												<path d="M9 12l2 2l4 -4" />
+											</svg>
+										</span>
+									</div>
+									<div class="col">
+										<div class="text-secondary small">状态</div>
+										<div><span class="badge bg-<?php echo $statusClass ?> badge-pill"><?php echo $statusLabel ?></span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 更换授权按钮 -->
+						<div class="text-center mt-4">
+							<button type="button" class="btn btn-warning w-100" id="change-license-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon me-2">
+									<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+									<path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+								</svg>
+								更换授权
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<?php endif; ?>
 		
-		<form class="card card-md" method="POST" action="" autocomplete="off" novalidate>
+		<form class="card card-md" method="POST" action="" autocomplete="off" novalidate id="license-form" <?php echo $licenseExists ? 'style="display: none;"' : ''; ?>>
 			<div class="card-body py-4 p-sm-5">
 				<div class="text-center">
 				<svg class="img mb-n2" xmlns="http://www.w3.org/2000/svg" height="200" fill="none" viewBox="0 0 800 600">
@@ -117,6 +380,9 @@
 				<h2 class="card-title mb-4"><?php echo $pageL->get('title') ?></h2>
 				</div>
 				
+				<!-- CSRF Token (Hidden) -->
+				<input type="hidden" name="tokenCSRF" value="<?php echo $security->getTokenCSRF() ?>">
+				
 				<!-- Progress Bar (Hidden by default) -->
 				<div class="progress progress-sm mb-3" id="auth-progress" style="display: none;">
 					<div class="progress-bar progress-bar-indeterminate bg-green"></div>
@@ -134,16 +400,17 @@
 					<small class="form-hint"><?php echo $pageL->get('hint_server_ip') ?></small>
 				</div>
 				
-				<!-- Username -->
+				<!-- User Identity (Username or Email) -->
 				<div class="mb-3">
-					<label class="form-label"><?php echo $pageL->get('label_username') ?></label>
-					<input type="text" class="form-control" name="username" placeholder="<?php echo $pageL->get('placeholder_username') ?>" required autocomplete="off">
+					<label class="form-label"><?php echo $pageL->get('label_user_identity') ?></label>
+					<input type="text" class="form-control" name="user_identity" value="<?php echo htmlspecialchars($formUserIdentity) ?>" placeholder="<?php echo $pageL->get('placeholder_user_identity') ?>" required autocomplete="off">
+					<small class="form-hint"><?php echo $pageL->get('hint_user_identity') ?></small>
 				</div>
 				
 				<!-- License Code -->
 				<div class="mb-3">
 					<label class="form-label"><?php echo $pageL->get('label_license_code') ?></label>
-					<input type="text" class="form-control" name="license_code" placeholder="<?php echo $pageL->get('placeholder_license') ?>" required autocomplete="off">
+					<input type="text" class="form-control" name="license_code" value="<?php echo htmlspecialchars($formLicenseCode) ?>" placeholder="<?php echo $pageL->get('placeholder_license') ?>" required autocomplete="off">
 					<small class="form-hint"><?php echo $pageL->get('hint_license') ?></small>
 				</div>
 				
@@ -167,4 +434,77 @@
 		
 	</div>
 
+<!-- JavaScript Localization -->
+<script>
+	// 提供JavaScript使用的本地化文本
+	window.authL10n = window.authL10n || {};
+	window.authL10n.ipRefreshed = '<?php echo $pageL->get('js_ip_refreshed') ?>';
+	window.authL10n.ipRefreshError = '<?php echo $pageL->get('js_ip_refresh_error') ?>';
+	window.authL10n.errorUserIdentity = '<?php echo $pageL->get('js_error_user_identity') ?>';
+	window.authL10n.errorLicenseCode = '<?php echo $pageL->get('js_error_license_code') ?>';
+	window.authL10n.errorLicenseMin = '<?php echo $pageL->get('js_error_license_min') ?>';
+	window.authL10n.errorLicenseMax = '<?php echo $pageL->get('js_error_license_max') ?>';
+	window.authL10n.errorTerms = '<?php echo $pageL->get('js_error_terms') ?>';
+</script>
+
+<!-- Authorization Settings JavaScript -->
 <script src="<?php echo DOMAIN_CORE_JS ?>authorization-settings.js"></script>
+
+<!-- Bootstrap Modals -->
+<!-- Change License Confirmation Modal -->
+<div class="modal modal-blur fade" id="change-license-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo $pageL->get('modal_change_cancel') ?>"></button>
+			<div class="modal-status bg-danger"></div>
+			<div class="modal-body text-center py-4">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
+					<path d="M12 9v4"></path>
+					<path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path>
+					<path d="M12 16h.01"></path>
+				</svg>
+				<h3><?php echo $pageL->get('modal_change_title') ?></h3>
+				<div class="text-secondary"><?php echo $pageL->get('modal_change_description') ?></div>
+			</div>
+			<div class="modal-footer">
+				<div class="w-100">
+					<div class="row">
+						<div class="col">
+							<button type="button" class="btn w-100" data-bs-dismiss="modal"><?php echo $pageL->get('modal_change_cancel') ?></button>
+						</div>
+						<div class="col">
+							<form method="POST" action="" style="display: inline;">
+								<input type="hidden" name="tokenCSRF" value="<?php echo $security->getTokenCSRF() ?>">
+								<input type="hidden" name="remove_license" value="1">
+								<button type="submit" class="btn btn-danger w-100"><?php echo $pageL->get('modal_change_confirm') ?></button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Success Modal (shown after successful authorization) -->
+<div class="modal modal-blur fade" id="success-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo $pageL->get('modal_success_close') ?>"></button>
+			<div class="modal-status bg-success"></div>
+			<div class="modal-body text-center py-4">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon mb-2 text-green icon-lg">
+					<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+					<path d="M9 12l2 2l4 -4"></path>
+				</svg>
+				<h3><?php echo $pageL->get('modal_success_title') ?></h3>
+				<div class="text-secondary"><?php echo $pageL->get('modal_success_description') ?></div>
+			</div>
+			<div class="modal-footer">
+				<div class="w-100">
+					<button type="button" class="btn btn-success w-100" data-bs-dismiss="modal"><?php echo $pageL->get('modal_success_close') ?></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
