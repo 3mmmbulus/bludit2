@@ -2,8 +2,7 @@
 
 <link rel="stylesheet" href="<?php echo DOMAIN_CORE_CSS ?>authorization-settings.css">
 
-<div class="page page-center">
-	<div class="container container-tight py-4">
+<div class="container container-tight py-4">
 		
 		<?php if (!empty($message)): ?>
 		<div class="alert alert-<?php echo $messageType ?> alert-dismissible mb-3" role="alert">
@@ -167,6 +166,5 @@
 		</form>
 		
 	</div>
-</div>
 
 <script src="<?php echo DOMAIN_CORE_JS ?>authorization-settings.js"></script>
