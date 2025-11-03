@@ -401,5 +401,6 @@
     "spider-management": "Spider Management",
     "cache": "Cache",
     "security-management": "Security Management",
+    "authorization": "Authorization",
     "others": "Others"
 }

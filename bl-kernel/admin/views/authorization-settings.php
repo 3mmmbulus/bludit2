@@ -43,7 +43,8 @@
 		<?php endif; ?>
 		
 		<form class="card card-md" method="POST" action="" autocomplete="off" novalidate>
-			<div class="card-body text-center py-4 p-sm-5">
+			<div class="card-body py-4 p-sm-5">
+				<div class="text-center">
 				<svg class="img mb-n2" xmlns="http://www.w3.org/2000/svg" height="200" fill="none" viewBox="0 0 800 600">
 					<style>
 						:where(.theme-dark, [data-bs-theme="dark"]) .tblr-illustrations-boy-girl-a {
@@ -114,7 +115,8 @@
 					<?php echo $pageL->get('welcome_text') ?>
 				</p>
 				
-				<h2 class="card-title text-center mb-4"><?php echo $pageL->get('title') ?></h2>
+				<h2 class="card-title mb-4"><?php echo $pageL->get('title') ?></h2>
+				</div>
 				
 				<!-- Progress Bar (Hidden by default) -->
 				<div class="progress progress-sm mb-3" id="auth-progress" style="display: none;">
